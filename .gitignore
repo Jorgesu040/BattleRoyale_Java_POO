@@ -1,0 +1,7 @@
+.metadata/
+poo1/.settings/
+poo1/.project
+poo1/.classpath
+poo1/bin/
+poo1/src/com/utad/poo/*
+!poo1/src/com/utad/poo/practicaFinalPackage/

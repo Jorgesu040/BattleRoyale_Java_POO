@@ -1,0 +1,15 @@
+
+package com.utad.poo.practicaFinalPackage;
+
+public class EspadaBastarda extends ArmaGuerrero {
+    
+    public static final String NOMBRE = "Orbe Ancestral";
+    public static final Double DANYO = 15.0; // pts. -> Hace 15 puntos de daño
+    public static final Double PRECISION = 90.0; // % -> 90% de precisión
+    public static final Double IRA_ESPARTANA_CONTRAATAQUE = 10.0; // +% -> +10 puntos al porcentaje de ira espartana de contraataque
+
+    public EspadaBastarda() {
+        super(EspadaBastarda.NOMBRE, EspadaBastarda.DANYO, EspadaBastarda.PRECISION, EspadaBastarda.IRA_ESPARTANA_CONTRAATAQUE);
+    }
+
+}
