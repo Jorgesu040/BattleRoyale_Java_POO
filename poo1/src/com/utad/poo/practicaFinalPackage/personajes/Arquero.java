@@ -1,4 +1,4 @@
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.personajes;
 
 /* Clase arquero:
     - Implementa la lógica de ataque, defensa, contraataque y retirada de un personaje
@@ -41,10 +41,20 @@ public class Arquero extends Personaje {
         this.punteria = Arquero.PUNTERIA_INICIAL;    
     }
 
-    // Implement abstract methods
-    @Override
+    // Metodo que calcula el daño total del guerrero y se lo pasa al padre para que lo aplique
     public void atacar(Personaje personaje) {
-        // Arquero attack logic considering range
+        Double danioTotal = this.calcularDanio();
+        super.atacar(personaje, danioTotal);
+    }
+
+    // El hijo calcula el daño total
+    private Double calcularDanio() {
+        // Obtenemos el daño base del arma
+        Double danioTotal = super.armaPerosonaje.getDanio();
+        // Le pedimos al padre que nos calcule el daño total teniendo en cuenta el ataque del personaje
+        danioTotal += super.calcularDanio(danioTotal);
+
+        return danioTotal;
     }
 
     @Override

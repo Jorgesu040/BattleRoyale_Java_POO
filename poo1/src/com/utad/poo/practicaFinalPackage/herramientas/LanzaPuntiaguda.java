@@ -1,5 +1,5 @@
 
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.herramientas;
 
 public class LanzaPuntiaguda extends ArmaGuerrero {
     
@@ -11,5 +11,7 @@ public class LanzaPuntiaguda extends ArmaGuerrero {
     public LanzaPuntiaguda() {
         super(LanzaPuntiaguda.NOMBRE, LanzaPuntiaguda.DANYO, LanzaPuntiaguda.PRECISION, LanzaPuntiaguda.IRA_ESPARTANA_CONTRAATAQUE);
     }
+
+    
 
 }

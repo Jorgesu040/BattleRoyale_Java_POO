@@ -1,4 +1,4 @@
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.personajes;
 
 /* Clase mago:
     - Implementa la lógica de ataque, defensa, contraataque y retirada de un personaje de tipo mago.
@@ -34,8 +34,6 @@ public class Mago extends Personaje {
     public static final Double MOD_DEF_INICIAL = 5.0;
 
     private Double probablidadCritico;
-    private Arma arma;
-
 
     public Mago() {
         this("Mago" + contadorPersonajes);
@@ -43,32 +41,45 @@ public class Mago extends Personaje {
 
     public Mago(String nombre) {
         super(nombre, Mago.MOD_ATQ_INICIAL, Mago.MOD_DEF_INICIAL, Personaje.NUMERO_ITEMS_DEFAULT);
-        probCritico = Mago.PROB_CRITICO_INICIAL;
+        this.probablidadCritico = Mago.PROB_CRITICO_INICIAL;
     }
 
-    public void equiparArma(Arma arma) {
-        this.arma = arma;
+     // Metodo que calcula el daño total del guerrero y se lo pasa al padre para que lo aplique
+     public void atacar(Personaje personaje) {
+        Double danioTotal = this.calcularDanio();
+        super.atacar(personaje, danioTotal);
     }
 
-    // Implement abstract methods
-    @Override
-    public void atacar(Personaje personaje) {
-        // Mago attack logic with special abilities
-        Double danioTotal = calcularDanio();
-        personaje.recibirDanio(danioTotal);
-    }
-
+    // El hijo calcula el daño total
     private Double calcularDanio() {
-        Double danioBase = this.ataque + arma.getDanio();
-        // Aplicar modificadores del arma
-        // ...existing code...
-        return danioBase;
+        // Obtenemos el daño base del arma
+        Double danioTotal = super.armaPerosonaje.getDanio();        
+        // Le pedimos al padre que nos calcule el daño total teniendo en cuenta el ataque del personaje
+        danioTotal += super.calcularDanio(danioTotal);
+
+        if (this.momentoAtaqueCritico()) {
+            System.out.println("Ataque crítico! Un " + Mago.ATAQUE_CRITICO + "% de daño adicional"); 
+            danioTotal += danioTotal * (Mago.ATAQUE_CRITICO / 100);
+        }
+        return danioTotal;
+    }
+
+    // Calcula si el ataque es crítico
+    protected boolean momentoAtaqueCritico() {
+        boolean critico = false;
+        Double probabilidad = Math.random() * 100; // Lanza un número aleatorio entre 0 y 100
+        if (probabilidad <= this.probablidadCritico) {
+            critico = true;
+        }
+        return critico;
     }
 
     @Override
     public void defensa(Personaje personaje) {
         // Mago defense logic
     }
+        // Mago defense logic
+    
 
     @Override
     public void contraataque(Personaje personaje, Double ataque) {

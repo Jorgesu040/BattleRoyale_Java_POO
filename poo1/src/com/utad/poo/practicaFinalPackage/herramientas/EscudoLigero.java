@@ -1,5 +1,5 @@
 
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.herramientas;
 
 public class EscudoLigero extends Escudo {
 
@@ -10,5 +10,5 @@ public class EscudoLigero extends Escudo {
     public EscudoLigero() {
         super(EscudoLigero.NOMBRE, EscudoLigero.DEFENSA, EscudoLigero.BONUS_DE_RETIRADA);
     }
-
+    
 }

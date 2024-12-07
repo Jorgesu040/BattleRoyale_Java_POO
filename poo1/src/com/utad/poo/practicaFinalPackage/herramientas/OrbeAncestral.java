@@ -1,5 +1,5 @@
 
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.herramientas;
 
 public class OrbeAncestral extends ArmaMago {
     public static final String NOMBRE = "Orbe Ancestral";

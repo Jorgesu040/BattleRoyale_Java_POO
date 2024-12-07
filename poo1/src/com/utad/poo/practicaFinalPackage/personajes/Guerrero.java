@@ -1,4 +1,4 @@
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.personajes;
 
 /* Clase guerrero:
     - Implementa la lógica de ataque, defensa, contraataque y retirada de un personaje de tipo Guerrero.
@@ -29,7 +29,6 @@ public class Guerrero extends Personaje {
     public static final Double MOD_DEF_INICIAL = 20.0;
 
     private Double iraEspartanaContraataque;
-    private Arma arma;
 
     public Guerrero() {
         this("Guerrero" + contadorPersonajes);
@@ -37,25 +36,23 @@ public class Guerrero extends Personaje {
 
     public Guerrero(String nombre) {
         super(nombre, Guerrero.MOD_ATQ_INICIAL, Guerrero.MOD_DEF_INICIAL, Personaje.NUMERO_ITEMS_DEFAULT);
-        this.iraEspartana = Guerrero.IRA_ESPARTANA_INICIAL;
+        this.iraEspartanaContraataque = Guerrero.IRA_ESPARTANA_INICIAL;
     }
 
-    public void equiparArma(Arma arma) {
-        this.arma = arma;
-    }
-
-    // Implement abstract methods
-    @Override
+    // Metodo que calcula el daño total del guerrero y se lo pasa al padre para que lo aplique
     public void atacar(Personaje personaje) {
-        Double danioTotal = calcularDanio();
-        personaje.recibirDanio(danioTotal);
-        // Guerrero attack logic
+        Double danioTotal = this.calcularDanio();
+        super.atacar(personaje, danioTotal);
     }
 
+    // El hijo calcula el daño total
     private Double calcularDanio() {
-        Double danioBase = this.ataque + arma.getDanio();
-        // Aplicar modificadores del arma
-        return danioBase;
+        // Obtenemos el daño base del arma
+        Double danioTotal = super.armaPerosonaje.getDanio();
+        // Le pedimos al padre que nos calcule el daño total teniendo en cuenta el ataque del personaje
+        danioTotal += super.calcularDanio(danioTotal);
+
+        return danioTotal;
     }
 
     @Override
@@ -70,6 +67,6 @@ public class Guerrero extends Personaje {
 
     @Override
     public void retirada(Personaje personaje) {
-        // Guerrero retreat logic
+        
     }
 }

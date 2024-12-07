@@ -1,4 +1,4 @@
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.herramientas;
 
 public class HachaDobleFilo extends ArmaGuerrero {
 

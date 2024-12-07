@@ -1,5 +1,5 @@
 
-package com.utad.poo.practicaFinalPackage;
+package com.utad.poo.practicaFinalPackage.herramientas;
 
 public class EscudoPesado extends Escudo {
     public static final String NOMBRE = "Escudo Pesaado";
