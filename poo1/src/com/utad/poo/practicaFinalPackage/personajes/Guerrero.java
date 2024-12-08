@@ -1,20 +1,22 @@
 package com.utad.poo.practicaFinalPackage.personajes;
 
-/* Clase guerrero:
-    - Implementa la lógica de ataque, defensa, contraataque y retirada de un personaje de tipo Guerrero.
+import com.utad.poo.practicaFinalPackage.herramientas.*;
 
-    Especialidad: 
-    - Herramienta de ataque: espada del guerrero.
-    - Herramienta de defensa: escudo del guerrero.   
+/* Clase guerrero:
+    - Implementa los métodos de la mecánica de contraataque de un personaje de tipo Guerrero.
+    - (Polimorfismo) Sobreescribe el método recibirAtaque para implementar la mecánica de aumento de la ira espartana.
 
     Nota:
-    - El guerrero tiene un ataque mayor.
-    - El guerrero tiene una defensa mayor.
-    - El guerrero tiene una probabilidad de contraataque alta 
-    - El guerrero tiene una probabilidad de retirada baja.
+    - Mecanica de contraataque: 
+        - El guerrero aumenta su probabilidad de contraataque cada vez que recibe un ataque.
+        - La probabilidad de contraataque se inicializa a 0 y aumenta en 5% cada vez que el guerrero recibe un ataque. (Max 30%)
 
-    Características / Equipamiento:
-    - Armadura del guerrero (defensa +20.0%)
+    Equipamiento:
+        - Armas de la catergoria ArmaGuerrero: EspadaBastarda, HachaDobleFilo, LanzaPuntiaguda
+        - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
+
+    Características:
+    - Fortaleza del guerrero (defensa +20.0%)
     - Una gran fuerza que le permite aumentar la fuerza de su ataque (+20.0%)
     - Una característica especial que le permite contraatacar con mayor probabilidad, llamada 'Ira Espartana'
         - Este atributo se inicializa a 0 y aumenta en 5% cada vez que el guerrero recibe un ataque. (Max 30%)
@@ -30,43 +32,41 @@ public class Guerrero extends Personaje {
 
     private Double iraEspartanaContraataque;
 
-    public Guerrero() {
-        this("Guerrero" + contadorPersonajes);
+    public Guerrero(Arma arma, Escudo escudo) {
+        this("Guerrero" + contadorPersonajes, arma, escudo);
     }
 
-    public Guerrero(String nombre) {
-        super(nombre, Guerrero.MOD_ATQ_INICIAL, Guerrero.MOD_DEF_INICIAL, Personaje.NUMERO_ITEMS_DEFAULT);
+    public Guerrero(String nombre, Arma arma, Escudo escudo) {
+        super(nombre, Guerrero.MOD_ATQ_INICIAL, Guerrero.MOD_DEF_INICIAL, Personaje.NUMERO_ITEMS_DEFAULT, arma, escudo);
         this.iraEspartanaContraataque = Guerrero.IRA_ESPARTANA_INICIAL;
     }
 
-    // Metodo que calcula el daño total del guerrero y se lo pasa al padre para que lo aplique
-    public void atacar(Personaje personaje) {
-        Double danioTotal = this.calcularDanio();
-        super.atacar(personaje, danioTotal);
-    }
-
-    // El hijo calcula el daño total
-    private Double calcularDanio() {
-        // Obtenemos el daño base del arma
-        Double danioTotal = super.armaPerosonaje.getDanio();
-        // Le pedimos al padre que nos calcule el daño total teniendo en cuenta el ataque del personaje
-        danioTotal += super.calcularDanio(danioTotal);
-
-        return danioTotal;
+    @Override
+    protected Boolean contraAtaco() {
+        Boolean contraAtaco = false;
+        Double probabilidadContraataque = Personaje.PROBABILIDAD_CONTRAATAQUE_DEFAULT + this.iraEspartanaContraataque;
+        if (probabilidadContraataque > Math.random() * 100) {
+            contraAtaco = true;
+        }
+        return contraAtaco;
     }
 
     @Override
-    public void defensa(Personaje personaje) {
-        // Guerrero defense logic
+    public void recibirAtaque(Double danio) {
+        super.recibirAtaque(danio);
+        this.iraEspartanaContraataque += Guerrero.IRA_ESPARTANA_INCREMENTO;
+        this.iraEspartanaContraataque = Math.min(this.iraEspartanaContraataque, Guerrero.IRA_ESPARTANA_MAX);
+        System.out.println("Tras recibir un ataque, la ira espartana del guerrero aumenta a " + this.iraEspartanaContraataque + "%");
     }
 
-    @Override
-    public void contraataque(Personaje personaje, Double ataque) {
-        // Guerrero counterattack logic
+
+    public void setIraEspartanaContraataque(Double iraEspartanaContraataque) {
+        this.iraEspartanaContraataque = iraEspartanaContraataque;
     }
 
-    @Override
-    public void retirada(Personaje personaje) {
-        
+    public Double getIraEspartanaContraataque() {
+        return iraEspartanaContraataque;
     }
+
+    
 }

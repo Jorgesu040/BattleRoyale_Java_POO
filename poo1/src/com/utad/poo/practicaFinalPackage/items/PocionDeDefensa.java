@@ -6,6 +6,7 @@ import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 public class PocionDeDefensa extends Pocion {
 
     public static final String NOMBRE = "Poción de defensa";
+    public static final Double VALOR_EFECTO = 30.0; // %
 
     public PocionDeDefensa(Double valorEfecto) {
         super(PocionDeDefensa.NOMBRE, valorEfecto);
@@ -17,5 +18,10 @@ public class PocionDeDefensa extends Pocion {
             personaje.incrementarDefensa(valorEfecto);
             haSidoUsada = true;
         }
+    }
+
+    @Override
+    public void revertir(Personaje personaje) {
+        personaje.decrementarDefensa(valorEfecto);
     }
 }

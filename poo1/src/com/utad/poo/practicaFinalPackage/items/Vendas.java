@@ -18,5 +18,10 @@ public class Vendas extends Item {
             haSidoUsada = true;
         }
     }
+
+    @Override
+    public void revertir(Personaje personaje) {
+        return;
+    }
     
 }

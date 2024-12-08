@@ -32,4 +32,6 @@ public abstract class Item {
         this.haSidoUsada = haSidoUsada;
     }
 
+    public abstract void revertir( Personaje personaje );
+
 }

@@ -1,23 +1,22 @@
 package com.utad.poo.practicaFinalPackage.personajes;
 
+import com.utad.poo.practicaFinalPackage.items.*;
+import com.utad.poo.practicaFinalPackage.herramientas.*;
+
 /* Clase mago:
-    - Implementa la lógica de ataque, defensa, contraataque y retirada de un personaje de tipo mago.
-    - Hereda de la clase Personaje.
-    - Implementa los métodos abstractos de la clase Personaje.
+    - Implementa la lógica de la mecánica de critico de un personaje de tipo Mago.
 
-    Especialidad: 
-    - Herramienta de ataque: hechizos mágicos.
-    - Herramienta de defensa: escudo mágico.
-    
     Nota:
-    - La clase Mago empieza con 2 objetos de tipo Item de tipo aleatorio.
-    - Tiene mas probabilidad de encontrar objetos de tipo Item.
-    - Tiene mas probabilidad de evitar las trampas.
+    - La clase Mago empieza con 2 dos pociones: una de defensa y otra de ataque.
 
-    Características / Equipamiento:
-    - Armadura del mago (defensa +5.0%)
-    - Poder runico que le permite aumentar el daño de su ataque (+5.0%)
-    - Un bastón mágico que le permite lanzar hechizos mágicos y tiene una pequeña probabilidad (1%) hacer un ataque crítico (+50%)
+    Equipamiento:
+        - Armas de la catergoria ArmaMago: BastonDeSabiduria, OrbeAncestral, VaritaDeCristal
+        - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
+
+    Características:
+    - Hechizo de defensor magico que aumenta su defensa base (defensa +5.0%)
+    - Magia runica que aumentar su daño base (ataque +5.0%)
+    - Un bastón mágico que le permite lanzar hechizos mágicos y tiene una pequeña probabilidad (2%) hacer un ataque crítico (+50%)
         - La probabilidad de ataque crítico aumenta en +2 hasta un 10%.
 */
 
@@ -26,36 +25,32 @@ public class Mago extends Personaje {
 
     public static final Double ATAQUE_CRITICO = 50.0;
 
-    public static final Double PROB_CRITICO_INICIAL = 1.0;
+    public static final Double PROB_CRITICO_INICIAL = 2.0;
     public static final Double PROB_CRITICO_INCREMENTO = 2.0;
     public static final Double PROB_CRITICO_MAX = 10.0;
 
     public static final Double MOD_ATQ_INICIAL = 5.0;
     public static final Double MOD_DEF_INICIAL = 5.0;
 
+    public static final Integer NUMERO_ITEMS_DEFAULT = 2;
+
     private Double probablidadCritico;
 
-    public Mago() {
-        this("Mago" + contadorPersonajes);
+    public Mago(Arma arma, Escudo escudo) {
+        this("Mago" + contadorPersonajes, arma, escudo);
     }
 
-    public Mago(String nombre) {
-        super(nombre, Mago.MOD_ATQ_INICIAL, Mago.MOD_DEF_INICIAL, Personaje.NUMERO_ITEMS_DEFAULT);
+    public Mago(String nombre, Arma arma, Escudo escudo) {
+        super(nombre, Mago.MOD_ATQ_INICIAL, Mago.MOD_DEF_INICIAL, Mago.NUMERO_ITEMS_DEFAULT, arma, escudo);
         this.probablidadCritico = Mago.PROB_CRITICO_INICIAL;
+        this.aniadaPociones();
     }
 
-     // Metodo que calcula el daño total del guerrero y se lo pasa al padre para que lo aplique
-     public void atacar(Personaje personaje) {
-        Double danioTotal = this.calcularDanio();
-        super.atacar(personaje, danioTotal);
-    }
 
-    // El hijo calcula el daño total
-    private Double calcularDanio() {
+    @Override
+    protected Double calcularDanio() {
         // Obtenemos el daño base del arma
-        Double danioTotal = super.armaPerosonaje.getDanio();        
-        // Le pedimos al padre que nos calcule el daño total teniendo en cuenta el ataque del personaje
-        danioTotal += super.calcularDanio(danioTotal);
+        Double danioTotal = super.armaPersonaje.getDanio() * (1 + (super.ataque / 100));
 
         if (this.momentoAtaqueCritico()) {
             System.out.println("Ataque crítico! Un " + Mago.ATAQUE_CRITICO + "% de daño adicional"); 
@@ -73,21 +68,21 @@ public class Mago extends Personaje {
         }
         return critico;
     }
-
-    @Override
-    public void defensa(Personaje personaje) {
-        // Mago defense logic
+    
+    // Añade las pociones iniciales
+    private void aniadaPociones() {
+        super.items.add(new PocionDeAtaque(PocionDeAtaque.VALOR_EFECTO));
+        super.items.add(new PocionDeDefensa(PocionDeDefensa.VALOR_EFECTO));
     }
-        // Mago defense logic
+
+    public Double getProbablidadCritico() {
+        return probablidadCritico;
+    }
+
+    public void setProbablidadCritico(Double probablidadCritico) {
+        this.probablidadCritico = probablidadCritico;
+    }
+
     
 
-    @Override
-    public void contraataque(Personaje personaje, Double ataque) {
-        // Mago counterattack logic
-    }
-
-    @Override
-    public void retirada(Personaje personaje) {
-        // Mago retreat logic
-    }
 }

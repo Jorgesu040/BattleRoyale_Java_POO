@@ -15,4 +15,9 @@ public class TrampaReducirDefensa extends Trampa {
     public void usar(Personaje personaje) {
         personaje.decrementarDefensa(valorEfecto);
     }
+
+    @Override
+    public void revertir(Personaje personaje) {
+        personaje.incrementarDefensa(valorEfecto);
+    }
 }

@@ -19,4 +19,8 @@ public class Botiquin extends Item {
         }
     }
 
+    @Override
+    public void revertir(Personaje personaje) {
+        return;
+    }
 }
