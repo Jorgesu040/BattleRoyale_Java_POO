@@ -1,7 +1,8 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class OrbeAncestral extends ArmaMago {
+public final class OrbeAncestral extends ArmaMago {
+	
     public static final String NOMBRE = "Orbe Ancestral";
     public static final Double DANYO = 15.0; // pts. -> Hace 15 puntos de daño
     public static final Double PRECISION = 90.0; // % -> 90% de precisión

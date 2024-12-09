@@ -1,6 +1,6 @@
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class Ballesta extends ArmaArquero {
+public final class Ballesta extends ArmaArquero {
 
     public static final String NOMBRE = "Ballesta";
     public static final Double DANYO = 15.0; // pts. -> Hace 15 puntos de daño

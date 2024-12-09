@@ -1,7 +1,7 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class EscudoLigero extends Escudo {
+public final class EscudoLigero extends Escudo {
 
     public static final String NOMBRE = "Escudo Ligero";
     public static final Double DEFENSA = 50.0d; // % -> Defiende el 70% de daño

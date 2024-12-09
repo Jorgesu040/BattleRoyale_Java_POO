@@ -1,7 +1,7 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class ArcoDePrecision extends ArmaArquero {
+public final class ArcoDePrecision extends ArmaArquero {
     
     public static final String NOMBRE = "Arco de precisión";
     public static final Double DANYO = 10.0; // pts. -> Hace 10 puntos de daño

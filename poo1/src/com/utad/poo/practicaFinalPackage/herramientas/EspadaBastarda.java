@@ -1,7 +1,7 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class EspadaBastarda extends ArmaGuerrero {
+public final class EspadaBastarda extends ArmaGuerrero {
     
     public static final String NOMBRE = "Orbe Ancestral";
     public static final Double DANYO = 15.0; // pts. -> Hace 15 puntos de daño

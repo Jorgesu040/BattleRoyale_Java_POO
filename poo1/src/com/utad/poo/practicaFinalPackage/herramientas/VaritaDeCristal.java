@@ -1,7 +1,7 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class VaritaDeCristal extends ArmaMago {
+public final class VaritaDeCristal extends ArmaMago {
 
     public static final String NOMBRE = "Varita de Cristal";
     public static final Double DANYO = 20.0; // pts. -> Hace 20 puntos de daño

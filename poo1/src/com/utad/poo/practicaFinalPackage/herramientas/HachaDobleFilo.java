@@ -1,6 +1,6 @@
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class HachaDobleFilo extends ArmaGuerrero {
+public final class HachaDobleFilo extends ArmaGuerrero {
 
     public static final String NOMBRE = "Hacha de doble filo";
     public static final Double DANYO = 10.0; // pts. -> Hace 15 puntos de daño

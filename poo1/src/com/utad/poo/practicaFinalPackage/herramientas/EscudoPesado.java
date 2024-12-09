@@ -1,7 +1,7 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class EscudoPesado extends Escudo {
+public final class EscudoPesado extends Escudo {
     public static final String NOMBRE = "Escudo Pesaado";
     public static final Double DEFENSA = 85.0; // % -> Defiende el 85% de daño
     public static final Double BONUS_DE_RETIRADA = -10.0; // % -> -10 puntos al porcentaje de probabilidad de retirada

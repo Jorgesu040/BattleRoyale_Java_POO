@@ -1,7 +1,7 @@
 
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public class LanzaPuntiaguda extends ArmaGuerrero {
+public final class LanzaPuntiaguda extends ArmaGuerrero {
     
     public static final String NOMBRE = "Lanza Puntiaguda";
     public static final Double DANYO = 15.0; // pts. -> Hace 15 puntos de daño
