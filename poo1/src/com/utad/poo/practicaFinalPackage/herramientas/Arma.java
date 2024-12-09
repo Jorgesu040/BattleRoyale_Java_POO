@@ -1,34 +1,14 @@
-
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public abstract class Arma extends Herramienta {
-    
-    // Daño que inflige el arma
-    protected Double danio;
-    // Probabilidad de acertar un golpe
-    protected Double precision;
-
-    public Arma(String nombre, Double danio, Double precision) {
-        super(nombre);
-        this.danio = danio;
-        this.precision = precision;
-    }
-
-    public Double getDanio() {
-        return danio;
-    }
-
-    public void setDanio(Double danio) {
-        this.danio = danio;
-    }
-
-    public Double getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(Double precision) {
-        this.precision = precision;
-    }
-    
-
+public interface Arma extends Herramienta
+{
+	public static Double DEFAULT_DANIO = 0.0d;
+	public static Double DEFAULT_PRECISION = 0.0d;
+	
+	public Double getDanio();
+	public void setDanio(Double danio);
+	
+	public Double getPrecision();
+	public void setPrecision(Double precision);
+	
 }

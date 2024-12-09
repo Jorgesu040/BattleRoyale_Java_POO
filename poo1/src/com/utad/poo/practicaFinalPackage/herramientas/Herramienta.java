@@ -1,19 +1,12 @@
-
 package com.utad.poo.practicaFinalPackage.herramientas;
 
-public abstract class Herramienta {
-    protected String nombre;
-    
-    public Herramienta(String nombre) {
-        this.nombre = nombre;
-    }
 
-    public String getNombre() {
-        return nombre;
-    }
+public interface Herramienta
+{
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }  
-
+	public static String DEFAULT_NOMBRE = "Nueva Herramienta";
+	
+	public String getNombre();
+	public void setNombre(String nombre);
+	
 }

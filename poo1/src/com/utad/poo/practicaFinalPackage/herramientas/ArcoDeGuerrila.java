@@ -10,4 +10,6 @@ public class ArcoDeGuerrila extends ArmaArquero {
     public ArcoDeGuerrila() {
         super(ArcoDeGuerrila.NOMBRE, ArcoDeGuerrila.DANYO, ArcoDeGuerrila.PRECISION, ArcoDeGuerrila.PUNTERIA);
     }
+    
+    
 }
