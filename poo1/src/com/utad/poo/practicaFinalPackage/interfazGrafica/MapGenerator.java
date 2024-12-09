@@ -48,12 +48,16 @@ public class MapGenerator extends JPanel
     private void drawHexagon(Graphics2D g2d, Integer x, Integer y, Integer radius) 
     {
         Polygon hex = new Polygon();
-        for (int i = 0; i < 6; i++) {
+        
+        // vertice = posicion_centro + radio * angulo
+        for (int i = 0; i < 6; i++) 
+        {
             double angle = Math.toRadians(i * 60);
             int xPoint = (int) (x + radius * Math.cos(angle));
             int yPoint = (int) (y + radius * Math.sin(angle));
             hex.addPoint(xPoint, yPoint);
         }
+        
         g2d.setColor(Color.YELLOW);
         g2d.fillPolygon(hex);
         g2d.setColor(Color.ORANGE);

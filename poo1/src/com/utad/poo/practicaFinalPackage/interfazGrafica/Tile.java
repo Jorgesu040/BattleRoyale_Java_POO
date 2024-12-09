@@ -1,9 +1,24 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
-public class Tile 
+import java.awt.*;
+import java.awt.Polygon;
+
+
+public abstract class Tile 
 {
 
-	private TileType tileType;
+	protected TileType tileType;
+	protected Integer hexagonRadious;
 	
+	protected Boolean ocupaid;
+	protected OcupaidState ocupaidType;
 	
+	// TODO
+	public void drawTile()
+	{
+		
+	}
+	
+	// TODO constructores
+	// otras movidas
 }
