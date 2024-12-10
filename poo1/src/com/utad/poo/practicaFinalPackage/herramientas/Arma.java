@@ -11,4 +11,5 @@ public interface Arma extends Herramienta
 	public Double getPrecision();
 	public void setPrecision(Double precision);
 	
+	
 }

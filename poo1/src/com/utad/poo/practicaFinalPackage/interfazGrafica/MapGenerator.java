@@ -17,7 +17,7 @@ public class MapGenerator extends JPanel
 	private final Integer hexRadius = 30; 
     private final Integer hexWidth = (int) (Math.sqrt(3) * hexRadius); 
     private final Integer hexHeight = 2 * hexRadius; 
-    private final Integer hexSpacing = 5; 
+    private final Integer hexSpacing = -1; 
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -60,7 +60,7 @@ public class MapGenerator extends JPanel
         
         g2d.setColor(Color.YELLOW);
         g2d.fillPolygon(hex);
-        g2d.setColor(Color.ORANGE);
+        g2d.setColor(Color.GREEN);
         g2d.drawPolygon(hex);
     }
 
@@ -68,6 +68,7 @@ public class MapGenerator extends JPanel
     {
         JFrame frame = new JFrame("Mapa Hexagonal");
         MapGenerator panel = new MapGenerator();
+        
         frame.add(panel);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
