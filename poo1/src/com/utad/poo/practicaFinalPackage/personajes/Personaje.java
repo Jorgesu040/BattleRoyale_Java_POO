@@ -298,7 +298,11 @@ public abstract class Personaje {
         }
     }
 
-    // TODO: metodo que reinicie el estado del personaje 
+    // Metodo que reinicie el estado del personaje al final de un turno 
+    public void reiniciarEstado() {
+        this.estado = EstadoPersonaje.NADA;
+        this.reiniciarModificadores(); 
+    }
     
     /* Getters y Setters */
 
