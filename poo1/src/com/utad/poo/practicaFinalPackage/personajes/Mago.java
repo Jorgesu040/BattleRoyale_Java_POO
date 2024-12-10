@@ -1,25 +1,24 @@
+/**
+ * Clase Mago:
+ * - Implementa la lógica de la mecánica de crítico de un personaje de tipo Mago.
+ *
+ * Nota:
+ * - La clase Mago empieza con 2 pociones: una de defensa y otra de ataque.
+ *
+ * Equipamiento:
+ * - Armas de la categoría ArmaMago: BastonDeSabiduria, OrbeAncestral, VaritaDeCristal
+ * - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
+ *
+ * Características:
+ * - Hechizo de defensor mágico que aumenta su defensa base (defensa +5.0%)
+ * - Magia rúnica que aumenta su daño base (ataque +5.0%)
+ * - Un bastón mágico que le permite lanzar hechizos mágicos y tiene una pequeña probabilidad (2%) de hacer un ataque crítico (+50%)
+ *   - La probabilidad de ataque crítico aumenta en +2 hasta un 10%.
+ */
 package com.utad.poo.practicaFinalPackage.personajes;
 
 import com.utad.poo.practicaFinalPackage.items.*;
 import com.utad.poo.practicaFinalPackage.herramientas.*;
-
-/* Clase mago:
-    - Implementa la lógica de la mecánica de critico de un personaje de tipo Mago.
-
-    Nota:
-    - La clase Mago empieza con 2 dos pociones: una de defensa y otra de ataque.
-
-    Equipamiento:
-        - Armas de la catergoria ArmaMago: BastonDeSabiduria, OrbeAncestral, VaritaDeCristal
-        - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
-
-    Características:
-    - Hechizo de defensor magico que aumenta su defensa base (defensa +5.0%)
-    - Magia runica que aumentar su daño base (ataque +5.0%)
-    - Un bastón mágico que le permite lanzar hechizos mágicos y tiene una pequeña probabilidad (2%) hacer un ataque crítico (+50%)
-        - La probabilidad de ataque crítico aumenta en +2 hasta un 10%.
-*/
-
 
 public class Mago extends Personaje {
 

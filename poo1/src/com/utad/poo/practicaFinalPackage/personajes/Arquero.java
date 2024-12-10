@@ -1,25 +1,24 @@
+/**
+ * Clase Arquero:
+ * - Implementa la mecánica de puntería de un personaje de tipo arquero.
+ *
+ * Nota:
+ * - Mecánica de puntería:
+ *   - Cuanto mayor sea la puntería, menor probabilidad tiene el enemigo de huir.
+ *   - Esta mecánica aplica un porcentaje reductor de probabilidad de huida del enemigo.
+ *
+ * Equipamiento:
+ * - Armas de la categoría ArmaArquero: ArcoDeGuerrila, ArcoDePrecision, Ballesta
+ * - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
+ *
+ * Características:
+ * - Agilidad del arquero (defensa +10.0%)
+ * - Sin bonus de ataque inicial (ataque +0.0%)
+ * - Con una puntería inicial de 10, que puede aumentar hasta 20.
+ */
 package com.utad.poo.practicaFinalPackage.personajes;
 
 import com.utad.poo.practicaFinalPackage.herramientas.*;
-
-/* Clase arquero:
-    - Implementa la mecánica de puntería de un personaje de tipo arquero.
-
-    Nota:
-    - Mecanica de punteria: 
-        - Cuanto mayor sea el punteria, menor probabilidad tiene el enemigo de huir.
-        - Esta mecanica aplica un porcentaje reductor de probabilidad de huida del enemigo.
-    
-    Equipamiento:
-        - Armas de la catergoria ArmaArquero: ArcoDeGuerrila, ArcoDePrecision, Ballesta
-        - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
-
-    Características:
-    - Agilidad del arquero(defensa +10.0%)
-    - Sin bonus de ataque inicial. (ataque +0.0%)
-    - Con una punteria inicial de 10, que puede aumentar hasta 20.
-*/
-
 
 public class Arquero extends Personaje {
 

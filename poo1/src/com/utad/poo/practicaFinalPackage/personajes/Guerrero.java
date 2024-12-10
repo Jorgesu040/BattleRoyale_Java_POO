@@ -1,26 +1,27 @@
+/**
+ * Clase Guerrero:
+ * - Implementa los métodos de la mecánica de contraataque de un personaje de tipo Guerrero.
+ * - (Polimorfismo) Sobreescribe el método recibirAtaque para implementar la mecánica de aumento de la ira espartana.
+ *
+ * Nota:
+ * - Mecánica de contraataque:
+ *   - El guerrero aumenta su probabilidad de contraataque cada vez que recibe un ataque.
+ *   - La probabilidad de contraataque se inicializa a 0 y aumenta en 5% cada vez que el guerrero recibe un ataque. (Máximo 30%)
+ *
+ * Equipamiento:
+ * - Armas de la categoría ArmaGuerrero: EspadaBastarda, HachaDobleFilo, LanzaPuntiaguda
+ * - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
+ *
+ * Características:
+ * - Fortaleza del guerrero (defensa +20.0%)
+ * - Una gran fuerza que le permite aumentar la fuerza de su ataque (+20.0%)
+ * - Una característica especial que le permite contraatacar con mayor probabilidad, llamada 'Ira Espartana'
+ *   - Este atributo se inicializa a 0 y aumenta en 5% cada vez que el guerrero recibe un ataque. (Máximo 30%)
+ */
 package com.utad.poo.practicaFinalPackage.personajes;
 
 import com.utad.poo.practicaFinalPackage.herramientas.*;
 
-/* Clase guerrero:
-    - Implementa los métodos de la mecánica de contraataque de un personaje de tipo Guerrero.
-    - (Polimorfismo) Sobreescribe el método recibirAtaque para implementar la mecánica de aumento de la ira espartana.
-
-    Nota:
-    - Mecanica de contraataque: 
-        - El guerrero aumenta su probabilidad de contraataque cada vez que recibe un ataque.
-        - La probabilidad de contraataque se inicializa a 0 y aumenta en 5% cada vez que el guerrero recibe un ataque. (Max 30%)
-
-    Equipamiento:
-        - Armas de la catergoria ArmaGuerrero: EspadaBastarda, HachaDobleFilo, LanzaPuntiaguda
-        - Escudos normales: EscudoLigero, EscudoNormal, EscudoPesado
-
-    Características:
-    - Fortaleza del guerrero (defensa +20.0%)
-    - Una gran fuerza que le permite aumentar la fuerza de su ataque (+20.0%)
-    - Una característica especial que le permite contraatacar con mayor probabilidad, llamada 'Ira Espartana'
-        - Este atributo se inicializa a 0 y aumenta en 5% cada vez que el guerrero recibe un ataque. (Max 30%)
-*/
 
 public class Guerrero extends Personaje {
     public static final Double IRA_ESPARTANA_INICIAL = 0.0;
