@@ -1,6 +1,8 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
+import java.awt.Polygon;
+
 
 
 public abstract class Tile 
