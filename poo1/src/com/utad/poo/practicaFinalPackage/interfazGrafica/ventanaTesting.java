@@ -10,13 +10,13 @@ public class ventanaTesting
     {
         JFrame frame = new JFrame("Mapa Hexagonal");
         MapGenerator panel = new MapGenerator(7, 540, 375, 2, 3, 5);
-        MapController controller = new MapController(panel);
+        MapController mapController = new MapController(panel);
         
         // Add game logic
-        controller.addTileEventListener(new GameLogicHandler());
+        mapController.addTileEventListener(new GameLogicHandler());
         
         // Add UI feedback
-        controller.addTileEventListener(new TileEventListener() {
+        mapController.addTileEventListener(new TileEventListener() {
             @Override
             public void onTileClicked(Tile tile) {
                 JOptionPane.showMessageDialog(panel, tile.toString());
@@ -24,7 +24,6 @@ public class ventanaTesting
             
             @Override
             public void onTileHovered(Tile tile) {
-                // Handle UI feedback
             }
         });
         
