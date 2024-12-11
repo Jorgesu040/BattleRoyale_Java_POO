@@ -71,10 +71,10 @@ public class Tile
 		createHexagon();
 		setTileColor(graficos, this.hexagono);	
 		
-		if (this.isHovered) {
+		if (this.isHovered && !this.tileType.equals(TileType.TILE_OBSTACLE)) {
 	        // Agregar borde rojo más grueso para indicar hover
 	        graficos.setStroke(new BasicStroke(3)); // Borde más grueso
-	        graficos.setColor(Color.RED);           // Color del borde
+	        graficos.setColor(new Color(108,70,49));           // Color del borde
 	        graficos.drawPolygon(this.hexagono);    // Dibujar borde
 	        graficos.setStroke(new BasicStroke(1)); // Restablecer grosor normal
 	    }
@@ -98,7 +98,7 @@ public class Tile
 			case TILE_OBSTACLE:
 			{
 				// Interior
-				graficos.setColor(Color.ORANGE);
+				graficos.setColor(new Color(76, 143, 220));
 				graficos.fillPolygon(hexagono);
 				this.debug = 2;
 
@@ -153,7 +153,7 @@ public class Tile
 			default:  // Se trata como un TILE_FREE_SPACE
 			{
 				// Interior
-				graficos.setColor(Color.BLACK);
+				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
 				this.debug = 8;
 			}
