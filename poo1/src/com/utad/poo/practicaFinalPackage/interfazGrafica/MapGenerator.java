@@ -172,19 +172,25 @@ public class MapGenerator extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        renderGrid(g2d);
+        generateMap(g2d);
         renderMap(g2d);
         
+        for (Tile myTile: this.tiles)
+    	{
+    		myTile.drawTile(g2d);
+    	}
     }
     
    
-    private void renderMap(Graphics g2d)
+    private void renderMap(Graphics2D g2d)
     {
     	super.setBackground(new Color(76, 143, 220));
+    	
+    	
     }
 
   
-    private void renderGrid(Graphics2D g2d)
+    private void generateMap(Graphics2D g2d)
     {
     	Double ang30 = Math.toRadians(30);
         Double xOff = Math.cos(ang30) * (Tile.HEXAGON_RADIOUS + MapGenerator.DEFAULT_SPACING_X);
@@ -239,7 +245,7 @@ public class MapGenerator extends JPanel
         MapGenerator.tileCounter++;
         // Crear el tile con el tipo generado
         newTile = new Tile(tileType, posX, posY, false, null, MapGenerator.tileCounter);
-        newTile.drawTile(g2d);
+        //newTile.drawTile(g2d);
         
         this.tiles.add(newTile);
        

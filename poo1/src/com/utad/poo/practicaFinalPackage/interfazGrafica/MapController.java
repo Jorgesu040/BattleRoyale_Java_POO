@@ -1,5 +1,6 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -16,26 +17,32 @@ public class MapController {
     }
     
     public void addTileEventListener(TileEventListener listener) {
-        tileEventListeners.add(listener);
+        this.tileEventListeners.add(listener);
     }
     
     private void initializeListeners() {
-        mapGenerator.addMouseListener(new MouseAdapter() {
+        mapGenerator.addMouseListener(new MouseAdapter() 
+        {
             @Override
             public void mouseClicked(MouseEvent e) {
                 handleTileClick(e);
             }
+          
+        });
+        
+        mapGenerator.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
                 handleTileHover(e);
             }
         });
+
     }
     
     private void handleTileClick(MouseEvent click) {
-        for (Tile tile : mapGenerator.getTiles()) {
+        for (Tile tile : this.mapGenerator.getTiles()) {
             if (tile.contains(click.getPoint())) {
-                for (TileEventListener listener : tileEventListeners) {
+                for (TileEventListener listener : this.tileEventListeners) {
                     listener.onTileClicked(tile);
                 }
                 break;
@@ -44,13 +51,24 @@ public class MapController {
     }
     
     private void handleTileHover(MouseEvent e) {
-        for (Tile tile : mapGenerator.getTiles()) {
+        boolean anyTileHovered = false;
+
+        for (Tile tile : this.mapGenerator.getTiles()) {
             if (tile.contains(e.getPoint())) {
-                for (TileEventListener listener : tileEventListeners) {
+                tile.setHovered(true);
+                anyTileHovered = true;
+
+                for (TileEventListener listener : this.tileEventListeners) {
                     listener.onTileHovered(tile);
                 }
-                break;
+            } else {
+                tile.setHovered(false);
             }
         }
+
+        if (anyTileHovered) {
+            this.mapGenerator.repaint();
+        }
     }
+
 }

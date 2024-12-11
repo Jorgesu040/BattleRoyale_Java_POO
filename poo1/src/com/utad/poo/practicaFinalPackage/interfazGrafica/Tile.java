@@ -22,6 +22,7 @@ public class Tile
 	
 	protected Polygon hexagono;
 	private Integer debug;
+	private boolean isHovered;
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
@@ -32,12 +33,21 @@ public class Tile
 		this.objectoOcupado = objectoOcupado;
 		this.tileId = id;
 		this.debug = 0;
+		this.isHovered = false;
 	}
 	
 	public boolean contains(Point p) 
 	{
 		return this.hexagono.contains(p);
 	}
+	
+	  public void setHovered(boolean hovered) {
+	        this.isHovered = hovered;
+	    }
+
+	    public boolean isHovered() {
+	        return this.isHovered;
+	    }
 	
 	public void createHexagon()
 	{
@@ -60,6 +70,14 @@ public class Tile
 	{
 		createHexagon();
 		setTileColor(graficos, this.hexagono);	
+		
+		if (this.isHovered) {
+	        // Agregar borde rojo más grueso para indicar hover
+	        graficos.setStroke(new BasicStroke(3)); // Borde más grueso
+	        graficos.setColor(Color.RED);           // Color del borde
+	        graficos.drawPolygon(this.hexagono);    // Dibujar borde
+	        graficos.setStroke(new BasicStroke(1)); // Restablecer grosor normal
+	    }
 	}
 	
 	private void setTileColor(Graphics2D graficos, Polygon hexagono)
