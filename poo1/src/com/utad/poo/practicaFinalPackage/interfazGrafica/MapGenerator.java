@@ -168,7 +168,8 @@ public class MapGenerator extends JPanel
         	
         while (values[randomIndex] == TileType.TILE_SPAWN || 
                values[randomIndex] == TileType.TILE_SPAWN_AI || 
-               values[randomIndex] == TileType.TILE_TRAP_SET) 
+               values[randomIndex] == TileType.TILE_TRAP_SET ||
+               values[randomIndex] == TileType.TILE_TRAP_IDLE) 
         {
             randomIndex = (int) (Math.random() * values.length);
         }

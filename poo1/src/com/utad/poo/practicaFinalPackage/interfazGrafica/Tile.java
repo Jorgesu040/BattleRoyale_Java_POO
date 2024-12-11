@@ -21,6 +21,7 @@ public class Tile
 	protected Object objectoOcupado; // el objeto que esta ocupando el tile
 	
 	protected Polygon hexagono;
+	private Integer debug;
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
@@ -30,6 +31,7 @@ public class Tile
 		this.ocupado = ocupado;
 		this.objectoOcupado = objectoOcupado;
 		this.tileId = id;
+		this.debug = 0;
 	}
 	
 	public boolean contains(Point p) 
@@ -71,14 +73,16 @@ public class Tile
 				// Interior
 				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
+				this.debug = 1;
 
 			} break;
 
 			case TILE_OBSTACLE:
 			{
 				// Interior
-				graficos.setColor(new Color(76, 143, 220));
+				graficos.setColor(Color.ORANGE);
 				graficos.fillPolygon(hexagono);
+				this.debug = 2;
 
 			} break;
 		
@@ -88,6 +92,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.PINK);
 				graficos.fillPolygon(hexagono);
+				this.debug = 3;
 				
 			} break;
 		
@@ -96,6 +101,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.BLACK);
 				graficos.fillPolygon(hexagono);	
+				this.debug = 4;
 				
 			} break;
 		
@@ -104,6 +110,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.ORANGE);
 				graficos.fillPolygon(hexagono);
+				this.debug = 5;
 				
 			} break;
 			
@@ -112,22 +119,25 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.RED);
 				graficos.fillPolygon(hexagono);
+				this.debug = 6;
 				
 			} break;
 			
 			case TILE_TRAP_IDLE:
 			{
 				// Interior
-				graficos.setColor(new Color(44, 131, 58));
+				graficos.setColor(Color.GRAY);
 				graficos.fillPolygon(hexagono);
+				this.debug = 7;
 			} break;
 				
 			
 			default:  // Se trata como un TILE_FREE_SPACE
 			{
 				// Interior
-				graficos.setColor(new Color(44, 131, 58));
+				graficos.setColor(Color.BLACK);
 				graficos.fillPolygon(hexagono);
+				this.debug = 8;
 			}
 		
 		}
@@ -137,7 +147,7 @@ public class Tile
 	@Override
 	public String toString() {
 		return "Tile [posX=" + this.posX + ", posY=" + this.posY + ", tileType=" + this.tileType + ", ocupado=" + this.ocupado
-				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + "]";
+				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + " " + this.debug + "]";
 	}
 	
 	
