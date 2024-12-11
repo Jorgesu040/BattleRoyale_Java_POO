@@ -1,34 +1,35 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
-import java.awt.Polygon;
 
 
 
 
 public class Tile 
 {
-	public static final Integer HEXAGON_RADIOUS = 30; // 10 pixeles de radio
+	public static final Integer HEXAGON_RADIOUS = 40; // 10 pixeles de radio
 	public static final Integer HEXAGON_WIDTH = (int) (Math.sqrt(3) * Tile.HEXAGON_RADIOUS);
 	public static final Integer HEXAGON_HEIGHT = 2 * Tile.HEXAGON_RADIOUS;
 
 	protected Integer posX;
 	protected Integer posY;
+	protected Integer tileId;
 	
 	protected TileType tileType;
 	
 	protected Boolean ocupado;
 	protected Object objectoOcupado; // el objeto que esta ocupando el tile
 	
-	private Polygon hexagono;
+	protected Polygon hexagono;
 	
-	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado)
+	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
 		this.tileType = type;
 		this.posX = posX;
 		this.posY = posY;
 		this.ocupado = ocupado;
 		this.objectoOcupado = objectoOcupado;
+		this.tileId = id;
 	}
 	
 	public boolean contains(Point p) 
@@ -61,31 +62,25 @@ public class Tile
 	
 	private void setTileColor(Graphics2D graficos, Polygon hexagono)
 	{
+
+		
 		switch(this.tileType)
 		{
 			case TILE_FREE_SPACE: 
 			{
 				// Interior
-				graficos.setColor(Color.GREEN);
+				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
-				
-				// Exterior
-				graficos.setColor(Color.DARK_GRAY);
-				graficos.drawPolygon(hexagono);
-			}
-			break;
+
+			} break;
 
 			case TILE_OBSTACLE:
 			{
 				// Interior
-				graficos.setColor(Color.CYAN);
+				graficos.setColor(new Color(76, 143, 220));
 				graficos.fillPolygon(hexagono);
-				
-				// Exterior
-				graficos.setColor(Color.CYAN);
-				graficos.drawPolygon(hexagono);
-			}
-			break;
+
+			} break;
 		
 			
 			case TILE_LOOT:
@@ -94,23 +89,15 @@ public class Tile
 				graficos.setColor(Color.PINK);
 				graficos.fillPolygon(hexagono);
 				
-				// Exterior
-				graficos.setColor(Color.DARK_GRAY);
-				graficos.drawPolygon(hexagono);
-			}
-			break;
+			} break;
 		
 			case TILE_SPAWN:
 			{
 				// Interior
 				graficos.setColor(Color.BLACK);
-				graficos.fillPolygon(hexagono);
+				graficos.fillPolygon(hexagono);	
 				
-				// Exterior
-				graficos.setColor(Color.RED);
-				graficos.drawPolygon(hexagono);
-			}
-			break;
+			} break;
 		
 			case TILE_SPAWN_AI:
 			{
@@ -118,21 +105,29 @@ public class Tile
 				graficos.setColor(Color.ORANGE);
 				graficos.fillPolygon(hexagono);
 				
-				// Exterior
-				graficos.setColor(Color.YELLOW);
-				graficos.drawPolygon(hexagono);
-			}
-			break;
+			} break;
+			
+			case TILE_TRAP_SET:
+			{
+				// Interior
+				graficos.setColor(Color.RED);
+				graficos.fillPolygon(hexagono);
+				
+			} break;
+			
+			case TILE_TRAP_IDLE:
+			{
+				// Interior
+				graficos.setColor(new Color(44, 131, 58));
+				graficos.fillPolygon(hexagono);
+			} break;
+				
 			
 			default:  // Se trata como un TILE_FREE_SPACE
 			{
 				// Interior
-				graficos.setColor(Color.GREEN);
+				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
-				
-				// Exterior
-				graficos.setColor(Color.DARK_GRAY);
-				graficos.drawPolygon(hexagono);
 			}
 		
 		}
@@ -142,7 +137,7 @@ public class Tile
 	@Override
 	public String toString() {
 		return "Tile [posX=" + this.posX + ", posY=" + this.posY + ", tileType=" + this.tileType + ", ocupado=" + this.ocupado
-				+ ", objectoOcupado=" + this.objectoOcupado + "]";
+				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + "]";
 	}
 	
 	

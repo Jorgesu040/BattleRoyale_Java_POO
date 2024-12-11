@@ -20,19 +20,53 @@ import java.util.ArrayList;
 public class MapGenerator extends JPanel
 {
 
-    public static final Integer DEFAULT_SPACING_X = 0; 
-    public static final Integer DEFAULT_SPACING_Y = 0; 
-    public static final Integer OFFSET_X = 200;
-    public static final Integer OFFSET_Y = 150;
+	// Necesitado por JPanel
+	private static final long serialVersionUID = 1L;
+	
+	public static final Integer DEFAULT_SPACING_X = 5; 
+    public static final Integer DEFAULT_SPACING_Y = 5; 
+    public static final Integer DEFAULT_TRAPS = 2;
+    public static final Integer DEFAULT_BANDITS = 3;
+    
+    public static final Integer DEFAULT_SIZE = 7;
+    
+    private Integer centerX;
+    private Integer centerY;
+    
+    private Integer trapsAmount;
+    private Integer playerAmount;
+    private Integer banditAmount;
 
     private List<Tile> tiles;
     private Integer size;
-
     
-    public MapGenerator(Integer size)
+    // Variables estaticas empleadas para la generacion procedural
+    private static Integer tileCounter = 0;
+    private static Integer trapCounter = 0;
+    private static Integer playerCounter = 0;
+    private static Integer banditCounter = 0;
+    
+
+
+    public MapGenerator(Integer posX, Integer posY, Integer players)
+    {
+    	this(MapGenerator.DEFAULT_SIZE,
+    			posX, posY,
+    			MapGenerator.DEFAULT_TRAPS,
+    			players,
+    			MapGenerator.DEFAULT_BANDITS);
+    }
+    
+    public MapGenerator(Integer size, Integer posX, Integer posY, Integer traps, Integer players, Integer bandits)
     {
     	super();
     	this.size = size;
+    	this.centerX = posX;
+    	this.centerY = posY;
+    	this.trapsAmount = traps;
+    	this.playerAmount = players;
+    	this.banditAmount = bandits;
+    	
     	this.tiles = new ArrayList<Tile>();
     	
     	addMouseListener(new MouseAdapter() 
@@ -57,28 +91,12 @@ public class MapGenerator extends JPanel
     }
     
    
-    
     private void renderMap(Graphics g2d)
     {
     	super.setBackground(new Color(76, 143, 220));
     }
 
-    
-    /*
-     *  
-
-        for (int col = 0; col < cols; col++) {
-            int xLbl = row < half ? col - row : col - half;
-            int yLbl = row - half;
-            int x = (int) (origin.x + xOff * (col * 2 + 1 - cols));
-            int y = (int) (origin.y + yOff * (row - half) * 3);
-
-            drawHex(g, xLbl, yLbl, x, y, radius);
-        }
-    }
-     */
-    
-    // TODO revisar la generacion de tiles
+  
     private void renderGrid(Graphics2D g2d)
     {
     	Double ang30 = Math.toRadians(30);
@@ -92,30 +110,72 @@ public class MapGenerator extends JPanel
     		
             for (Integer col = 0; col < cols; col++) 
             {
-            	 int xLbl = row < half ? col - row : col - half;
-                 int yLbl = row - half;
-                 int x = (int) (150 + xOff * (col * 2 + 1 - cols));
-                 int y = (int) (150 + yOff * (row - half) * 3);
+                 Integer x = (int) (this.centerX + xOff * (col * 2 + 1 - cols));
+                 Integer y = (int) (this.centerY + yOff * (row - half) * 3);
             	
-                /*Integer x = (col * (Tile.HEXAGON_WIDTH + MapGenerator.DEFAULT_SPACING_X)) + MapGenerator.OFFSET_X;
-                Integer y = (row * (Tile.HEXAGON_HEIGHT - (Tile.HEXAGON_RADIOUS / 2) + MapGenerator.DEFAULT_SPACING_Y	)) + MapGenerator.OFFSET_Y;
-
-                // Desplaza las columnas impares hacia abajo
-                if (col % 2 != 0) 
-                {
-                   y += Tile.HEXAGON_HEIGHT / 3;
-                }
-                */
                
+                 generateRandomTile(x, y, g2d);
                 
-                Tile newTile = new Tile(TileType.TILE_FREE_SPACE, x, y, false, null);
-                
-                this.tiles.add(newTile);
-                newTile.drawTile(g2d);
+                 
             }
         }
     }
    
+    
+    private void generateRandomTile(Integer posX, Integer posY, Graphics2D g2d) 
+    {
+        Tile newTile = null;
+        TileType tileType;
+
+        /*
+        if (MapGenerator.playerCounter < this.playerAmount) 
+        {
+            tileType = TileType.TILE_SPAWN; 
+            MapGenerator.playerCounter++;
+            
+        } else if (MapGenerator.banditCounter < this.banditAmount) 
+        {
+            tileType = TileType.TILE_SPAWN_AI; 
+            MapGenerator.banditCounter++;
+            
+        } else if (MapGenerator.trapCounter < this.trapsAmount) 
+        {
+            tileType = TileType.TILE_TRAP_SET; 
+            MapGenerator.trapCounter++;
+            
+        } else 
+        {
+          
+        }
+*/
+        tileType = generateRandomTileType();
+        MapGenerator.tileCounter++;
+        // Crear el tile con el tipo generado
+        newTile = new Tile(tileType, posX, posY, false, null, MapGenerator.tileCounter);
+        newTile.drawTile(g2d);
+        
+        this.tiles.add(newTile);
+       
+        
+    }
+    
+    private TileType generateRandomTileType() 
+    {
+        TileType[] values = TileType.values();
+        
+        Integer randomIndex = (int) (Math.random() * values.length);
+
+        	
+        while (values[randomIndex] == TileType.TILE_SPAWN || 
+               values[randomIndex] == TileType.TILE_SPAWN_AI || 
+               values[randomIndex] == TileType.TILE_TRAP_SET) 
+        {
+            randomIndex = (int) (Math.random() * values.length);
+        }
+        
+        return values[randomIndex];
+    }
+    
     private void handleTileClick(MouseEvent click) 
     {
         for (Tile tile : this.tiles) 
@@ -132,15 +192,5 @@ public class MapGenerator extends JPanel
             }
         }
     }
-
-    public static void main(String[] args) 
-    {
-        JFrame frame = new JFrame("Mapa Hexagonal");
-        MapGenerator panel = new MapGenerator(5);
-        
-        frame.add(panel);
-        frame.setSize(800, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
+  
 }
