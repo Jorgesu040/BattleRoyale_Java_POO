@@ -43,7 +43,7 @@ public class Tile
 		 // 6 repeticiones por ser un hexagono
 		 for (Integer vertice = 0; vertice < 6; vertice++)
 		 {
-			 Double anguloVertice = Math.toRadians(vertice * 60);
+			 Double anguloVertice = Math.toRadians((vertice * 60) + 90);
 			 
 			 Integer verticePosX = (int) (this.posX + Tile.HEXAGON_RADIOUS * Math.cos(anguloVertice));
 			 Integer verticePosY = (int) (this.posY + Tile.HEXAGON_RADIOUS * Math.sin(anguloVertice));

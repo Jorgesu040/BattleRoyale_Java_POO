@@ -26,14 +26,13 @@ public class MapGenerator extends JPanel
     public static final Integer OFFSET_Y = 150;
 
     private List<Tile> tiles;
-    private Integer rows;
-    private Integer columns;
+    private Integer size;
+
     
-    public MapGenerator(Integer rows, Integer cols)
+    public MapGenerator(Integer size)
     {
     	super();
-    	this.rows = rows;
-    	this.columns = cols;
+    	this.size = size;
     	this.tiles = new ArrayList<Tile>();
     	
     	addMouseListener(new MouseAdapter() 
@@ -64,15 +63,41 @@ public class MapGenerator extends JPanel
     	super.setBackground(new Color(76, 143, 220));
     }
 
+    
+    /*
+     *  
+
+        for (int col = 0; col < cols; col++) {
+            int xLbl = row < half ? col - row : col - half;
+            int yLbl = row - half;
+            int x = (int) (origin.x + xOff * (col * 2 + 1 - cols));
+            int y = (int) (origin.y + yOff * (row - half) * 3);
+
+            drawHex(g, xLbl, yLbl, x, y, radius);
+        }
+    }
+     */
+    
     // TODO revisar la generacion de tiles
     private void renderGrid(Graphics2D g2d)
     {
-    	for (Integer row = 0; row < this.rows; row++) 
+    	Double ang30 = Math.toRadians(30);
+        Double xOff = Math.cos(ang30) * (Tile.HEXAGON_RADIOUS + MapGenerator.DEFAULT_SPACING_X);
+        Double yOff = Math.sin(ang30) * (Tile.HEXAGON_RADIOUS + MapGenerator.DEFAULT_SPACING_Y);
+        Integer half = this.size / 2;
+    	
+    	for (Integer row = 0; row < this.size; row++) 
         {
-            for (Integer col = 0; col < this.columns; col++) 
+    		Integer cols = this.size - java.lang.Math.abs(row - half);
+    		
+            for (Integer col = 0; col < cols; col++) 
             {
-                // Calcular la posición del hexágono
-                Integer x = (col * (Tile.HEXAGON_WIDTH + MapGenerator.DEFAULT_SPACING_X)) + MapGenerator.OFFSET_X;
+            	 int xLbl = row < half ? col - row : col - half;
+                 int yLbl = row - half;
+                 int x = (int) (150 + xOff * (col * 2 + 1 - cols));
+                 int y = (int) (150 + yOff * (row - half) * 3);
+            	
+                /*Integer x = (col * (Tile.HEXAGON_WIDTH + MapGenerator.DEFAULT_SPACING_X)) + MapGenerator.OFFSET_X;
                 Integer y = (row * (Tile.HEXAGON_HEIGHT - (Tile.HEXAGON_RADIOUS / 2) + MapGenerator.DEFAULT_SPACING_Y	)) + MapGenerator.OFFSET_Y;
 
                 // Desplaza las columnas impares hacia abajo
@@ -80,19 +105,10 @@ public class MapGenerator extends JPanel
                 {
                    y += Tile.HEXAGON_HEIGHT / 3;
                 }
+                */
+               
                 
-                TileType tipo = TileType.TILE_FREE_SPACE;
-                
-                if (row == 0 && col == 0)
-                {
-                	tipo = TileType.TILE_SPAWN;
-                }
-                else if ( row == 2 && col == 4)
-                {
-                	tipo = TileType.TILE_LOOT;
-                }
-                
-                Tile newTile = new Tile(tipo, x, y, false, null);
+                Tile newTile = new Tile(TileType.TILE_FREE_SPACE, x, y, false, null);
                 
                 this.tiles.add(newTile);
                 newTile.drawTile(g2d);
@@ -120,7 +136,7 @@ public class MapGenerator extends JPanel
     public static void main(String[] args) 
     {
         JFrame frame = new JFrame("Mapa Hexagonal");
-        MapGenerator panel = new MapGenerator(5, 5);
+        MapGenerator panel = new MapGenerator(5);
         
         frame.add(panel);
         frame.setSize(800, 600);
