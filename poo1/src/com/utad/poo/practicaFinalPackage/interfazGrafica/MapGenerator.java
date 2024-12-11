@@ -2,7 +2,13 @@ package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.Polygon;
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
+
 
 /*
  * Esta clase se tiene que hacer en condiciones
@@ -13,61 +19,108 @@ import java.awt.Polygon;
 
 public class MapGenerator extends JPanel
 {
-	
-	private final Integer hexRadius = 30; 
-    private final Integer hexWidth = (int) (Math.sqrt(3) * hexRadius); 
-    private final Integer hexHeight = 2 * hexRadius; 
-    private final Integer hexSpacing = -1; 
 
+    public static final Integer DEFAULT_SPACING_X = 0; 
+    public static final Integer DEFAULT_SPACING_Y = 0; 
+    public static final Integer OFFSET_X = 200;
+    public static final Integer OFFSET_Y = 150;
+
+    private List<Tile> tiles;
+    private Integer rows;
+    private Integer columns;
+    
+    public MapGenerator(Integer rows, Integer cols)
+    {
+    	super();
+    	this.rows = rows;
+    	this.columns = cols;
+    	this.tiles = new ArrayList<Tile>();
+    	
+    	addMouseListener(new MouseAdapter() 
+    	{
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {
+                handleTileClick(e);
+            }
+        });
+    }
+    
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) 
+    {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        // Esto hay que hacerlo en condiciones
-        int cols = 5; 
-        int rows = 5; 
+        renderGrid(g2d);
+        renderMap(g2d);
+        
+    }
+    
+   
+    
+    private void renderMap(Graphics g2d)
+    {
+    	super.setBackground(new Color(76, 143, 220));
+    }
 
-        for (Integer row = 0; row < rows; row++) {
-            for (Integer col = 0; col < cols; col++) {
+    // TODO revisar la generacion de tiles
+    private void renderGrid(Graphics2D g2d)
+    {
+    	for (Integer row = 0; row < this.rows; row++) 
+        {
+            for (Integer col = 0; col < this.columns; col++) 
+            {
                 // Calcular la posición del hexágono
-                int x = col * (hexWidth + hexSpacing);
-                int y = row * (hexHeight - hexRadius / 2 + hexSpacing);
+                Integer x = (col * (Tile.HEXAGON_WIDTH + MapGenerator.DEFAULT_SPACING_X)) + MapGenerator.OFFSET_X;
+                Integer y = (row * (Tile.HEXAGON_HEIGHT - (Tile.HEXAGON_RADIOUS / 2) + MapGenerator.DEFAULT_SPACING_Y	)) + MapGenerator.OFFSET_Y;
 
                 // Desplaza las columnas impares hacia abajo
                 if (col % 2 != 0) 
                 {
-                    y += hexHeight / 2;
+                   y += Tile.HEXAGON_HEIGHT / 3;
                 }
-
-                drawHexagon(g2d, x, y, hexRadius);
+                
+                TileType tipo = TileType.TILE_FREE_SPACE;
+                
+                if (row == 0 && col == 0)
+                {
+                	tipo = TileType.TILE_SPAWN;
+                }
+                else if ( row == 2 && col == 4)
+                {
+                	tipo = TileType.TILE_LOOT;
+                }
+                
+                Tile newTile = new Tile(tipo, x, y, false, null);
+                
+                this.tiles.add(newTile);
+                newTile.drawTile(g2d);
             }
         }
     }
-
-    private void drawHexagon(Graphics2D g2d, Integer x, Integer y, Integer radius) 
+   
+    private void handleTileClick(MouseEvent click) 
     {
-        Polygon hex = new Polygon();
-        
-        // vertice = posicion_centro + radio * angulo
-        for (int i = 0; i < 6; i++) 
+        for (Tile tile : this.tiles) 
         {
-            double angle = Math.toRadians(i * 60);
-            int xPoint = (int) (x + radius * Math.cos(angle));
-            int yPoint = (int) (y + radius * Math.sin(angle));
-            hex.addPoint(xPoint, yPoint);
+            if (tile.contains(click.getPoint())) 
+            {
+                JOptionPane.showMessageDialog(
+                    this,
+                    tile.toString(),
+                    "Información del Tile",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                break;
+            }
         }
-        
-        g2d.setColor(Color.YELLOW);
-        g2d.fillPolygon(hex);
-        g2d.setColor(Color.GREEN);
-        g2d.drawPolygon(hex);
     }
 
     public static void main(String[] args) 
     {
         JFrame frame = new JFrame("Mapa Hexagonal");
-        MapGenerator panel = new MapGenerator();
+        MapGenerator panel = new MapGenerator(5, 5);
         
         frame.add(panel);
         frame.setSize(800, 600);
