@@ -132,6 +132,7 @@ public class MapGenerator extends JPanel
     private static Integer playerCounter = 0;
     private static Integer banditCounter = 0;
     
+    private Boolean firstGeneration;
 
 
     public MapGenerator(Integer posX, Integer posY, Integer players)
@@ -153,17 +154,10 @@ public class MapGenerator extends JPanel
     	this.playerAmount = players;
     	this.banditAmount = bandits;
     	
+    	this.firstGeneration = false;
+    	
     	this.tiles = new ArrayList<Tile>();
     	
-        // TODO: al parecer no es buena idea añadir un listener en el constructor, se deberia tener en otra clase
-    	// addMouseListener(new MouseAdapter() 
-    	// {
-        //     @Override
-        //     public void mouseClicked(MouseEvent e) 
-        //     {
-        //         handleTileClick(e);
-        //     }
-        // });
     }
     
     @Override
@@ -172,13 +166,14 @@ public class MapGenerator extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        generateMap(g2d);
+        if (this.firstGeneration.equals(false))
+        {
+        	   generateMap(g2d);
+        	   this.firstGeneration = true;
+        }
+     
         renderMap(g2d);
-        
-        for (Tile myTile: this.tiles)
-    	{
-    		myTile.drawTile(g2d);
-    	}
+       
     }
     
    
@@ -186,7 +181,10 @@ public class MapGenerator extends JPanel
     {
     	super.setBackground(new Color(76, 143, 220));
     	
-    	
+    	for (Tile myTile: this.tiles)
+     	{
+    		myTile.drawTile(g2d);
+     	}
     }
 
   
@@ -220,7 +218,7 @@ public class MapGenerator extends JPanel
         Tile newTile = null;
         TileType tileType;
 
-        /*
+        
         if (MapGenerator.playerCounter < this.playerAmount) 
         {
             tileType = TileType.TILE_SPAWN; 
@@ -238,14 +236,13 @@ public class MapGenerator extends JPanel
             
         } else 
         {
-          
+        	tileType = generateRandomTileType();
         }
-*/
-        tileType = generateRandomTileType();
+
+        
         MapGenerator.tileCounter++;
         // Crear el tile con el tipo generado
         newTile = new Tile(tileType, posX, posY, false, null, MapGenerator.tileCounter);
-        //newTile.drawTile(g2d);
         
         this.tiles.add(newTile);
        

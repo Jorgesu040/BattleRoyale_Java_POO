@@ -24,7 +24,7 @@ public class ventanaTesting
             
             @Override
             public void onTileHovered(Tile tile) {
-            	System.out.println(tile); 
+            	 
             }
         });
         
