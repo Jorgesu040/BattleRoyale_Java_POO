@@ -1,3 +1,89 @@
+/**
+ * El archivo MapGenerator.java es parte del paquete com.utad.poo.practicaFinalPackage.interfazGrafica y es responsable de generar y renderizar un mapa hexagonal dentro de una aplicación Swing en Java. Esta clase extiende `JPanel` y utiliza componentes personalizados y de Swing para crear una interfaz de mapa interactiva.
+ *
+ * ### Resumen de la clase MapGenerator
+ *
+ * - **Propósito**: Crear y gestionar un mapa hexagonal procedimentalmente generado, permitiendo la interacción con los tiles (hexágonos) individuales.
+ *
+ * - **Variables clave**:
+ *   - `size`: Tamaño de la cuadrícula del mapa (número de tiles).
+ *   - `centerX`, `centerY`: Coordenadas centrales desde donde se dibuja el mapa.
+ *   - `tiles`: Una lista que almacena todos los objetos `Tile` generados en el mapa.
+ *   - `playerAmount`, `banditAmount`, `trapsAmount`: Cantidades de tiles especiales que representan spawns de jugadores, bandidos y trampas.
+ *   - Contadores estáticos como `tileCounter`, `trapCounter`, `playerCounter`, `banditCounter` para rastrear la creación de tiles.
+ *
+ * - **Constructores**:
+ *   - Permite inicializar el mapa con tamaños y cantidades por defecto o personalizadas.
+ *   - Configura el listener de ratón para permitir la interacción con los tiles.
+ *
+ * ### Métodos principales
+ *
+ * - **`paintComponent(Graphics g)`**:
+ *   - Sobreescribe el método de `JPanel` para realizar el dibujo personalizado.
+ *   - Llama a `renderGrid(g2d)` y `renderMap(g2d)` para dibujar los tiles y el fondo.
+ *
+ * - **`renderGrid(Graphics2D g2d)`**:
+ *   - Calcula las posiciones de los tiles basándose en geometría hexagonal.
+ *   - Itera a través de filas y columnas, posicionando cada tile correctamente.
+ *   - Para cada posición, llama a `generateRandomTile(x, y, g2d)`.
+ *
+ * - **`renderMap(Graphics g2d)`**:
+ *   - Establece el color de fondo del panel.
+ *   - Puede expandirse para renderizar elementos adicionales del mapa.
+ *
+ * - **`generateRandomTile(int posX, int posY, Graphics2D g2d)`**:
+ *   - Determina el tipo de tile a crear, pudiendo colocar tiles especiales como spawns o trampas.
+ *   - Crea una nueva instancia de `Tile` con el tipo y posición determinados.
+ *   - Añade el tile a la lista `tiles` y lo dibuja usando `newTile.drawTile(g2d)`.
+ *
+ * - **`generateRandomTileType()`**:
+ *   - Genera aleatoriamente un `TileType`, excluyendo ciertos tipos especiales como spawns y trampas, para asegurar una distribución variada en el mapa.
+ *
+ * - **`handleTileClick(MouseEvent click)`**:
+ *   - Responde a eventos de clic del ratón.
+ *   - Verifica si un tile contiene el punto clicado y muestra información utilizando `JOptionPane`.
+ *
+ * ### Dependencias y su uso
+ *
+ * - **Clase `Tile`** (`Tile.java`):
+ *   - Representa los tiles hexagonales individuales en el mapa.
+ *   - **Métodos utilizados**:
+ *     - `drawTile(Graphics2D graficos)`: Renderiza el tile en el panel.
+ *     - `contains(Point p)`: Verifica si un punto está dentro del área del tile.
+ *   - Cada `Tile` contiene propiedades como tipo (`tileType`), posición (`posX`, `posY`) y estado de ocupación.
+ *
+ * - **Enum `TileType`** (`TileType.java`):
+ *   - Define los tipos posibles de tiles (e.g., `TILE_FREE_SPACE`, `TILE_OBSTACLE`, `TILE_SPAWN`, etc.).
+ *   - Se usa para asignar comportamientos y apariencias a los tiles según su tipo.
+ *
+ * - **Componentes de Java Swing**:
+ *   - `JPanel`: Clase base para el panel del mapa.
+ *   - `Graphics2D`: Utilizado para dibujar formas y controlar el renderizado con mayor precisión.
+ *   - `MouseAdapter` y `MouseEvent`: Manejan las interacciones del usuario con los tiles del mapa.
+ *
+ * - **Clases utilitarias**:
+ *   - `Color`, `Polygon`, `Point`: Ayudan en el dibujo y detección de interacciones con los tiles.
+ *   - `List`, `ArrayList`: Gestionan colecciones de objetos `Tile`.
+ *
+ * ### Resumen
+ *
+ * La clase `MapGenerator` es esencial para la interfaz del mapa, combinando el renderizado gráfico y la interacción con el usuario. Utiliza:
+ *
+ * - **Clases personalizadas**:
+ *   - `Tile`: Maneja el comportamiento y renderizado de cada tile individual.
+ *   - `TileType`: Enumera los diferentes tipos de tiles disponibles.
+ *
+ * - **Bibliotecas de Java**:
+ *   - Componentes de Swing para la interfaz gráfica.
+ *   - Clases de AWT para gráficos y manejo de eventos.
+ *
+ * Al organizar la lógica de generación del mapa dentro de `MapGenerator`, la aplicación separa responsabilidades, permitiendo que `Tile` se centre en el comportamiento de los tiles individuales y `MapGenerator` en gestionar el diseño general del mapa y las interacciones.
+ *
+ * Esto permite crear un mapa interactivo donde cada tile puede responder a acciones del usuario, como clics, y mostrar información relevante, sentando las bases para desarrollar las mecánicas del juego encima de este mapa.
+ *
+ */
+
+
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import javax.swing.*;
@@ -69,14 +155,15 @@ public class MapGenerator extends JPanel
     	
     	this.tiles = new ArrayList<Tile>();
     	
-    	addMouseListener(new MouseAdapter() 
-    	{
-            @Override
-            public void mouseClicked(MouseEvent e) 
-            {
-                handleTileClick(e);
-            }
-        });
+        // TODO: al parecer no es buena idea añadir un listener en el constructor, se deberia tener en otra clase
+    	// addMouseListener(new MouseAdapter() 
+    	// {
+        //     @Override
+        //     public void mouseClicked(MouseEvent e) 
+        //     {
+        //         handleTileClick(e);
+        //     }
+        // });
     }
     
     @Override
@@ -177,21 +264,8 @@ public class MapGenerator extends JPanel
         return values[randomIndex];
     }
     
-    private void handleTileClick(MouseEvent click) 
-    {
-        for (Tile tile : this.tiles) 
-        {
-            if (tile.contains(click.getPoint())) 
-            {
-                JOptionPane.showMessageDialog(
-                    this,
-                    tile.toString(),
-                    "Información del Tile",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
-                break;
-            }
-        }
+    public List<Tile> getTiles() {
+        return this.tiles;
     }
   
 }
