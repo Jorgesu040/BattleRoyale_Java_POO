@@ -11,6 +11,7 @@ public class Tile
 	public static final Integer HEXAGON_RADIOUS = 40;
 	public static final Integer HEXAGON_WIDTH = (int) (Math.sqrt(3) * Tile.HEXAGON_RADIOUS);
 	public static final Integer HEXAGON_HEIGHT = 2 * Tile.HEXAGON_RADIOUS;
+	public static final Double MAX_DISTANCE_LEGAL_MOVE = 80.0d;
 
 	private Integer posX;
 	private Integer posY;
@@ -51,17 +52,20 @@ public class Tile
 	// ni grafos ni pollas, a la cuenta de la vieja
 	private Double getTileDistance(Tile tile)
 	{
-		Point tileCenter = new Point(tile.getPosX(), tile.getPosY());
+		Point tileCenter = new Point(tile.posX, tile.posY);
 		
-		Double rawDistance = tileCenter.distance(new Point(this.posX, this.posY));
-		return rawDistance + Tile.HEXAGON_RADIOUS;
+		Double rawDistance = new Point(this.posX, this.posY).distance(tileCenter);
+	
+		// Siempre da el mismo valor, 78.39
+		return rawDistance;
 	}
 	
 	public boolean isLegalMove(Tile tile)
 	{
-		return this.getTileDistance(tile) < 10 && !tile.getTileType().equals(TileType.TILE_OBSTACLE);
+		return this.getTileDistance(tile) <= Tile.MAX_DISTANCE_LEGAL_MOVE && !tile.getTileType().equals(TileType.TILE_OBSTACLE);
 	}
-
+	
+	
 	public void createHexagon()
 	{
 		this.hexagono = new Polygon();
