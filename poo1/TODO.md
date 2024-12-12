@@ -1,78 +1,45 @@
-# TODO List
+# Lista de Tareas
 
-## 1. Implement methods in `Personaje`
+## 1. Implementar conexión entre interfaz gráfica y lógica del juego
 
-- Complete the `lootearEnemigo` method to allow characters to loot items from defeated enemies.
-- Implement the attribute increment methods:
-  - `incrementarAtaque(Double valorEfecto)`
-  - `incrementarDefensa(Double valorEfecto)`
-  - `incrementarProbabilidadRetirada(Double valorEfecto)`
+- Implementar la conexión entre los botones de la interfaz gráfica y las acciones/items de un personaje.
 
-## 2. Complete the character classes
+## 2. Implementar el movimiento del personaje por los tiles
 
-- **Guerrero**:
-  - Implement the `defensa`, `contraataque`, and `retirada` methods.
-  - Ensure `iraEspartanaContraataque` increases correctly upon receiving damage.
-- **Arquero**:
-  - Define the `atacar`, `defensa`, `contraataque`, and `retirada` methods.
-  - Utilize the `punteria` attribute from `ArmaArquero` to affect attack precision.
-- **Mago**:
-  - Complete the `defensa`, `contraataque`, and `retirada` methods.
-  - Implement the logic for critical attacks based on `probabilidadCritico`.
+## 3. Implementar la mecánica de cambio de equipamiento
 
-## 3. Develop the combat mechanics
+- Permitir que los personajes cambien su `Escudo`.
+- Asegurarse de que el nuevo equipamiento impacte correctamente las estadísticas del personaje.
 
-- Implement the turn-based system to manage player actions.
-- Define the logic for calculating damage, including weapon attributes and character modifiers.
-- Ensure that methods like `atacar` and `recibirAtaque` correctly interact.
+## 4. Construir el flujo del juego
 
-## 4. Create subclasses of `Item`
+- Crear una clase `Partida` para controlar la progresión del juego.
+- Gestionar la inicialización de personajes, distribución de turnos y condiciones de fin de juego.
 
-- **Potions**:
-  - `PocionDeCuracion`: Restores health when used.
-  - `PocionDeAtaque`: Increases attack strength temporarily.
-  - Implement the `usar` method for each potion type.
-- **Traps**:
-  - Create trap items that negatively affect characters.
-  - Define how traps are triggered and their effects.
+## 5. Mejorar el manejo de errores y la validación de entradas
 
-## 5. Implement equipment change mechanics
+- Validar las entradas de los usuarios para prevenir datos inválidos.
+- Agregar manejo de excepciones para errores imprevistos durante el juego.
 
-- Allow characters to change their `Escudo`.
-- Ensure that new equipment correctly impacts character stats.
+## 6. Optimizar y refactorizar el código **IMPORTANTE: mi parte gráfica es un poco desastre**
 
-## 6. Build the game flow
+- Revisar el código para consistencia en estilo y convenciones de nombres.
+- Refactorizar segmentos de código redundantes o ineficientes.
+- Asegurarse de que los comentarios estén actualizados y sean útiles.
 
-- Create a `Partida` class to control the game progression.
-- Manage the initialization of characters, distribution of turns, and end-game conditions.
+## 7. Implementar un sistema de cargado desde un fichero
 
-## 7. Handle traps and environmental effects
+- Crear un sistema de cargado de ajustes de juego desde un archivo de configuración.
+- Control de errores con Try-Catch.
 
-- Implement the logic for traps affecting characters at the end of turns, as mentioned in your `PLANIFICACION.md`.
-- Define how environmental effects alter gameplay.
+## 8. Implementar un sistema de logs: **Punto 7 del pdf de blackboard**
 
-## 8. Enhance error handling and input validation
+- Una clase `Logs` que:
+  - O cada `Personaje`, tenga una instancia de `Logs` que registre sus acciones.
+  - O que la clase `Partida` tenga una instancia de `Logs` que registre las acciones de todos los personajes.
+- Los logs deben ser guardados en un archivo de texto.
+- Los logs deben guardar:
+  - Acciones de movimiento.
+  - Acciones de cada personaje en cada turno.
+  - Al finalizar el turno un 'rundown' del estado (vida, defensa, ataque) de cada personaje.
 
-- Validate inputs from users to prevent invalid data.
-- Add exception handling for unforeseen errors during gameplay.
-
-## 9. Develop a user interface
-
-- Start with a console-based menu for player interaction.
-- Consider planning for a graphical interface in future updates.
-
-## 10. Update documentation
-
-- Revise the `README.md` to reflect current progress and any changes.
-- Document new classes and methods added to the project.
-
-## 11. Optimize and refactor code
-
-- Review code for consistency in style and naming conventions.
-- Refactor redundant or inefficient code segments.
-- Ensure comments are up-to-date and helpful.
-
-## 12. Write unit tests
-
-- Create test cases for critical methods to ensure they work as intended.
-- Implement tests for combat mechanics, item usage, and character actions.

@@ -42,6 +42,7 @@
 
 3. **Sistema de turnos**: HACER
    - Crea un sistema que permita al jugador humano seleccionar los tiles contiguos a su personaje para moverse y atacar.
+
    ``` java
    // TODO: Añadir el movimiento de los personajes
    // ¿Deberia ser parte de la clase Personaje, o gestionarlo el MapGenerator/MapController?
@@ -60,7 +61,7 @@
 ## **Puntos extra y originalidad**
 
 1. **Generación de mapas**:
-   - Un sistema que coloque obstáculos aleatorios o zonas restringidas en cada turno. HECHO! 
+   - Un sistema que coloque obstáculos aleatorios o zonas restringidas en cada turno. HECHO!
 2. **Inteligencia artificial básica**: HACER
    - Define estrategias para los jugadores máquina, como atacar al más débil o usar herramientas según el contexto.
 3. **Simulación avanzada**: OPCIONAL
