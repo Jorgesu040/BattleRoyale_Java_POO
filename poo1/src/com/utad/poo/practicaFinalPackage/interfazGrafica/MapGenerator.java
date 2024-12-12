@@ -239,7 +239,6 @@ public class MapGenerator extends JPanel
         
     }
     
-    // TODO esta generaciion de random esta sobreescribiendo tiles ya creados
     private Integer generateRandom(Integer min, Integer max)
     {
     	Random r = new Random();
@@ -266,7 +265,6 @@ public class MapGenerator extends JPanel
     		for(Integer i = 0; i < this.playerAmount; i++)
     		{
     			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_SPAWN);;
-    		
     		}
     		loadingPlayerSpawn = true;
     		
@@ -274,7 +272,6 @@ public class MapGenerator extends JPanel
     		for(Integer i = 0; i < this.banditAmount; i++)
     		{
     			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_SPAWN_AI);;
-    		
     		}
     		loadingBanditSpawn = true;
     		
@@ -282,7 +279,6 @@ public class MapGenerator extends JPanel
     		for(Integer i = 0; i < this.lootAmount; i++)
     		{
     			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_LOOT);;
-    			
     		}
     		loadingLootSpawn = true;
     		
@@ -290,7 +286,6 @@ public class MapGenerator extends JPanel
     		for(Integer i = 0; i < this.trapsAmount; i++)
     		{
     			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
-    		
     		}
     		loadingTrapSpawn = true;
     	}
@@ -300,19 +295,25 @@ public class MapGenerator extends JPanel
     {
         TileType[] values = TileType.values();
         
-        Integer randomIndex = (int) (Math.random() * values.length);
+        Integer randomIndex = this.generateSimpleRandom(values.length);
 
         	
         while (values[randomIndex] == TileType.TILE_SPAWN || 
                values[randomIndex] == TileType.TILE_SPAWN_AI || 
                values[randomIndex] == TileType.TILE_TRAP_SET ||
                values[randomIndex] == TileType.TILE_TRAP_IDLE ||
+               values[randomIndex] == TileType.TILE_TRAP_EXPLODED ||
                values[randomIndex] == TileType.TILE_LOOT) 
         {
-            randomIndex = (int) (Math.random() * values.length);
+            randomIndex = this.generateSimpleRandom(values.length);
         }
         
         return values[randomIndex];
+    }
+    
+    private Integer generateSimpleRandom(Integer lenght)
+    {
+    	return (int) (Math.random() * lenght);
     }
     
     public List<Tile> getTiles() {

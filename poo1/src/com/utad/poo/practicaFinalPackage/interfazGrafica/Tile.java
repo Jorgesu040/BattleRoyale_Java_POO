@@ -166,6 +166,13 @@ public class Tile
 
 			} break;
 				
+			case TILE_TRAP_EXPLODED:
+			{
+				// Interior
+				graficos.setColor(Color.DARK_GRAY);
+				graficos.fillPolygon(hexagono);
+
+			} break;
 			
 			default:  // Se trata como un TILE_FREE_SPACE
 			{
