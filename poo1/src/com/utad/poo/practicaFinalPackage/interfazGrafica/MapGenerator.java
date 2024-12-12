@@ -127,15 +127,15 @@ public class MapGenerator extends JPanel
     private Integer banditAmount;
     private Integer lootAmount;
     
-
-    private List<Tile> tiles;
-    private Integer size;
-    private Boolean firstGeneration;
     
-    // Variable estatica empleada para la generacion procedural
+    // Variables empleadas para la generacion procedural
     private static Integer tileCounter = 0;
     
+    private Integer size;
     
+    private List<Tile> tiles;
+    private Boolean firstGeneration;
+    private List<Integer> generatedSpecialTiles;
 
 
     public MapGenerator(Integer posX, Integer posY, Integer players)
@@ -159,7 +159,11 @@ public class MapGenerator extends JPanel
     	this.banditAmount = bandits;
     	this.lootAmount = loot;
     	
+    	
+    	// Variables dedicadas al empleo de la generacion procedural
+    	// No tocar por usuario bajo ningun concepto
     	this.firstGeneration = false;
+    	this.generatedSpecialTiles = new ArrayList<Integer>();
     	
     	this.tiles = new ArrayList<Tile>();
     	
@@ -239,7 +243,14 @@ public class MapGenerator extends JPanel
     private Integer generateRandom(Integer min, Integer max)
     {
     	Random r = new Random();
-    	return r.nextInt(max - min) + min;
+    	Integer randomNum;
+
+        do {
+            randomNum = r.nextInt(max - min) + min; 
+        } while (this.generatedSpecialTiles.contains(randomNum)); 
+
+        this.generatedSpecialTiles.add(randomNum); 
+        return randomNum;
     }
     
     private void generateSpecialTiles()
