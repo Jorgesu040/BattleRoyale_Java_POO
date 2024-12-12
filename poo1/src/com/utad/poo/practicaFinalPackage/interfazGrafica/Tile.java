@@ -1,7 +1,8 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
-
+import java.util.List;
+import java.util.ArrayList;
 
 
 
@@ -11,18 +12,18 @@ public class Tile
 	public static final Integer HEXAGON_WIDTH = (int) (Math.sqrt(3) * Tile.HEXAGON_RADIOUS);
 	public static final Integer HEXAGON_HEIGHT = 2 * Tile.HEXAGON_RADIOUS;
 
-	protected Integer posX;
-	protected Integer posY;
-	protected Integer tileId;
+	private Integer posX;
+	private Integer posY;
+	private Integer tileId;
 	
-	protected TileType tileType;
+	private TileType tileType;
 	
-	protected Boolean ocupado;
-	protected Object objectoOcupado; // el objeto que esta ocupando el tile
-	
-	protected Polygon hexagono;
-	private Integer debug;
+	private Boolean ocupado;
+	private Object objectoOcupado; // el objeto que esta ocupando el tile
+	private Polygon hexagono;
 	private boolean isHovered;
+
+	private List<Integer> tileConection; // cantidad de conexiones que tiene este tile con otros
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
@@ -32,23 +33,22 @@ public class Tile
 		this.ocupado = ocupado;
 		this.objectoOcupado = objectoOcupado;
 		this.tileId = id;
-		this.debug = 0;
 		this.isHovered = false;
+		
+		this.tileConection = new ArrayList<Integer>();
+	}
+	
+	public void setTileConection(Integer tileId)
+	{
+		this.tileConection.add(tileId);
 	}
 	
 	public boolean contains(Point p) 
 	{
 		return this.hexagono.contains(p);
 	}
-	
-	  public void setHovered(boolean hovered) {
-	        this.isHovered = hovered;
-	    }
 
-	    public boolean isHovered() {
-	        return this.isHovered;
-	    }
-	
+
 	public void createHexagon()
 	{
 		this.hexagono = new Polygon();
@@ -73,10 +73,10 @@ public class Tile
 		
 		if (this.isHovered && !this.tileType.equals(TileType.TILE_OBSTACLE)) {
 	        // Agregar borde rojo más grueso para indicar hover
-	        graficos.setStroke(new BasicStroke(3)); // Borde más grueso
-	        graficos.setColor(new Color(108,70,49));           // Color del borde
-	        graficos.drawPolygon(this.hexagono);    // Dibujar borde
-	        graficos.setStroke(new BasicStroke(1)); // Restablecer grosor normal
+	        graficos.setStroke(new BasicStroke(3)); 
+	        graficos.setColor(new Color(108,70,49));          
+	        graficos.drawPolygon(this.hexagono);    
+	        graficos.setStroke(new BasicStroke(1)); 
 	    }
 	}
 	
@@ -91,7 +91,7 @@ public class Tile
 				// Interior
 				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
-				this.debug = 1;
+
 
 			} break;
 
@@ -100,7 +100,7 @@ public class Tile
 				// Interior
 				graficos.setColor(new Color(76, 143, 220));
 				graficos.fillPolygon(hexagono);
-				this.debug = 2;
+
 
 			} break;
 		
@@ -110,7 +110,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.PINK);
 				graficos.fillPolygon(hexagono);
-				this.debug = 3;
+
 				
 			} break;
 		
@@ -119,7 +119,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.BLACK);
 				graficos.fillPolygon(hexagono);	
-				this.debug = 4;
+
 				
 			} break;
 		
@@ -128,7 +128,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.ORANGE);
 				graficos.fillPolygon(hexagono);
-				this.debug = 5;
+
 				
 			} break;
 			
@@ -137,7 +137,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.RED);
 				graficos.fillPolygon(hexagono);
-				this.debug = 6;
+
 				
 			} break;
 			
@@ -146,7 +146,7 @@ public class Tile
 				// Interior
 				graficos.setColor(Color.GRAY);
 				graficos.fillPolygon(hexagono);
-				this.debug = 7;
+
 			} break;
 				
 			
@@ -155,17 +155,80 @@ public class Tile
 				// Interior
 				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
-				this.debug = 8;
+
 			}
 		
 		}
 	}
 
+	public void setHovered(boolean hovered) 
+	{
+        this.isHovered = hovered;
+    }
+
+	public Boolean getHovered()
+	{
+		return this.isHovered;
+	}
+	
+	public Integer getTileId()
+	{
+		return this.tileId;
+	}
+	
+	public Integer getPosX() {
+		return this.posX;
+	}
+
+	public void setPosX(Integer posX) {
+		this.posX = posX;
+	}
+
+	public Integer getPosY() {
+		return this.posY;
+	}
+
+	public void setPosY(Integer posY) {
+		this.posY = posY;
+	}
+
+	public TileType getTileType() {
+		return this.tileType;
+	}
+
+	public void setTileType(TileType tileType) {
+		this.tileType = tileType;
+	}
+
+	public Boolean getOcupado() {
+		return this.ocupado;
+	}
+
+	public void setOcupado(Boolean ocupado) {
+		this.ocupado = ocupado;
+	}
+
+	public Object getObjectoOcupado() {
+		return this.objectoOcupado;
+	}
+
+	public void setObjectoOcupado(Object objectoOcupado) {
+		this.objectoOcupado = objectoOcupado;
+	}
+
+	public Polygon getHexagono() {
+		return this.hexagono;
+	}
+
+	public void setHexagono(Polygon hexagono) {
+		this.hexagono = hexagono;
+	}
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Tile [posX=" + this.posX + ", posY=" + this.posY + ", tileType=" + this.tileType + ", ocupado=" + this.ocupado
-				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + " " + this.debug + "]";
+				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + " " + this.isHovered + "]";
 	}
 	
 	

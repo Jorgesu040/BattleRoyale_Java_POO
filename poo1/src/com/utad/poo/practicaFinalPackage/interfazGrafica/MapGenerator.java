@@ -93,6 +93,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Polygon;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.ArrayList;
 
 
@@ -111,8 +112,10 @@ public class MapGenerator extends JPanel
 	
 	public static final Integer DEFAULT_SPACING_X = 5; 
     public static final Integer DEFAULT_SPACING_Y = 5; 
+    
     public static final Integer DEFAULT_TRAPS = 2;
     public static final Integer DEFAULT_BANDITS = 3;
+    public static final Integer DEFAULT_LOOT = 3;
     
     public static final Integer DEFAULT_SIZE = 7;
     
@@ -122,17 +125,17 @@ public class MapGenerator extends JPanel
     private Integer trapsAmount;
     private Integer playerAmount;
     private Integer banditAmount;
+    private Integer lootAmount;
+    
 
     private List<Tile> tiles;
     private Integer size;
-    
-    // Variables estaticas empleadas para la generacion procedural
-    private static Integer tileCounter = 0;
-    private static Integer trapCounter = 0;
-    private static Integer playerCounter = 0;
-    private static Integer banditCounter = 0;
-    
     private Boolean firstGeneration;
+    
+    // Variable estatica empleada para la generacion procedural
+    private static Integer tileCounter = 0;
+    
+    
 
 
     public MapGenerator(Integer posX, Integer posY, Integer players)
@@ -141,10 +144,11 @@ public class MapGenerator extends JPanel
     			posX, posY,
     			MapGenerator.DEFAULT_TRAPS,
     			players,
-    			MapGenerator.DEFAULT_BANDITS);
+    			MapGenerator.DEFAULT_BANDITS,
+    			MapGenerator.DEFAULT_LOOT);
     }
     
-    public MapGenerator(Integer size, Integer posX, Integer posY, Integer traps, Integer players, Integer bandits)
+    public MapGenerator(Integer size, Integer posX, Integer posY, Integer traps, Integer players, Integer bandits, Integer loot)
     {
     	super();
     	this.size = size;
@@ -153,6 +157,7 @@ public class MapGenerator extends JPanel
     	this.trapsAmount = traps;
     	this.playerAmount = players;
     	this.banditAmount = bandits;
+    	this.lootAmount = loot;
     	
     	this.firstGeneration = false;
     	
@@ -166,9 +171,11 @@ public class MapGenerator extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
+        // Solo permite la generacion del mapa una vez en toda la ejecucion
         if (this.firstGeneration.equals(false))
         {
         	   generateMap(g2d);
+        	   generateSpecialTiles();
         	   this.firstGeneration = true;
         }
      
@@ -218,35 +225,64 @@ public class MapGenerator extends JPanel
         Tile newTile = null;
         TileType tileType;
 
-        
-        if (MapGenerator.playerCounter < this.playerAmount) 
-        {
-            tileType = TileType.TILE_SPAWN; 
-            MapGenerator.playerCounter++;
-            
-        } else if (MapGenerator.banditCounter < this.banditAmount) 
-        {
-            tileType = TileType.TILE_SPAWN_AI; 
-            MapGenerator.banditCounter++;
-            
-        } else if (MapGenerator.trapCounter < this.trapsAmount) 
-        {
-            tileType = TileType.TILE_TRAP_SET; 
-            MapGenerator.trapCounter++;
-            
-        } else 
-        {
-        	tileType = generateRandomTileType();
-        }
 
-        
         MapGenerator.tileCounter++;
         // Crear el tile con el tipo generado
-        newTile = new Tile(tileType, posX, posY, false, null, MapGenerator.tileCounter);
+        newTile = new Tile(generateRandomTileType() , posX, posY, false, null, MapGenerator.tileCounter);
         
         this.tiles.add(newTile);
        
         
+    }
+    
+    // TODO esta generaciion de random esta sobreescribiendo tiles ya creados
+    private Integer generateRandom(Integer min, Integer max)
+    {
+    	Random r = new Random();
+    	return r.nextInt(max - min) + (min + 1);
+    }
+    
+    private void generateSpecialTiles()
+    {
+    	Boolean loadingPlayerSpawn = false;
+    	Boolean loadingBanditSpawn = false;
+    	Boolean loadingLootSpawn = false;
+    	Boolean loadingTrapSpawn = false;
+    	
+    	while(!loadingPlayerSpawn && !loadingBanditSpawn && !loadingLootSpawn && !loadingTrapSpawn)
+    	{
+    		// generate players
+    		for(Integer i = 0; i < this.playerAmount; i++)
+    		{
+    			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_SPAWN);;
+    		
+    		}
+    		loadingPlayerSpawn = true;
+    		
+    		// generate bandits
+    		for(Integer i = 0; i < this.banditAmount; i++)
+    		{
+    			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_SPAWN_AI);;
+    		
+    		}
+    		loadingBanditSpawn = true;
+    		
+    		// generate loot
+    		for(Integer i = 0; i < this.lootAmount; i++)
+    		{
+    			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_LOOT);;
+    			
+    		}
+    		loadingLootSpawn = true;
+    		
+    		// generate trap
+    		for(Integer i = 0; i < this.trapsAmount; i++)
+    		{
+    			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
+    		
+    		}
+    		loadingTrapSpawn = true;
+    	}
     }
     
     private TileType generateRandomTileType() 
@@ -259,7 +295,8 @@ public class MapGenerator extends JPanel
         while (values[randomIndex] == TileType.TILE_SPAWN || 
                values[randomIndex] == TileType.TILE_SPAWN_AI || 
                values[randomIndex] == TileType.TILE_TRAP_SET ||
-               values[randomIndex] == TileType.TILE_TRAP_IDLE) 
+               values[randomIndex] == TileType.TILE_TRAP_IDLE ||
+               values[randomIndex] == TileType.TILE_LOOT) 
         {
             randomIndex = (int) (Math.random() * values.length);
         }

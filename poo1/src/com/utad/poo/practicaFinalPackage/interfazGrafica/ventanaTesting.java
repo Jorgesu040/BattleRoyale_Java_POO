@@ -9,7 +9,7 @@ public class ventanaTesting
 	public static void main(String[] args) 
     {
         JFrame frame = new JFrame("Mapa Hexagonal");
-        MapGenerator panel = new MapGenerator(7, 540, 375, 2, 3, 5);
+        MapGenerator panel = new MapGenerator(7, 540, 375, 1, 2, 2, 4);
         MapController mapController = new MapController(panel);
         
         // Add game logic
@@ -24,7 +24,7 @@ public class ventanaTesting
             
             @Override
             public void onTileHovered(Tile tile) {
-            	 
+            	 // nada, dentro de Tile ya esta el stroke
             }
         });
         
