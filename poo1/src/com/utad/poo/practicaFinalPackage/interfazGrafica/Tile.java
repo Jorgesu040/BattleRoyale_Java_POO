@@ -48,12 +48,18 @@ public class Tile
 		return this.hexagono.contains(p);
 	}
 
-	public Double getTileDistance(Tile tile)
+	// ni grafos ni pollas, a la cuenta de la vieja
+	private Double getTileDistance(Tile tile)
 	{
 		Point tileCenter = new Point(tile.getPosX(), tile.getPosY());
 		
 		Double rawDistance = tileCenter.distance(new Point(this.posX, this.posY));
 		return rawDistance + Tile.HEXAGON_RADIOUS;
+	}
+	
+	public boolean isLegalMove(Tile tile)
+	{
+		return this.getTileDistance(tile) < 10 && !tile.getTileType().equals(TileType.TILE_OBSTACLE);
 	}
 
 	public void createHexagon()
