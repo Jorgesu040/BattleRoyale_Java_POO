@@ -24,7 +24,6 @@ public class Tile
 	private Polygon hexagono;
 	private boolean isHovered;
 
-	private List<Integer> tileConection; // cantidad de conexiones que tiene este tile con otros
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
@@ -36,14 +35,9 @@ public class Tile
 		this.tileId = id;
 		this.isHovered = false;
 		
-		this.tileConection = new ArrayList<Integer>();
 	}
 	
-	public void setTileConection(Integer tileId)
-	{
-		this.tileConection.add(tileId);
-	}
-	
+
 	public boolean contains(Point p) 
 	{
 		return this.hexagono.contains(p);
@@ -65,6 +59,17 @@ public class Tile
 		return this.getTileDistance(tile) <= Tile.MAX_DISTANCE_LEGAL_MOVE && !tile.getTileType().equals(TileType.TILE_OBSTACLE);
 	}
 	
+	public void setTileObject(Object object)
+	{
+		this.objectoOcupado = object;
+		this.ocupado = true;
+	}
+	
+	public void removeTileObject()
+	{
+		this.objectoOcupado = null;
+		this.ocupado = false;
+	}
 	
 	public void createHexagon()
 	{
