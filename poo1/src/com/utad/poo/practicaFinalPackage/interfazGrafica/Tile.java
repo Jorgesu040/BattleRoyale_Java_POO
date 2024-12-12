@@ -252,7 +252,7 @@ public class Tile
 	public String toString() 
 	{
 		return "Tile [posX=" + this.posX + ", posY=" + this.posY + ", tileType=" + this.tileType + ", ocupado=" + this.ocupado
-				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + " " + this.isHovered + "]";
+				+ ", objectoOcupado=" + this.objectoOcupado + ", tileId=" + this.tileId + ", isHovered=" + this.isHovered + "]";
 	}
 	
 	

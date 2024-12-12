@@ -90,7 +90,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Polygon;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -319,11 +318,78 @@ public class MapGenerator extends JPanel
     	return (int) (Math.random() * lenght);
     }
     
-    public List<Tile> getTiles() {
-        return this.tiles;
-    }
+   
     
     public Integer getThisSize() {
     	return this.size;
     }
+
+	public Integer getCenterX() {
+		return centerX;
+	}
+
+	public void setCenterX(Integer centerX) {
+		this.centerX = centerX;
+	}
+
+	public Integer getCenterY() {
+		return centerY;
+	}
+
+	public void setCenterY(Integer centerY) {
+		this.centerY = centerY;
+	}
+
+	public Integer getTrapsAmount() {
+		return trapsAmount;
+	}
+
+	public void setTrapsAmount(Integer trapsAmount) {
+		this.trapsAmount = trapsAmount;
+	}
+
+	public Integer getPlayerAmount() {
+		return playerAmount;
+	}
+
+	public void setPlayerAmount(Integer playerAmount) {
+		this.playerAmount = playerAmount;
+	}
+
+	public Integer getBanditAmount() {
+		return banditAmount;
+	}
+
+	public void setBanditAmount(Integer banditAmount) {
+		this.banditAmount = banditAmount;
+	}
+
+	public Integer getLootAmount() {
+		return lootAmount;
+	}
+
+	public void setLootAmount(Integer lootAmount) {
+		this.lootAmount = lootAmount;
+	}
+
+	public static Integer getTileCounter() {
+		return tileCounter;
+	}
+
+	public static void setTileCounter(Integer tileCounter) {
+		MapGenerator.tileCounter = tileCounter;
+	}
+
+	public Boolean getFirstGeneration() {
+		return firstGeneration;
+	}
+
+	public void setTiles(List<Tile> tiles) {
+		this.tiles = tiles;
+	}
+    
+	 public List<Tile> getTiles() {
+	        return this.tiles;
+	    }
+    
 }
