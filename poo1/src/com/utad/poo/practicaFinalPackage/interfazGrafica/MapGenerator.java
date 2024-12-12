@@ -295,21 +295,23 @@ public class MapGenerator extends JPanel
     private TileType generateRandomTileType() 
     {
         TileType[] values = TileType.values();
+        TileType result = null;
         
+   
         Integer randomIndex = this.generateSimpleRandom(values.length);
-
-        	
-        while (values[randomIndex] == TileType.TILE_SPAWN || 
-               values[randomIndex] == TileType.TILE_SPAWN_AI || 
-               values[randomIndex] == TileType.TILE_TRAP_SET ||
-               values[randomIndex] == TileType.TILE_TRAP_IDLE ||
-               values[randomIndex] == TileType.TILE_TRAP_EXPLODED ||
-               values[randomIndex] == TileType.TILE_LOOT) 
+        
+        if (randomIndex < (values.length / 4))
         {
-            randomIndex = this.generateSimpleRandom(values.length);
+        	result = TileType.TILE_OBSTACLE;
+        }
+        else
+        {
+        	result = TileType.TILE_FREE_SPACE;
         }
         
-        return values[randomIndex];
+      
+        
+        return result;
     }
     
     private Integer generateSimpleRandom(Integer lenght)
