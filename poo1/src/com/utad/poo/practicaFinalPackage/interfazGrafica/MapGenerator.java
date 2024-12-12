@@ -86,6 +86,7 @@
 
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
+import com.utad.poo.practicaFinalPackage.personajes.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -128,6 +129,7 @@ public class MapGenerator extends JPanel
     private Integer banditAmount;
     private Integer lootAmount;
     
+   
     
     // Variables empleadas para la generacion procedural
     private static Integer tileCounter = 0;
@@ -139,11 +141,11 @@ public class MapGenerator extends JPanel
     private List<Integer> generatedSpecialTiles;
 
 
-    public MapGenerator(Integer players)
+    public MapGenerator(Integer playersNumber)
     {
     	this(MapGenerator.DEFAULT_SIZE,
     			MapGenerator.DEFAULT_TRAPS,
-    			players,
+    			playersNumber,
     			MapGenerator.DEFAULT_BANDITS,
     			MapGenerator.DEFAULT_LOOT);
     }
@@ -159,7 +161,6 @@ public class MapGenerator extends JPanel
     	this.banditAmount = bandits;
     	this.lootAmount = loot;
     	
-    	
     	// Variables dedicadas al empleo de la generacion procedural
     	// No tocar por usuario bajo ningun concepto
     	this.firstGeneration = false;
@@ -169,6 +170,7 @@ public class MapGenerator extends JPanel
     	
     }
     
+   
     @Override
     public void paintComponent(Graphics g) 
     {
@@ -252,6 +254,22 @@ public class MapGenerator extends JPanel
         return randomNum;
     }
     
+    public void setPlayers(List<Personaje> players)
+    {
+    	for (Integer i = 0; i < this.playerAmount; i++)
+    	{
+    		Personaje player = players.get(i);
+    		
+    		for (Tile generatedTile : this.tiles)
+    		{
+    			if (generatedTile.getTileType().equals(TileType.TILE_SPAWN) && !generatedTile.getOcupado())
+        		{
+        			generatedTile.setTileObject(player);
+        		}
+    		}
+    	}
+    }
+    
     private void generateSpecialTiles()
     {
     	Boolean loadingPlayerSpawn = false;
@@ -264,14 +282,20 @@ public class MapGenerator extends JPanel
     		// generate players
     		for(Integer i = 0; i < this.playerAmount; i++)
     		{
-    			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_SPAWN);;
+    			Integer random = generateRandom(1, MapGenerator.tileCounter);
+    			
+    			this.tiles.get(random).setTileType(TileType.TILE_SPAWN);
     		}
     		loadingPlayerSpawn = true;
     		
     		// generate bandits
+    		checkBanditAmount();
     		for(Integer i = 0; i < this.banditAmount; i++)
     		{
-    			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_SPAWN_AI);;
+    			Integer random = generateRandom(1, MapGenerator.tileCounter);
+    			
+    			this.tiles.get(random).setTileType(TileType.TILE_SPAWN_AI);
+    			//this.tiles.get(random).setTileObject(bandit);
     		}
     		loadingBanditSpawn = true;
     		
@@ -288,6 +312,14 @@ public class MapGenerator extends JPanel
     			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
     		}
     		loadingTrapSpawn = true;
+    	}
+    }
+    
+    private void checkBanditAmount()
+    {
+    	if (this.banditAmount > MapGenerator.tileCounter)
+    	{
+    		this.setBanditAmount( (int) (this.banditAmount / 8));;
     	}
     }
     
