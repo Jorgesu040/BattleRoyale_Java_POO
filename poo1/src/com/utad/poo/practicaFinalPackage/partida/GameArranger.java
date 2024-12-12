@@ -50,7 +50,7 @@ public class GameArranger {
 	}
 
 	public static void main(String[] args) {
-    	MapGenerator mapa = new MapGenerator(7, 1, 1, 2, 4);
+    	MapGenerator mapa = new MapGenerator(7, 1, 1, 3, 4);
         GraphicWindowManager graphicWindowManager = new GraphicWindowManager(mapa);
         GameArranger gameArranger = new GameArranger(graphicWindowManager);
         gameArranger.startGame();

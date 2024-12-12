@@ -289,6 +289,7 @@ public class MapGenerator extends JPanel
     		loadingPlayerSpawn = true;
     		
     		// generate bandits
+    		checkBanditAmount();
     		for(Integer i = 0; i < this.banditAmount; i++)
     		{
     			Integer random = generateRandom(1, MapGenerator.tileCounter);
@@ -311,6 +312,14 @@ public class MapGenerator extends JPanel
     			this.tiles.get(generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
     		}
     		loadingTrapSpawn = true;
+    	}
+    }
+    
+    private void checkBanditAmount()
+    {
+    	if (this.banditAmount > MapGenerator.tileCounter)
+    	{
+    		this.setBanditAmount( (int) (this.banditAmount / 8));;
     	}
     }
     
