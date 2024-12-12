@@ -239,7 +239,7 @@ public class MapGenerator extends JPanel
     private Integer generateRandom(Integer min, Integer max)
     {
     	Random r = new Random();
-    	return r.nextInt(max - min) + (min + 1);
+    	return r.nextInt(max - min) + min;
     }
     
     private void generateSpecialTiles()
