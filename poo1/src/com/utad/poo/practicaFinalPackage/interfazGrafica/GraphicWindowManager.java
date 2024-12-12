@@ -13,31 +13,32 @@ import javax.swing.JPanel;
 import com.utad.poo.practicaFinalPackage.GameLogicHandler;
 
 public class GraphicWindowManager {
-    
+
+    JFrame frame;
+    MapController mapController;
+    MapGenerator panel;
+
     public static void main(String[] args) {
-        GraphicWindowManager graphicWindowManager = new GraphicWindowManager();
-        graphicWindowManager.createWindow();
+        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4);
+        new GraphicWindowManager(panel);
     }
 
-    public void createWindow() {
-        JFrame frame = setupFrame();
-        MapGenerator panel = setupMapGenerator();
-        MapController mapController = new MapController(panel);
+    public GraphicWindowManager(MapGenerator panel) {
+        this.frame = setupFrame();
+        this.panel = panel;
+        this.mapController = new MapController(this.panel);
+    }
 
-        addGameLogic(mapController);
-        addUIFeedback(mapController, panel);
-        setupLayout(frame, panel, panel.getThisSize());
-        initializeFrame(frame);
+    public void setupGame() {
+        addGameLogic(this.mapController);
+        addUIFeedback(this.mapController, this.panel);
+        setupLayout(this.frame, this.panel, this.panel.getThisSize());
+        initializeFrame(this.frame);
     }
 
     private JFrame setupFrame() {
         JFrame frame = new JFrame("Mapa Hexagonal");
         return frame;
-    }
-
-    private MapGenerator setupMapGenerator() {
-        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4);
-        return panel;
     }
 
     private void addGameLogic(MapController mapController) {
@@ -53,7 +54,7 @@ public class GraphicWindowManager {
 
             @Override
             public void onTileHovered(Tile tile) {
-                // nada, dentro de Tile ya esta el stroke
+                // Nada, dentro de Tile ya está el stroke
             }
         });
     }
@@ -63,16 +64,13 @@ public class GraphicWindowManager {
 
         frame.add(BorderLayout.SOUTH, new JButton("Estoy en el Sur"));
         frame.add(BorderLayout.NORTH, new JButton("Estoy en el Norte"));
-        
-        // Añadir botones en los bordes de la ventana
-        // East border - Aqui irian las acciones: atacar, defender, retirada, etc;
+
         JPanel eastPanel = new JPanel(new GridLayout(3, 1));
         eastPanel.add(new JButton("Atacar"));
         eastPanel.add(new JButton("Defender"));
         eastPanel.add(new JButton("Retirada"));
         frame.add(BorderLayout.EAST, eastPanel);
 
-        // West border - Aqui irian los 5 items que se añaden en el panel
         JPanel westPanel = new JPanel(new GridLayout(5, 1));
         westPanel.add(new JButton("Item 1"));
         westPanel.add(new JButton("Item 2"));
@@ -81,14 +79,13 @@ public class GraphicWindowManager {
         westPanel.add(new JButton("Item 5"));
         frame.add(BorderLayout.WEST, westPanel);
 
-        // Toda esta logica es para centrar el panel en la ventana principal por tanto la posiscion ya no la maneja el objeto panel
-        // Ahora las coordenadas de los ejes X e Y se emplean para centrar el panel en su espacio
         JPanel centerPanel = new JPanel(new GridBagLayout());
-        panel.setPreferredSize(new Dimension(panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X), panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y)));
-        panel.setMinimumSize(new Dimension(panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X), panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y)));
-        centerPanel.add(panel); 
+        int width = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X);
+        int height = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y);
+        panel.setPreferredSize(new Dimension(width, height));
+        panel.setMinimumSize(new Dimension(width, height));
+        centerPanel.add(panel);
         frame.add(BorderLayout.CENTER, centerPanel);
-        // Cambio un poco este color para ver las dos ventanas de las que hablo
         centerPanel.setBackground(new java.awt.Color(76, 143, 200));
     }
 
@@ -97,5 +94,4 @@ public class GraphicWindowManager {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    
 }

@@ -61,18 +61,18 @@ import com.utad.poo.practicaFinalPackage.items.*;
 public abstract class Personaje {
 
     // Atributos default del personaje
-    protected static final Integer VIDA_DEFAULT = 100; // Puntos de vida
-    protected static final Double ATAQUE_DEFAULT = 0.0; // %
-    protected static final Double DEFENSA_DEFAULT = 0.0; // %
-    protected static final Double PROBABILIDAD_RETIRADA_DEFAULT = 10.0; // %
-    protected static final Double PROBABILIDAD_CONTRAATAQUE_DEFAULT = 10.0; // %
-    protected static final Double DANIO_CONTRAATAQUE_DEFAULT = 50.0; // %
+    public static final Integer VIDA_DEFAULT = 100; // Puntos de vida
+    public static final Double ATAQUE_DEFAULT = 0.0; // %
+    public static final Double DEFENSA_DEFAULT = 0.0; // %
+    public static final Double PROBABILIDAD_RETIRADA_DEFAULT = 10.0; // %
+    public static final Double PROBABILIDAD_CONTRAATAQUE_DEFAULT = 10.0; // %
+    public static final Double DANIO_CONTRAATAQUE_DEFAULT = 50.0; // %
 
-    protected static final Integer NUMERO_ITEMS_DEFAULT = 0;
-    protected static final Integer NUMERO_ITEMS_MAX = 5;
+    public static final Integer NUMERO_ITEMS_DEFAULT = 0;
+    public static final Integer NUMERO_ITEMS_MAX = 5;
 
     // Contador de personajes (usado para asignar un id único a cada personaje)
-    protected static Integer contadorPersonajes = 0;
+    public static Integer contadorPersonajes = 0;
 
     // Atributos del personaje
     protected Integer id;
@@ -352,12 +352,16 @@ public abstract class Personaje {
         this.estado = estado;
     }
 
+    
     /* Misceláneos */
-
     @Override
     public String toString() {
         return "Personaje [id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", ataque=" + ataque + ", defensa="
-                + defensa + "]";
+                + defensa + ", probabilidadRetirada=" + probabilidadRetirada + ", estado=" + estado + ", armaPersonaje="
+                + armaPersonaje + ", escudoPersonaje=" + escudoPersonaje + ", items=" + items + ", efectos=" + efectos
+                + ", numeroItems=" + numeroItems + ", personajeOponente=" + personajeOponente + "]";
     }
+    
+    
 
 }

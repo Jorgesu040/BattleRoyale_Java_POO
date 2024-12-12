@@ -11,7 +11,7 @@ public class ClasesTesting
 	public static void main(String[] args) 
 	{
 	
-		Arma arco1 = new ArcoDeGuerrila();
+		Arma arco1 = new ArcoDeGuerrilla();
 		Arma arco2 = new ArcoDePrecision();
 		Arma arco3 = new Ballesta();
 		
