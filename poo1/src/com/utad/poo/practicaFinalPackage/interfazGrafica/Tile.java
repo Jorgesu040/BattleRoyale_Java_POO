@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Tile 
 {
-	public static final Integer HEXAGON_RADIOUS = 40; // 10 pixeles de radio
+	public static final Integer HEXAGON_RADIOUS = 40;
 	public static final Integer HEXAGON_WIDTH = (int) (Math.sqrt(3) * Tile.HEXAGON_RADIOUS);
 	public static final Integer HEXAGON_HEIGHT = 2 * Tile.HEXAGON_RADIOUS;
 
@@ -48,6 +48,13 @@ public class Tile
 		return this.hexagono.contains(p);
 	}
 
+	public Double getTileDistance(Tile tile)
+	{
+		Point tileCenter = new Point(tile.getPosX(), tile.getPosY());
+		
+		Double rawDistance = tileCenter.distance(new Point(this.posX, this.posY));
+		return rawDistance + Tile.HEXAGON_RADIOUS;
+	}
 
 	public void createHexagon()
 	{
