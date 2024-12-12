@@ -118,6 +118,8 @@ public class MapGenerator extends JPanel
     public static final Integer DEFAULT_LOOT = 3;
     
     public static final Integer DEFAULT_SIZE = 7;
+
+    public static final Integer OCCUPIED_SIZE_DEFAULT = Tile.HEXAGON_RADIOUS * 2;
     
     private Integer centerX;
     private Integer centerY;
@@ -138,22 +140,21 @@ public class MapGenerator extends JPanel
     private List<Integer> generatedSpecialTiles;
 
 
-    public MapGenerator(Integer posX, Integer posY, Integer players)
+    public MapGenerator(Integer players)
     {
     	this(MapGenerator.DEFAULT_SIZE,
-    			posX, posY,
     			MapGenerator.DEFAULT_TRAPS,
     			players,
     			MapGenerator.DEFAULT_BANDITS,
     			MapGenerator.DEFAULT_LOOT);
     }
     
-    public MapGenerator(Integer size, Integer posX, Integer posY, Integer traps, Integer players, Integer bandits, Integer loot)
+    public MapGenerator(Integer size, Integer traps, Integer players, Integer bandits, Integer loot)
     {
     	super();
     	this.size = size;
-    	this.centerX = posX;
-    	this.centerY = posY;
+    	this.centerX = (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X) * this.size / 2;
+    	this.centerY = (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y) * this.size / 2;
     	this.trapsAmount = traps;
     	this.playerAmount = players;
     	this.banditAmount = bandits;
@@ -319,5 +320,8 @@ public class MapGenerator extends JPanel
     public List<Tile> getTiles() {
         return this.tiles;
     }
-  
+    
+    public Integer getThisSize() {
+    	return this.size;
+    }
 }
