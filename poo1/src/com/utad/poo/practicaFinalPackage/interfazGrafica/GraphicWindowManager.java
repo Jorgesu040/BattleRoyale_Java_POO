@@ -49,7 +49,11 @@ public class GraphicWindowManager {
         mapController.addTileEventListener(new TileEventListener() {
             @Override
             public void onTileClicked(Tile tile) {
-                JOptionPane.showMessageDialog(panel, tile.toString());
+            	if (!tile.getTileType().equals(TileType.TILE_OBSTACLE))
+            	{
+            		 JOptionPane.showMessageDialog(panel, tile.toString());
+            	}
+               
             }
 
             @Override
