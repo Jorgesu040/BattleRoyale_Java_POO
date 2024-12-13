@@ -17,8 +17,9 @@ public class Tile
 	public static final Integer HEXAGON_HEIGHT = 2 * Tile.HEXAGON_RADIOUS;
 	public static final Double MAX_DISTANCE_LEGAL_MOVE = 80.0d;
 	
-	public static final Integer IMAGE_WIDTH =  (int) ((int) Tile.HEXAGON_WIDTH - MapGenerator.DEFAULT_SPACING_X*1.5);
-	public static final Integer IMAGE_HEIGHT = (int) ((int) Tile.HEXAGON_HEIGHT - MapGenerator.DEFAULT_SPACING_Y*1.5);
+	public static final Integer IMAGE_WIDTH = (int) (0.8 * HEXAGON_WIDTH); 
+	public static final Integer IMAGE_HEIGHT = (int) (0.8 * HEXAGON_HEIGHT); 
+
 
 	private Integer posX;
 	private Integer posY;
@@ -118,8 +119,8 @@ public class Tile
 		{
 			Personaje player = (Personaje) this.objectoOcupado;
 			
-			Integer imageX = this.posX - Tile.HEXAGON_RADIOUS;
-	        Integer imageY = this.posY - Tile.HEXAGON_RADIOUS;
+			 Integer imageX = this.posX - Tile.IMAGE_WIDTH / 2;
+		     Integer imageY = this.posY - Tile.IMAGE_HEIGHT / 2;
 			
 	        try {
 	        	graficos.drawImage(player.getImagen(), imageX, imageY, Tile.IMAGE_WIDTH, Tile.IMAGE_HEIGHT, null);
