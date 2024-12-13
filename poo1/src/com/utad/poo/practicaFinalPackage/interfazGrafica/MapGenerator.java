@@ -86,6 +86,7 @@
 
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
+import com.utad.poo.practicaFinalPackage.partida.BanditSetup;
 import com.utad.poo.practicaFinalPackage.personajes.*;
 import javax.swing.*;
 import java.awt.*;
@@ -279,12 +280,16 @@ public class MapGenerator extends JPanel
     		
     		// generate bandits
     		checkBanditAmount();
+    		
+    		BanditSetup banditGenerator = new BanditSetup();
+    		
+    		
     		for(Integer i = 0; i < this.banditAmount; i++)
     		{
     			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
     			
     			this.tiles.get(random).setTileType(TileType.TILE_SPAWN_AI);
-    			//this.tiles.get(random).setTileObject(bandit);
+    			this.tiles.get(random).setTileObject(banditGenerator.createRandomBandit());
     		}
     		
     		
