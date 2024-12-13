@@ -214,13 +214,9 @@ public class MapGenerator extends JPanel
     		
             for (Integer col = 0; col < cols; col++) 
             {
-                 Integer x = (int) (this.centerX + xOff * (col * 2 + 1 - cols));
-                 Integer y = (int) (this.centerY + yOff * (row - half) * 3);
-            	
-               
-                 generateRandomTile(x, y, g2d);
-                
-                 
+                Integer x = (int) (this.centerX + xOff * (col * 2 + 1 - cols));
+                Integer y = (int) (this.centerY + yOff * (row - half) * 3);
+            	generateRandomTile(x, y, g2d); 
             }
         }
     }
@@ -229,8 +225,6 @@ public class MapGenerator extends JPanel
     private void generateRandomTile(Integer posX, Integer posY, Graphics2D g2d) 
     {
         Tile newTile = null;
-		// FIXME: The value of the local variable tileType is not used
-        TileType tileType;
 
 
         MapGenerator.tileCounter++;

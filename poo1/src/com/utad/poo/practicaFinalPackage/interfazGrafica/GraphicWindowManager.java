@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.utad.poo.practicaFinalPackage.GameLogicHandler;
-
 public class GraphicWindowManager {
 
     JFrame frame;
@@ -30,7 +28,6 @@ public class GraphicWindowManager {
     }
 
     public void setupGame() {
-        addGameLogic(this.mapController);
         addUIFeedback(this.mapController, this.panel);
         setupLayout(this.frame, this.panel, this.panel.getThisSize());
         initializeFrame(this.frame);
@@ -39,10 +36,6 @@ public class GraphicWindowManager {
     private JFrame setupFrame() {
         JFrame frame = new JFrame("Mapa Hexagonal");
         return frame;
-    }
-
-    private void addGameLogic(MapController mapController) {
-        mapController.addTileEventListener(new GameLogicHandler());
     }
 
     private void addUIFeedback(MapController mapController, MapGenerator panel) {

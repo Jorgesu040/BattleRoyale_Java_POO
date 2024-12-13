@@ -2,7 +2,6 @@ package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import com.utad.poo.practicaFinalPackage.GameLogicHandler;
 
 public class ventanaTesting 
 {
@@ -13,10 +12,7 @@ public class ventanaTesting
         
         MapGenerator panel = new MapGenerator(7, 1, 2, 2, 4, new Utility());
         MapController mapController = new MapController(panel);
-        
-        // Add game logic
-        mapController.addTileEventListener(new GameLogicHandler());
-        
+                
         // Add UI feedback
         mapController.addTileEventListener(new TileEventListener() {
             @Override
