@@ -42,4 +42,3 @@
   - Acciones de movimiento.
   - Acciones de cada personaje en cada turno.
   - Al finalizar el turno un 'rundown' del estado (vida, defensa, ataque) de cada personaje.
-

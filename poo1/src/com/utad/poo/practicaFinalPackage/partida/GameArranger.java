@@ -11,6 +11,7 @@ public class GameArranger {
 
     private GraphicWindowManager graphicWindowManager;
     private List<Personaje> personajes = new ArrayList<Personaje>();
+    private List<Personaje> enemigos = new ArrayList<Personaje>();
 
     public GameArranger(GraphicWindowManager graphicWindowManager) {
         this.graphicWindowManager = graphicWindowManager;
@@ -18,10 +19,13 @@ public class GameArranger {
 
     public void startGame() {
         personajes.add((new UserSetup()).askUserSettings());
+
+        enemigos.add((new BanditSetup()).createRandomBandit()); // Testing
         // Initialize game logic
         // Setup the graphic window
         graphicWindowManager.setupGame();
-        System.out.println("Game started " + personajes.get(0).toString());
+        System.out.println("Game started " + personajes.get(0).toString()); // Testing
+        System.out.println("Game started " + enemigos.get(0).toString()); // Testing
     }
 
     public void endGame() {
