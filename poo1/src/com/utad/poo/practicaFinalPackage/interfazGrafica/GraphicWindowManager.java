@@ -19,7 +19,7 @@ public class GraphicWindowManager {
     MapGenerator panel;
 
     public static void main(String[] args) {
-        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4);
+        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4, new Utility());
         new GraphicWindowManager(panel);
     }
 
@@ -49,7 +49,11 @@ public class GraphicWindowManager {
         mapController.addTileEventListener(new TileEventListener() {
             @Override
             public void onTileClicked(Tile tile) {
-                JOptionPane.showMessageDialog(panel, tile.toString());
+            	if (!tile.getTileType().equals(TileType.TILE_OBSTACLE))
+            	{
+            		 JOptionPane.showMessageDialog(panel, tile.toString());
+            	}
+               
             }
 
             @Override

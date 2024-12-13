@@ -17,7 +17,7 @@ public class ventanaTesting
         JFrame frame = new JFrame("Mapa Hexagonal");
    
         
-        MapGenerator panel = new MapGenerator(7, 1, 2, 2, 4);
+        MapGenerator panel = new MapGenerator(7, 1, 2, 2, 4, new Utility());
         MapController mapController = new MapController(panel);
         
         // Add game logic

@@ -1,6 +1,7 @@
 package com.utad.poo.practicaFinalPackage.partida;
 
 import java.util.ArrayList;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
 import java.util.List;
 
 import com.utad.poo.practicaFinalPackage.interfazGrafica.GraphicWindowManager;
@@ -54,7 +55,7 @@ public class GameArranger {
 	}
 
 	public static void main(String[] args) {
-    	MapGenerator mapa = new MapGenerator(7, 1, 1, 3, 4);
+    	MapGenerator mapa = new MapGenerator(7, 1, 1, 3, 4, new Utility());
         GraphicWindowManager graphicWindowManager = new GraphicWindowManager(mapa);
         GameArranger gameArranger = new GameArranger(graphicWindowManager);
         gameArranger.startGame();
