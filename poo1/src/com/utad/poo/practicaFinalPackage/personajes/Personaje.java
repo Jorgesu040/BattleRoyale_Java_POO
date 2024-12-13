@@ -57,6 +57,7 @@ import java.util.List;
 import com.utad.poo.practicaFinalPackage.herramientas.Arma;
 import com.utad.poo.practicaFinalPackage.herramientas.Escudo;
 import com.utad.poo.practicaFinalPackage.items.*;
+import java.awt.image.BufferedImage;
 
 public abstract class Personaje {
 
@@ -93,6 +94,8 @@ public abstract class Personaje {
 
     protected Personaje personajeOponente;
 
+    protected BufferedImage imagen;
+
     /* Constructor (Solo uno, los hijos se encargan de los Defaults) */
     public Personaje(String nombre, Double ataque, Double defensa, Integer numeroItems, Arma arma, Escudo escudo) {
         this.nombre = nombre;
@@ -109,6 +112,15 @@ public abstract class Personaje {
         this.efectos = new ArrayList<Item>();
         this.personajeOponente = null;
         this.id = ++contadorPersonajes;
+        this.imagen = seleccionarImagenAleatoria();
+    }
+
+
+    // TODO: determinar si la imagen es aleatoria o clase específica
+    // TODO: deberia ser la imagen recibida por el constructor??
+    private BufferedImage seleccionarImagenAleatoria() {
+        // Lógica para seleccionar y cargar una imagen aleatoria desde una pool
+        return null;
     }
 
     /* Métodos Opciones de combate */
@@ -350,6 +362,10 @@ public abstract class Personaje {
 
     public void setEstado(EstadoPersonaje estado) {
         this.estado = estado;
+    }
+
+    public BufferedImage getImagen() {
+        return this.imagen;
     }
 
     
