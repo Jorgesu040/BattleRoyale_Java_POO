@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import com.utad.poo.practicaFinalPackage.personajes.*;
 
 
 public class Tile 
@@ -15,6 +16,9 @@ public class Tile
 	public static final Integer HEXAGON_WIDTH = (int) (Math.sqrt(3) * Tile.HEXAGON_RADIOUS);
 	public static final Integer HEXAGON_HEIGHT = 2 * Tile.HEXAGON_RADIOUS;
 	public static final Double MAX_DISTANCE_LEGAL_MOVE = 80.0d;
+	
+	public static final Integer IMAGE_WIDTH =  (int) ((int) Tile.HEXAGON_WIDTH - MapGenerator.DEFAULT_SPACING_X*1.5);
+	public static final Integer IMAGE_HEIGHT = (int) ((int) Tile.HEXAGON_HEIGHT - MapGenerator.DEFAULT_SPACING_Y*1.5);
 
 	private Integer posX;
 	private Integer posY;
@@ -27,7 +31,6 @@ public class Tile
 	private Polygon hexagono;
 	private boolean isHovered;
 
-	 private BufferedImage tileImage; 
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
@@ -96,17 +99,8 @@ public class Tile
 	{
 		createHexagon();
 		setTileColor(graficos, this.hexagono);	
-		/*
-		int imageX = this.posX - Tile.HEXAGON_RADIOUS;
-        int imageY = this.posY - Tile.HEXAGON_RADIOUS;
-        try {
-			graficos.drawImage(ImageIO.read(getClass().getClassLoader().getResource("images/stonks.png"))
-					, imageX, imageY, Tile.HEXAGON_WIDTH, Tile.HEXAGON_HEIGHT, null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+		setTileImage(graficos);
+		
 		
 		if (this.isHovered && !this.tileType.equals(TileType.TILE_OBSTACLE)) {
 	        // Agregar borde rojo más grueso para indicar hover
@@ -115,6 +109,26 @@ public class Tile
 	        graficos.drawPolygon(this.hexagono);    
 	        graficos.setStroke(new BasicStroke(1)); 
 	    }
+	}
+	
+	private void setTileImage(Graphics2D graficos)
+	{
+		
+		if (this.ocupado && this.objectoOcupado instanceof Personaje)
+		{
+			Personaje player = (Personaje) this.objectoOcupado;
+			
+			Integer imageX = this.posX - Tile.HEXAGON_RADIOUS;
+	        Integer imageY = this.posY - Tile.HEXAGON_RADIOUS;
+			
+	        try {
+	        	graficos.drawImage(player.getImagen(), imageX, imageY, Tile.IMAGE_WIDTH, Tile.IMAGE_HEIGHT, null);
+			} catch (Exception e) {
+				System.out.println("Error with loading tile image");
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	private void setTileColor(Graphics2D graficos, Polygon hexagono)

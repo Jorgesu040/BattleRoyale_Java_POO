@@ -8,11 +8,12 @@ import java.util.ArrayList;
 public class Utility 
 {
 
-	  private List<Integer> generatedSpecialTiles;
+	  private static List<Integer> generatedSpecialTiles = new ArrayList<Integer>();
+	  private static List<Integer> generatedSkins = new ArrayList<Integer>();
 	
 	public Utility()
 	{
-		this.generatedSpecialTiles = new ArrayList<Integer>();
+
 	}
 	
 	public Integer generateRandom(Integer min, Integer max)
@@ -22,9 +23,23 @@ public class Utility
 
         do {
             randomNum = r.nextInt(max - min) + min; 
-        } while (this.generatedSpecialTiles.contains(randomNum)); 
+        } while (Utility.generatedSpecialTiles.contains(randomNum)); 
 
-        this.generatedSpecialTiles.add(randomNum); 
+        Utility.generatedSpecialTiles.add(randomNum); 
+        
+        return randomNum;
+    }
+	
+	public Integer generateRandomSkin(Integer min, Integer max)
+    {
+    	Random r = new Random();
+    	Integer randomNum;
+
+        do {
+            randomNum = r.nextInt(max - min) + min; 
+        } while (Utility.generatedSkins.contains(randomNum)); 
+
+        Utility.generatedSkins.add(randomNum); 
         
         return randomNum;
     }
