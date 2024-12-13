@@ -1,9 +1,12 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 
 public class Tile 
@@ -24,6 +27,7 @@ public class Tile
 	private Polygon hexagono;
 	private boolean isHovered;
 
+	 private BufferedImage tileImage; 
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
 	{
@@ -92,6 +96,17 @@ public class Tile
 	{
 		createHexagon();
 		setTileColor(graficos, this.hexagono);	
+		/*
+		int imageX = this.posX - Tile.HEXAGON_RADIOUS;
+        int imageY = this.posY - Tile.HEXAGON_RADIOUS;
+        try {
+			graficos.drawImage(ImageIO.read(getClass().getClassLoader().getResource("images/stonks.png"))
+					, imageX, imageY, Tile.HEXAGON_WIDTH, Tile.HEXAGON_HEIGHT, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 		
 		if (this.isHovered && !this.tileType.equals(TileType.TILE_OBSTACLE)) {
 	        // Agregar borde rojo más grueso para indicar hover
