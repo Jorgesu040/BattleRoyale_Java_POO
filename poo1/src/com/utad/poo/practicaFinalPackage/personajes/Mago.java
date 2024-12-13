@@ -18,6 +18,13 @@
 package com.utad.poo.practicaFinalPackage.personajes;
 
 import com.utad.poo.practicaFinalPackage.items.*;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.utad.poo.practicaFinalPackage.herramientas.*;
 
 public class Mago extends Personaje {
@@ -45,14 +52,13 @@ public class Mago extends Personaje {
         this.aniadaPociones();
     }
 
-
     @Override
     protected Double calcularDanio() {
         // Obtenemos el daño base del arma
         Double danioTotal = super.armaPersonaje.getDanio() * (1 + (super.ataque / 100));
 
         if (this.momentoAtaqueCritico()) {
-            System.out.println("Ataque crítico! Un " + Mago.ATAQUE_CRITICO + "% de daño adicional"); 
+            System.out.println("Ataque crítico! Un " + Mago.ATAQUE_CRITICO + "% de daño adicional");
             danioTotal += danioTotal * (Mago.ATAQUE_CRITICO / 100);
         }
         return danioTotal;
@@ -67,11 +73,39 @@ public class Mago extends Personaje {
         }
         return critico;
     }
-    
+
     // Añade las pociones iniciales
     private void aniadaPociones() {
         super.items.add(new PocionDeAtaque(PocionDeAtaque.VALOR_EFECTO));
         super.items.add(new PocionDeDefensa(PocionDeDefensa.VALOR_EFECTO));
+    }
+
+    @Override
+    protected BufferedImage seleccionarImagen() {
+        BufferedImage imagen = null;
+        String basePath = "";
+
+        try {
+            File currentDir = new File(System.getProperty("user.dir"));
+            basePath = currentDir.getCanonicalPath() + "\\poo1\\files\\";
+        } catch (IOException e) {
+            System.err.println("Error al obtener el directorio de las imágenes.");
+            e.printStackTrace();
+        }
+
+        String filePrefix = estaVivo() ? "mago" : "derrotado";
+        String fileExtension = ".png";
+        String nombreArchivo = basePath + filePrefix + fileExtension;
+
+        try {
+            File archivoImagen = new File(nombreArchivo);
+            imagen = ImageIO.read(archivoImagen);
+        } catch (IOException e) {
+            System.err.println("Error al cargar la imagen: " + nombreArchivo);
+            e.printStackTrace();
+        }
+
+        return imagen;
     }
 
     public Double getProbablidadCritico() {
@@ -81,7 +115,5 @@ public class Mago extends Personaje {
     public void setProbablidadCritico(Double probablidadCritico) {
         this.probablidadCritico = probablidadCritico;
     }
-
-    
 
 }

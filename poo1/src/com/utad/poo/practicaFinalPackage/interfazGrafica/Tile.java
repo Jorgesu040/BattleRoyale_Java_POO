@@ -1,12 +1,6 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import com.utad.poo.practicaFinalPackage.personajes.*;
 
 

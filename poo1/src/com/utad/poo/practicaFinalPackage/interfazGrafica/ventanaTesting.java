@@ -1,14 +1,8 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
-import com.utad.poo.practicaFinalPackage.personajes.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import com.utad.poo.practicaFinalPackage.GameLogicHandler;
-import com.utad.poo.practicaFinalPackage.herramientas.Arma;
-import com.utad.poo.practicaFinalPackage.herramientas.Escudo;
-
-import java.util.List;
-import java.util.ArrayList;
 
 public class ventanaTesting 
 {

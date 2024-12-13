@@ -90,11 +90,7 @@ import com.utad.poo.practicaFinalPackage.partida.BanditSetup;
 import com.utad.poo.practicaFinalPackage.personajes.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.ArrayList;
 
 
@@ -233,6 +229,7 @@ public class MapGenerator extends JPanel
     private void generateRandomTile(Integer posX, Integer posY, Graphics2D g2d) 
     {
         Tile newTile = null;
+		// FIXME: The value of the local variable tileType is not used
         TileType tileType;
 
 

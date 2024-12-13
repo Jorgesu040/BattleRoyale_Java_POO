@@ -60,12 +60,6 @@ import com.utad.poo.practicaFinalPackage.items.*;
 import java.awt.image.BufferedImage;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Random;
-import javax.imageio.ImageIO;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
-
 public abstract class Personaje {
 
     // Atributos default del personaje
@@ -119,35 +113,10 @@ public abstract class Personaje {
         this.efectos = new ArrayList<Item>();
         this.personajeOponente = null;
         this.id = ++contadorPersonajes;
-        this.imagen = seleccionarImagenAleatoria();
+        this.imagen = seleccionarImagen();
     }
 
-
-    // TODO: determinar si la imagen es aleatoria o clase específica
-    // TODO: deberia ser la imagen recibida por el constructor??
-    private BufferedImage seleccionarImagenAleatoria() {
-      
-        String basePath = "images/";
-        String filePrefix = "skin";
-        String fileExtension = ".png";
-
-        Integer numeroDeImagenes = 7; 
-
-        Utility generator = new Utility();
-     
-        String nombreArchivo = filePrefix + generator.generateRandomSkin(1, numeroDeImagenes) + fileExtension;
-
-
-        try {
-            File archivoImagen = new File(basePath + nombreArchivo);
-            return ImageIO.read(archivoImagen);
-        } catch (IOException e) {  
-            System.err.println("Error al cargar la imagen: " + nombreArchivo);
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+    protected abstract BufferedImage seleccionarImagen();
 
     /* Métodos Opciones de combate */
 
@@ -345,11 +314,15 @@ public abstract class Personaje {
             System.out.println("No se pueden añadir más items al inventario de " + this.nombre);
         }
     }
-
+    
     // Metodo que reinicie el estado del personaje al final de un turno
     public void reiniciarEstado() {
         this.estado = EstadoPersonaje.NADA;
         this.reiniciarModificadores();
+    }
+    
+    public void updateImagen() {
+        this.imagen = seleccionarImagen();
     }
 
     /* Getters y Setters */
@@ -393,6 +366,7 @@ public abstract class Personaje {
     public BufferedImage getImagen() {
         return this.imagen;
     }
+
 
     
     /* Misceláneos */

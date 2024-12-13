@@ -20,6 +20,12 @@
  */
 package com.utad.poo.practicaFinalPackage.personajes;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.utad.poo.practicaFinalPackage.herramientas.*;
 
 
@@ -58,6 +64,34 @@ public class Guerrero extends Personaje {
         this.iraEspartanaContraataque += Guerrero.IRA_ESPARTANA_INCREMENTO;
         this.iraEspartanaContraataque = Math.min(this.iraEspartanaContraataque, Guerrero.IRA_ESPARTANA_MAX);
         System.out.println("Tras recibir un ataque, la ira espartana del guerrero aumenta a " + this.iraEspartanaContraataque + "%");
+    }
+
+    @Override
+    protected BufferedImage seleccionarImagen() {
+        BufferedImage imagen = null;
+        String basePath = "";
+    
+        try {
+            File currentDir = new File(System.getProperty("user.dir"));
+            basePath = currentDir.getCanonicalPath() + "\\poo1\\files\\";
+        } catch (IOException e) {
+            System.err.println("Error al obtener el directorio de las imágenes.");
+            e.printStackTrace();
+        }
+    
+        String filePrefix = estaVivo() ? "guerrero" : "derrotado";
+        String fileExtension = ".png";
+        String nombreArchivo = basePath + filePrefix + fileExtension;
+    
+        try {
+            File archivoImagen = new File(nombreArchivo);
+            imagen = ImageIO.read(archivoImagen);
+        } catch (IOException e) {
+            System.err.println("Error al cargar la imagen: " + nombreArchivo);
+            e.printStackTrace();
+        }
+    
+        return imagen;
     }
 
 
