@@ -19,7 +19,7 @@ public class GraphicWindowManager {
     MapGenerator panel;
 
     public static void main(String[] args) {
-        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4);
+        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4, new Utility());
         new GraphicWindowManager(panel);
     }
 
