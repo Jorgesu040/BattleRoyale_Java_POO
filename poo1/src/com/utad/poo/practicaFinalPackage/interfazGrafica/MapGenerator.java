@@ -270,44 +270,61 @@ public class MapGenerator extends JPanel
     	while(!loading)
     	{
     		// generate players
-    		for(Integer i = 0; i < this.playerAmount; i++)
-    		{
-    			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
-    			
-    			this.tiles.get(random).setTileType(TileType.TILE_SPAWN);
-    		}
-    		
+    		generatePlayersTiles();
     		
     		// generate bandits
-    		checkBanditAmount();
-    		
-    		BanditSetup banditGenerator = new BanditSetup();
-    		
-    		
-    		for(Integer i = 0; i < this.banditAmount; i++)
-    		{
-    			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
-    			
-    			this.tiles.get(random).setTileType(TileType.TILE_SPAWN_AI);
-    			this.tiles.get(random).setTileObject(banditGenerator.createRandomBandit());
-    		}
-    		
+    		generateBanditTiles();
     		
     		// generate loot
-    		for(Integer i = 0; i < this.lootAmount; i++)
-    		{
-    			this.tiles.get(this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_LOOT);;
-    		}
-    		
+    		generateLootTiles();
     		
     		// generate trap
-    		for(Integer i = 0; i < this.trapsAmount; i++)
-    		{
-    			this.tiles.get(this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
-    		}
+    		generateTrapsTiles();
     		
     		loading = true;
     	}
+    }
+    
+    private void generatePlayersTiles()
+    {
+    	for(Integer i = 0; i < this.playerAmount; i++)
+		{
+			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
+			
+			this.tiles.get(random).setTileType(TileType.TILE_SPAWN);
+		}
+    }
+    
+    private void generateBanditTiles()
+    {
+    	checkBanditAmount();
+		
+		BanditSetup banditGenerator = new BanditSetup();
+		
+		
+		for(Integer i = 0; i < this.banditAmount; i++)
+		{
+			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
+			
+			this.tiles.get(random).setTileType(TileType.TILE_SPAWN_AI);
+			this.tiles.get(random).setTileObject(banditGenerator.createRandomBandit());
+		}
+    }
+    
+    private void generateLootTiles()
+    {
+    	for(Integer i = 0; i < this.lootAmount; i++)
+		{
+			this.tiles.get(this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_LOOT);;
+		}
+    }
+    
+    private void generateTrapsTiles()
+    {
+    	for(Integer i = 0; i < this.trapsAmount; i++)
+		{
+			this.tiles.get(this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
+		}
     }
     
     private void checkBanditAmount()
