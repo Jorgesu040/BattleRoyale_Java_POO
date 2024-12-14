@@ -13,7 +13,7 @@ public class ItemsButton extends JButton {
 
     Item itemAsociado;
 
-    public ItemsButton(Item itemAsociado, Personaje jugador, JPanel ventanaItems) {
+    public ItemsButton(Item itemAsociado, Personaje jugador, JPanel inventoryPanel, GraphicWindowManager graphicWindowManager) {
         super(itemAsociado.getNombre());
         this.itemAsociado = itemAsociado;
         this.addActionListener(new ActionListener() {
@@ -23,9 +23,11 @@ public class ItemsButton extends JButton {
                 // Deshabilitar el botón
                 setEnabled(false);
                 // Actualizar la ventana
-                ventanaItems.updateUI();
+                inventoryPanel.updateUI();
+                graphicWindowManager.updateStatsPanel(jugador);
 
             }
         });
     };
+    
 }

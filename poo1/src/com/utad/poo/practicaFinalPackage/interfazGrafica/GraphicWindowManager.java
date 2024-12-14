@@ -60,12 +60,12 @@ public class GraphicWindowManager {
 
     private JFrame setupFrame() {
         JFrame frame = new JFrame("Mapa Hexagonal");
-        
+
         // Menu
         JMenuBar menuBar = new JMenuBar();
         JMenu helpMenu = new JMenu("Ayuda");
         JMenuItem actionsItem = new JMenu("Acciones");
-        
+
         JMenuItem statsItem = new JMenuItem("Estadisticas de personajes, armas y escudos");
         JMenuItem playItem = new JMenuItem("Instrucciones de juego");
         JMenuItem exitItem = new JMenuItem("Salir");
@@ -86,23 +86,21 @@ public class GraphicWindowManager {
         logsItem.addActionListener(menuListener);
 
         frame.setJMenuBar(menuBar);
-        
+
         return frame;
     }
 
     public void updateInventoryPanel(Personaje jugador) {
 
         List<Item> items = jugador.getItems();
-
         // Borra todos los elementos del panel westPanel
         panelItemsPersonaje.removeAll();
-
-        // Añade los items del jugador al panel westPanel   
+        // Añade los items del jugador al panel westPanel
         if (items.isEmpty()) {
             panelItemsPersonaje.add(new JButton("Tu personaje no tiene items para usar"));
         } else {
             for (Item item : items) {
-                panelItemsPersonaje.add((new ItemsButton(item, jugador, panelItemsPersonaje)));
+                panelItemsPersonaje.add((new ItemsButton(item, jugador, panelItemsPersonaje, this)));
             }
         }
 
@@ -113,6 +111,16 @@ public class GraphicWindowManager {
     public void updateActionsPanel() {
         accionesPersonaje.revalidate();
         accionesPersonaje.updateUI();
+    }
+
+    public void updateStatsPanel(Personaje jugador) {
+        stats.get(0).setText("Vida: " + jugador.getVida());
+        stats.get(1).setText("Ataque: " + jugador.getAtaque());
+        stats.get(2).setText("Defensa: " + jugador.getDefensa());
+        stats.get(3).setText("Habilidad Especial: " + jugador.getSpecialAbility());
+
+        statsPersonaje.revalidate();
+        statsPersonaje.updateUI();
     }
 
     private void setupLayout(JFrame frame, MapGenerator panel, int panelSize, Personaje jugador) {
@@ -128,9 +136,7 @@ public class GraphicWindowManager {
         for (JButton stat : stats) {
             statsPersonaje.add(stat);
         }
-        statsPersonaje.setMinimumSize(new Dimension(100, 1000));
 
-        
         frame.add(BorderLayout.NORTH, statsPersonaje);
 
         accionesPersonaje = new JPanel(new GridLayout(4, 1));
@@ -168,12 +174,11 @@ public class GraphicWindowManager {
     }
 
     private void addCharacterOptionsListeners(Personaje jugador) {
-        attackButton.addActionListener(new onClickDisableButtons( EstadoPersonaje.ATACANDO, jugador));
-        defendButton.addActionListener(new onClickDisableButtons( EstadoPersonaje.DEFENDIENDO, jugador));
+        attackButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.ATACANDO, jugador));
+        defendButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.DEFENDIENDO, jugador));
         retreatButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.RETIRANDOSE, jugador));
-        moveButton.addActionListener(new onClickDisableButtons( EstadoPersonaje.NADA, jugador));
+        moveButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.NADA, jugador));
     }
-
 
     class onClickDisableButtons implements ActionListener {
 
@@ -200,27 +205,28 @@ public class GraphicWindowManager {
     }
 
     class MenuListener implements ActionListener {
-    
+
         @Override
         public void actionPerformed(ActionEvent e) {
             JMenuItem item = (JMenuItem) e.getSource();
             if (item.getText().equals("Salir")) {
                 System.exit(0);
             }
-            
+
             if (item.getText().equals("Estadisticas de personajes, armas y escudos")) {
-                GraphicUserSetup.showOptionStats();
+                // Update to use GraphicHelp
+                GraphicHelp.showOptionStats();
             }
 
             if (item.getText().equals("Instrucciones de juego")) {
-                JOptionPane.showMessageDialog(null, "Funcionalidad no implementada", "Error", JOptionPane.ERROR_MESSAGE);
+                GraphicHelp.showOptionHelp();
             }
 
             if (item.getText().equals("Crear logs")) {
                 // Show unimplemented dialog
-                JOptionPane.showMessageDialog(null, "Funcionalidad no implementada", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Funcionalidad no implementada", "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
-
 
         }
 
