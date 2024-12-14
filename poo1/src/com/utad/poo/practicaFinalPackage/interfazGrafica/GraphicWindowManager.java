@@ -59,7 +59,7 @@ public class GraphicWindowManager {
     }
 
     private JFrame setupFrame() {
-        JFrame frame = new JFrame("Mapa Hexagonal");
+        JFrame frame = new JFrame("Battle Royale");
 
         // Menu
         JMenuBar menuBar = new JMenuBar();

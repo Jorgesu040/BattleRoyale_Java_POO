@@ -21,14 +21,13 @@ public class GameContoller {
     public void startGame() {
         // Inicializar elementos del juego
         gameArranger.startGame();
-        
-        mapa.setPlayers(gameArranger.getPersonajes());
+        // Obtener personajes
         jugador = gameArranger.getPersonajes().get(0);
+        graphicWindowManager.setupGame(jugador);
         
         // Poner al personaje en el mapa
-
+        mapa.setPlayers(gameArranger.getPersonajes());
         // Configurar la ventana gráfica
-        graphicWindowManager.setupGame(jugador);
         graphicWindowManager.updateInventoryPanel(jugador); // Actualizar la ventana gráfica
     }
 
