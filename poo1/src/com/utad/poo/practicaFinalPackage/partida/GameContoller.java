@@ -1,8 +1,6 @@
 package com.utad.poo.practicaFinalPackage.partida;
 
-import com.utad.poo.practicaFinalPackage.interfazGrafica.GraphicWindowManager;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.MapGenerator;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.Utility;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 
 public class GameContoller {
@@ -11,10 +9,12 @@ public class GameContoller {
     private Personaje jugador;
     private GameArranger gameArranger;
     private GraphicWindowManager graphicWindowManager;
+    private MapGenerator mapa;
 
     public GameContoller(MapGenerator mapa) {
         this.graphicWindowManager = new GraphicWindowManager(mapa);
         this.gameArranger = new GameArranger();
+        this.mapa = mapa;
         this.jugador = null;
     }
 
@@ -22,11 +22,13 @@ public class GameContoller {
         // Inicializar elementos del juego
         gameArranger.startGame();
         
-        jugador = gameArranger.getPersonajes().get(0); // TESTING: Obtener el jugador
+        mapa.setPlayers(gameArranger.getPersonajes());
+        jugador = gameArranger.getPersonajes().get(0);
         
+        // Poner al personaje en el mapa
+
         // Configurar la ventana gráfica
         graphicWindowManager.setupGame(jugador);
-        
         graphicWindowManager.updateInventoryPanel(jugador); // Actualizar la ventana gráfica
     }
 
