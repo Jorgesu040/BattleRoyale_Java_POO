@@ -56,6 +56,7 @@ import java.util.List;
 
 import com.utad.poo.practicaFinalPackage.herramientas.Arma;
 import com.utad.poo.practicaFinalPackage.herramientas.Escudo;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.Tile;
 import com.utad.poo.practicaFinalPackage.items.*;
 import java.awt.image.BufferedImage;
 
@@ -96,6 +97,8 @@ public abstract class Personaje {
     protected Personaje personajeOponente;
 
     protected BufferedImage imagen;
+    protected Tile ubicacion_personaje;
+
 
     /* Constructor (Solo uno, los hijos se encargan de los Defaults) */
     public Personaje(String nombre, Double ataque, Double defensa, Integer numeroItems, Arma arma, Escudo escudo) {
@@ -114,6 +117,9 @@ public abstract class Personaje {
         this.personajeOponente = null;
         this.id = ++contadorPersonajes;
         this.imagen = seleccionarImagen();
+
+        // TODO: Añadir su tile aqui o luego tras la instanciación?
+        this.ubicacion_personaje = null;
     }
 
     protected abstract BufferedImage seleccionarImagen();
@@ -365,6 +371,14 @@ public abstract class Personaje {
 
     public BufferedImage getImagen() {
         return this.imagen;
+    }
+
+    public Tile getUbicacion_personaje() {
+        return ubicacion_personaje;
+    }
+
+    public void setUbicacion_personaje(Tile ubicacion_personaje) {
+        this.ubicacion_personaje = ubicacion_personaje;
     }
 
 
