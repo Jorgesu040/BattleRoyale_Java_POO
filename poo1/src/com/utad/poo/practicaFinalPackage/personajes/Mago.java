@@ -43,7 +43,7 @@ public class Mago extends Personaje {
     private Double probablidadCritico;
 
     public Mago(Arma arma, Escudo escudo) {
-        this("Mago" + contadorPersonajes, arma, escudo);
+        this("Mago " + contadorPersonajes, arma, escudo);
     }
 
     public Mago(String nombre, Arma arma, Escudo escudo) {
@@ -114,6 +114,11 @@ public class Mago extends Personaje {
 
     public void setProbablidadCritico(Double probablidadCritico) {
         this.probablidadCritico = probablidadCritico;
+    }
+
+    @Override
+    public String getSpecialAbility() {
+        return "Probabilidad de crítico: " + probablidadCritico + "%";
     }
 
 }

@@ -21,13 +21,13 @@ public class UserSetup extends CharacterSetup {
                             personaje = createCharacter(characterType, weapon, shield);
                             gui.showCharacterCreated(characterType, weapon, shield);
                         } else {
-                            gui.showError("Shield selection failed.");
+                            gui.showError("Error en la selección de escudo.");
                         }
                     } else {
-                        gui.showError("Weapon selection failed.");
+                        gui.showError("Error en la selección de arma.");
                     }
                 } catch (Exception e) {
-                    gui.showError("An error occurred: " + e.getMessage());
+                    gui.showError("Ha ocurrido un error: " + e.getMessage());
                 }
             }
         } while (personaje == null);

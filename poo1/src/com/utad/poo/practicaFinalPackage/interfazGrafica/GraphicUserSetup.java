@@ -87,7 +87,7 @@ public class GraphicUserSetup {
                 opciones[0]);
     }
 
-    public void showOptionStats() {
+    public static void showOptionStats() {
         String estadisticasGuerro = "Guerrero:\n"
                 + "Vida:" + Personaje.VIDA_DEFAULT + "pts. "
                 + "Ataque:" + Guerrero.MOD_ATQ_INICIAL + "% "

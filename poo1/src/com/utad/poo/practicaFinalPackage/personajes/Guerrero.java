@@ -40,7 +40,7 @@ public class Guerrero extends Personaje {
     private Double iraEspartanaContraataque;
 
     public Guerrero(Arma arma, Escudo escudo) {
-        this("Guerrero" + contadorPersonajes, arma, escudo);
+        this("Guerrero " + contadorPersonajes, arma, escudo);
     }
 
     public Guerrero(String nombre, Arma arma, Escudo escudo) {
@@ -101,6 +101,11 @@ public class Guerrero extends Personaje {
 
     public Double getIraEspartanaContraataque() {
         return iraEspartanaContraataque;
+    }
+
+    @Override
+    public String getSpecialAbility() {
+        return "Ira Espartana: " + iraEspartanaContraataque + "%";
     }
 
     

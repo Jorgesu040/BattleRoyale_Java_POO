@@ -86,6 +86,7 @@ public abstract class Personaje {
     protected Double defensa;
     protected Double probabilidadRetirada;
     protected EstadoPersonaje estado;
+    protected Boolean retiradaConExito;
 
     protected Arma armaPersonaje;
     protected Escudo escudoPersonaje;
@@ -93,8 +94,6 @@ public abstract class Personaje {
     protected List<Item> items;
     protected List<Item> efectos;
     protected Integer numeroItems;
-
-    protected Personaje personajeOponente;
 
     protected BufferedImage imagen;
     protected Tile ubicacion_personaje;
@@ -114,7 +113,6 @@ public abstract class Personaje {
         this.vida = Personaje.VIDA_DEFAULT;
         this.items = new ArrayList<Item>();
         this.efectos = new ArrayList<Item>();
-        this.personajeOponente = null;
         this.id = ++contadorPersonajes;
         this.imagen = seleccionarImagen();
 
@@ -128,7 +126,6 @@ public abstract class Personaje {
 
     /// ************* Logica de ataque ************* ///
     public void atacar(Personaje opponent) {
-        this.estado = EstadoPersonaje.ATACANDO;
         Double danioTotal = this.calcularDanio();
         if (danioTotal == 0.0) {
             System.out.println("¡Oh no! El personaje ha fallado el ataque");
@@ -153,8 +150,7 @@ public abstract class Personaje {
     // Defiende de un ataque a un personaje -> reduce el y pequeña posibilidad de
     // contraataque (devolver un porcentaje del daño recibido)
     public void defensa(Personaje opponent) {
-        this.estado = EstadoPersonaje.DEFENDIENDO;
-        if (contraAtaco()) {
+        if (contraAtaco() && opponent.getEstado() == EstadoPersonaje.ATACANDO) {
             this.contraataque(opponent, opponent.ataque);
         }
     }
@@ -178,17 +174,16 @@ public abstract class Personaje {
 
     // ************* Logica de retirada ************* ///
     // Se retira de la batalla (probabilidad pequeña) -> no recibe daño
-    public Boolean retirada() {
-        this.estado = EstadoPersonaje.RETIRANDOSE;
+    public void retirada(Personaje opponent) {
         Boolean retirada = false;
         Double probabilidadRetirada = Personaje.PROBABILIDAD_RETIRADA_DEFAULT;
 
         // Comprobar si el personaje oponente es un arquero y reducir la probabilidad de
         // retirada
-        if (personajeOponente != null && personajeOponente instanceof Arquero) {
-            probabilidadRetirada = Math.max(probabilidadRetirada - ((Arquero) personajeOponente).getPunteria(), 0);
+        if (opponent != null && opponent instanceof Arquero) {
+            probabilidadRetirada = Math.max(probabilidadRetirada - ((Arquero) opponent).getPunteria(), 0);
             System.out.println("El oponente es un arquero muy preciso y redujo tu probabilidad de retirada en "
-                    + ((Arquero) personajeOponente).getPunteria() + "%");
+                    + ((Arquero) opponent).getPunteria() + "%");
         }
 
         // Comprobar si el personaje tiene un escudo y aumentar/disminuir la
@@ -202,7 +197,8 @@ public abstract class Personaje {
             retirada = true;
         }
 
-        return retirada;
+        this.retiradaConExito = retirada;
+        
     }
 
     // ************* Logica de recibir ataque ************* ///
@@ -217,7 +213,7 @@ public abstract class Personaje {
             System.out.println("El personaje se ha defendido y ha reducido el daño recibido");
         }
 
-        if (estado == EstadoPersonaje.RETIRANDOSE && this.retirada()) {
+        if (estado == EstadoPersonaje.RETIRANDOSE && this.retiradaConExito) {
             ataque = 0.0; // No recibe daño
             System.out.println("El personaje se ha retirado y ha evitado el ataque");
         }
@@ -380,6 +376,12 @@ public abstract class Personaje {
     public void setUbicacion_personaje(Tile ubicacion_personaje) {
         this.ubicacion_personaje = ubicacion_personaje;
     }
+    
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public abstract String getSpecialAbility();
 
 
     
@@ -389,7 +391,7 @@ public abstract class Personaje {
         return "Personaje [id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", ataque=" + ataque + ", defensa="
                 + defensa + ", probabilidadRetirada=" + probabilidadRetirada + ", estado=" + estado + ", armaPersonaje="
                 + armaPersonaje + ", escudoPersonaje=" + escudoPersonaje + ", items=" + items + ", efectos=" + efectos
-                + ", numeroItems=" + numeroItems + ", personajeOponente=" + personajeOponente + "]";
+                + ", numeroItems=" + numeroItems + "]";
     }
     
     

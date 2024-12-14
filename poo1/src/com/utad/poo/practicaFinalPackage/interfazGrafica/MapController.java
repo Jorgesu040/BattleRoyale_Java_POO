@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class MapController {
     private MapGenerator mapGenerator;
@@ -41,6 +42,9 @@ public class MapController {
     private void handleTileClick(MouseEvent click) {
         for (Tile tile : this.mapGenerator.getTiles()) {
             if (tile.contains(click.getPoint())) {
+                if (!tile.getTileType().equals(TileType.TILE_OBSTACLE)) {
+                    JOptionPane.showMessageDialog(mapGenerator, tile.toString());
+                }
                 for (TileEventListener listener : this.tileEventListeners) {
                     listener.onTileClicked(tile);
                 }

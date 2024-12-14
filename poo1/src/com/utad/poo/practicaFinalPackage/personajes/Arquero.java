@@ -37,7 +37,7 @@ public class Arquero extends Personaje {
     private Double punteria;
 
     public Arquero(Arma arco, Escudo escudo) {
-        this("Arquero" + contadorPersonajes, arco, escudo);
+        this("Arquero " + contadorPersonajes, arco, escudo);
         
     }
 
@@ -84,5 +84,11 @@ public class Arquero extends Personaje {
         this.punteria = punteria;
     }
 
+    @Override
+    public String getSpecialAbility() {
+        return "Puntería: " + punteria;
+    }
+
+    
 
 }
