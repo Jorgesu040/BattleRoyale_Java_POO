@@ -2,9 +2,10 @@ package com.utad.poo.practicaFinalPackage.items;
 
 import java.util.Random;
 
-public abstract class ItemGenerator {
+public class ItemGenerator {
 
-    public static Item generateRandomItem() {
+
+    public Item generateRandomItem() {
         Random rand = new Random();
         int randomNum = rand.nextInt(2); // 0 for trap, 1 for character item
         if (randomNum == 0) {
@@ -14,7 +15,7 @@ public abstract class ItemGenerator {
         }
     }
 
-    public static Item generateRandomTrap() {
+    public Item generateRandomTrap() {
         Random rand = new Random();
         int randomNum = rand.nextInt(3); // Number of trap types
         switch(randomNum) {
@@ -29,7 +30,7 @@ public abstract class ItemGenerator {
         }
     }
 
-    public static Item generateRandomCharacterItem() {
+    public Item generateRandomCharacterItem() {
         Random rand = new Random();
         int randomNum = rand.nextInt(5); // Number of character item types
         switch(randomNum) {

@@ -1,23 +1,26 @@
 package com.utad.poo.practicaFinalPackage.inout;
 
 
-import com.utad.poo.practicaFinalPackage.personajes.*;
-
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class IniciarPartidaFichero {
 
-    private String fileToSearch;
-    private Personaje jugador;
+    public static final String FILE_NAME = "iniciar.xml";
+    public static final String PATH_TO_BOOT_FILE = System.getProperty("user.dir") + File.separator + 
+                                                    "poo1" + File.separator + 
+                                                    "files" + File.separator + 
+                                                    "ficheros" + File.separator + 
+                                                    IniciarPartidaFichero.FILE_NAME;
+
+    private String jugador;
     private Integer lootCount;
     private Integer trapCount;
     private Integer banditCount;
 
-    public IniciarPartidaFichero(String fichero) {
-        this.fileToSearch = fichero;
-        this.jugador = null;
+    public IniciarPartidaFichero() {
+        this.jugador = "Sin Nombre";
         this.lootCount = 0;
         this.trapCount = 0;
         this.banditCount = 0;
@@ -25,58 +28,86 @@ public class IniciarPartidaFichero {
 
     public void cargarDatosDesdeXML() {
         try {
-            // Crear el DocumentBuilder para leer el XML
-            File xmlFile = new File(fileToSearch);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(xmlFile);
-            
-            // Normalizar el documento
-            doc.getDocumentElement().normalize();
+            File myObj = new File(IniciarPartidaFichero.PATH_TO_BOOT_FILE);
+            Scanner myReader = new Scanner(myObj);
 
-            // Buscar el nodo GameStart
-            Node gameStartNode = doc.getElementsByTagName("GameStart").item(0);
-            
-            if (gameStartNode != null) {
-                // Obtener el nodo hijo <Player> y extraer el atributo Name
-                NodeList playerList = ((Element) gameStartNode).getElementsByTagName("Player");
-                if (playerList.getLength() > 0) {
-                    Element playerElement = (Element) playerList.item(0);
-                    String playerName = playerElement.getAttribute("Name");
-                    jugador = null;  // Crear un nuevo personaje con el nombre
-                }
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine().trim(); 
 
-                // Obtener el nodo <Loot> y extraer el atributo LootCount
-                NodeList lootList = ((Element) gameStartNode).getElementsByTagName("Loot");
-                if (lootList.getLength() > 0) {
-                    Element lootElement = (Element) lootList.item(0);
-                    lootCount = Integer.parseInt(lootElement.getAttribute("LootCount"));
-                }
 
-                // Obtener el nodo <Traps> y extraer el atributo TrapCount
-                NodeList trapsList = ((Element) gameStartNode).getElementsByTagName("Traps");
-                if (trapsList.getLength() > 0) {
-                    Element trapsElement = (Element) trapsList.item(0);
-                    trapCount = Integer.parseInt(trapsElement.getAttribute("TrapCount"));
-                }
+                if (data.startsWith("<Player")) 
+                {
+                    String[] parts = data.split("Name=\"");
+                    if (parts.length > 1) 
+                    {
+                        String name = parts[1].split("\"")[0]; 
+                        this.jugador = name;
+                    }
 
-                // Obtener el nodo <Bandits> y extraer el atributo BanditCount
-                NodeList banditsList = ((Element) gameStartNode).getElementsByTagName("Bandits");
-                if (banditsList.getLength() > 0) {
-                    Element banditsElement = (Element) banditsList.item(0);
-                    banditCount = Integer.parseInt(banditsElement.getAttribute("BanditCount"));
+                } else if (data.startsWith("<Loot")) 
+                {
+                    String[] parts = data.split("LootCount=\"");
+                    if (parts.length > 1) 
+                    {
+                        this.lootCount = Integer.parseInt(parts[1].split("\"")[0]);
+                    }
+
+                } else if (data.startsWith("<Traps")) 
+                {
+                    String[] parts = data.split("TrapCount=\"");
+                    if (parts.length > 1) 
+                    {
+                        this.trapCount = Integer.parseInt(parts[1].split("\"")[0]);
+                    }
+
+                } else if (data.startsWith("<Bandits")) 
+                {
+                    String[] parts = data.split("BanditCount=\"");
+                    if (parts.length > 1) 
+                    {
+                        this.banditCount = Integer.parseInt(parts[1].split("\"")[0]); 
+                    }
                 }
             }
-        } catch (Exception e) {
+
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al leer el archivo");
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        IniciarPartidaFichero gen = new IniciarPartidaFichero("/src/");
-        gen.cargarDatosDesdeXML();
-        System.out.println(gen);
 
-       
+
+    
+    public String getJugador() {
+        return this.jugador;
+    }
+
+    public Integer getLootCount() {
+        return this.lootCount;
+    }
+
+    public Integer getTrapCount() {
+        return this.trapCount;
+    }
+
+    public Integer getBanditCount() {
+        return this.banditCount;
+    }
+
+
+    
+    @Override
+    public String toString() {
+        return "IniciarPartidaFichero [jugador=" + jugador + ", lootCount=" + lootCount + ", trapCount=" + trapCount
+                + ", banditCount=" + banditCount + "]";
+    }
+
+    public static void main(String[] args) {
+        IniciarPartidaFichero partida = new IniciarPartidaFichero();
+        partida.cargarDatosDesdeXML();
+
+        System.out.println(partida);
     }
 }

@@ -88,6 +88,7 @@ package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import com.utad.poo.practicaFinalPackage.partida.BanditSetup;
 import com.utad.poo.practicaFinalPackage.personajes.*;
+import com.utad.poo.practicaFinalPackage.items.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -178,11 +179,7 @@ public class MapGenerator extends JPanel
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
-        
-     
-        renderMap(g2d);
-       
+        renderMap(g2d);  
     }
     
    
@@ -307,9 +304,15 @@ public class MapGenerator extends JPanel
     
     private void generateLootTiles()
     {
+
     	for(Integer i = 0; i < this.lootAmount; i++)
 		{
-			this.tiles.get(this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_LOOT);;
+			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
+			Item item = new ItemGenerator().generateRandomCharacterItem();
+
+
+			this.tiles.get(random).setTileType(TileType.TILE_LOOT);
+			this.tiles.get(random).setTileObject(item);
 		}
     }
     
@@ -317,7 +320,12 @@ public class MapGenerator extends JPanel
     {
     	for(Integer i = 0; i < this.trapsAmount; i++)
 		{
-			this.tiles.get(this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter)).setTileType(TileType.TILE_TRAP_SET);;
+			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
+			Item trap = new ItemGenerator().generateRandomTrap();
+
+
+			this.tiles.get(random).setTileType(TileType.TILE_TRAP_SET);
+			this.tiles.get(random).setTileObject(trap);
 		}
     }
     
