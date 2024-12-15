@@ -188,14 +188,14 @@ public class Tile
 				
 			// } break;
 			
-			// case TILE_TRAP_SET:
-			// {
-			// 	// Interior
-			// 	graficos.setColor(Color.RED);
-			// 	graficos.fillPolygon(hexagono);
+			case TILE_TRAP_SET:
+			{
+				// Interior
+				graficos.setColor(Color.RED);
+				graficos.fillPolygon(hexagono);
 
 				
-			// } break;
+			} break;
 			
 			// case TILE_TRAP_IDLE:
 			// {
