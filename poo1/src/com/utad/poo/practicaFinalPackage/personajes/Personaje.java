@@ -215,7 +215,7 @@ public abstract class Personaje {
     // etc.)
     public void recibirAtaque(Double ataque) {
         if (estado == EstadoPersonaje.DEFENDIENDO) {
-            ataque = ataque * (1 - this.escudoPersonaje.getDefensa()); // Reducir el daño recibido
+            ataque = ataque * (1 - this.escudoPersonaje.getDefensa()/100.0); // Reducir el daño recibido
             System.out.println("El personaje se ha defendido y ha reducido el daño recibido");
         }
 
@@ -224,7 +224,9 @@ public abstract class Personaje {
             System.out.println("El personaje se ha retirado y ha evitado el ataque");
         }
 
-        this.vida -= (int) (ataque - (ataque * this.defensa));
+        this.vida -= (int) (ataque - (ataque * this.defensa/100.0));
+
+        System.out.println(this.nombre + " ha recibido un ataque de " + ataque + " pero gracias a su defensa ha recibido " + (int) (ataque - (ataque * this.defensa/100.0)) + " de daño"); 
 
         if (this.vida < 0) {
             this.vida = 0;
