@@ -369,11 +369,11 @@ public abstract class Personaje {
         return this.imagen;
     }
 
-    public Tile getUbicacion_personaje() {
+    public Tile getUbicacionPersonaje() {
         return ubicacion_personaje;
     }
 
-    public void setUbicacion_personaje(Tile ubicacion_personaje) {
+    public void setUbicacionPersonaje(Tile ubicacion_personaje) {
         this.ubicacion_personaje = ubicacion_personaje;
     }
     

@@ -199,6 +199,19 @@ public class GraphicWindowManager {
 
             jugador.setEstado(estado);
 
+            // performAction(estado, tile)
+
+            
+
+           
+
+            if ( jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile()))
+            {
+                jugador.getUbicacionPersonaje().removeTileObject();
+                jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());
+                GraphicWindowManager.this.mapController.getSelectedTile().setTileObject(jugador);;
+            }
+
             GraphicWindowManager.this.updateActionsPanel();
         }
 

@@ -134,8 +134,6 @@ public class MapGenerator extends JPanel
     private Integer size;
     
     private List<Tile> tiles;
-    private Boolean firstGeneration;
-  
 
 
     public MapGenerator(Integer playersNumber, Utility func)
@@ -163,7 +161,7 @@ public class MapGenerator extends JPanel
     	
     	// Variables dedicadas al empleo de la generacion procedural
     	// No tocar por usuario bajo ningun concepto
-    	this.firstGeneration = false;
+
     	
     	
     	this.tiles = new ArrayList<Tile>();
@@ -215,9 +213,6 @@ public class MapGenerator extends JPanel
         }
 		generateSpecialTiles();
 		
-
-		this.firstGeneration = true;
-
     }
    
     
@@ -247,6 +242,7 @@ public class MapGenerator extends JPanel
     			if (generatedTile.getTileType().equals(TileType.TILE_SPAWN) && !generatedTile.getOcupado())
         		{
         			generatedTile.setTileObject(player);
+					player.setUbicacionPersonaje(generatedTile);
         		}
     		}
     	}
@@ -386,9 +382,6 @@ public class MapGenerator extends JPanel
 		MapGenerator.tileCounter = tileCounter;
 	}
 
-	public Boolean getFirstGeneration() {
-		return firstGeneration;
-	}
 
 	public void setTiles(List<Tile> tiles) {
 		this.tiles = tiles;
