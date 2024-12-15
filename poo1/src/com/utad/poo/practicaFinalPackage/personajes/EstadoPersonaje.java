@@ -4,5 +4,6 @@ public enum EstadoPersonaje {
     NADA,
     ATACANDO,
     DEFENDIENDO,
-    RETIRANDOSE
+    RETIRANDOSE,
+    MOVIENDOSE
 }
