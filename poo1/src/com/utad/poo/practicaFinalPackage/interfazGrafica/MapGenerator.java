@@ -135,6 +135,9 @@ public class MapGenerator extends JPanel
     
     private List<Tile> tiles;
 
+	// pal turno
+	private List<Personaje> bandidosGenerados;
+
 
     public MapGenerator(Integer playersNumber, Utility func)
     {
@@ -165,6 +168,7 @@ public class MapGenerator extends JPanel
     	
     	
     	this.tiles = new ArrayList<Tile>();
+		this.bandidosGenerados = new ArrayList<Personaje>();
     	
     }
     
@@ -292,8 +296,11 @@ public class MapGenerator extends JPanel
 		{
 			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
 			
+			Personaje bandit = banditGenerator.createRandomBandit();
+
 			this.tiles.get(random).setTileType(TileType.TILE_SPAWN_AI);
-			this.tiles.get(random).setTileObject(banditGenerator.createRandomBandit());
+			this.tiles.get(random).setTileObject(bandit);
+			this.bandidosGenerados.add(bandit);
 		}
     }
     
@@ -391,4 +398,9 @@ public class MapGenerator extends JPanel
 	        return this.tiles;
 	    }
     
+	public List<Personaje> getBandidos()
+	{
+		return this.bandidosGenerados;
+	}
+
 }
