@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 public class MapController {
     private MapGenerator mapGenerator;
     private List<TileEventListener> tileEventListeners;
+    private Tile selectedTile; // Variable to store the selected Tile
 
     public MapController(MapGenerator mapGenerator) {
         this.mapGenerator = mapGenerator;
@@ -21,13 +22,15 @@ public class MapController {
     }
     
     private void initializeListeners() {
-        mapGenerator.addMouseListener(new MouseAdapter() 
-        {
+        mapGenerator.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                handleTileClick(e);
+                Tile tile = handleTileClick(e); // Capture the returned Tile
+                if (tile != null) {
+                    selectedTile = tile; // Update the variable with the returned Tile
+                    // You can add additional logic here if needed
+                }
             }
-          
         });
         
         mapGenerator.addMouseMotionListener(new MouseAdapter() {
@@ -73,6 +76,11 @@ public class MapController {
         if (anyTileHovered) {
             this.mapGenerator.repaint();
         }
+    }
+
+    // Optional: Getter for selectedTile
+    public Tile getSelectedTile() {
+        return selectedTile;
     }
 
 }
