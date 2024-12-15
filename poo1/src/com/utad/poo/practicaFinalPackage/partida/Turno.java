@@ -22,12 +22,30 @@ package com.utad.poo.practicaFinalPackage.partida;
 import com.utad.poo.practicaFinalPackage.personajes.EstadoPersonaje;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 
+import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
+import com.utad.poo.practicaFinalPackage.items.Item;
+import com.utad.poo.practicaFinalPackage.items.Trampa;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
+
+
+// if (personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
+//     mensaje = personaje.getNombre() + " se ha defendido de " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
+// } else {
+//     mensaje = personaje.getNombre() + " se ha defendido de una casilla en la que no había nadie 【・_・?】";
+// }
+
+
 
 public class Turno {
 
     private List<Personaje> personajes;
+
+    private static Integer turnoActual = 0;
 
     private List<Personaje> enemigosVivos;
 
@@ -37,29 +55,55 @@ public class Turno {
     }
 
     public void iniciarTurno() {
+
+        CreateLogs.addLog("|------------- TURNO " + turnoActual + " -------------|");
+
         ejecutarFaseAcciones();
         ejecutarFaseAtaques();
         ejecutarFaseMovimientos();
         finalizarTurno();
+
+        turnoActual++;
+
+        CreateLogs.addLog("|----------------------------------|");
     }
 
     private void ejecutarFaseAcciones() {
         for (Personaje personaje : personajes) {
+            String mensaje = null;
             if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
                 if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO || personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {
                     personaje.defensa((Personaje) personaje.getTargetTile().getObjectoOcupado());
+                    mensaje = personaje.getNombre() + " se ha defendido de " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
+
                 }
+            } else if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO) {
+                mensaje = personaje.getNombre() + " se ha defendido de una casilla en la que no había nadie 【・_・?】";
+            } else if (personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {
+                mensaje = personaje.getNombre() + " se ha evitado el ataque (retirada) de una casilla en la que no había nadie 【・_・?】";
+            }
+
+            if ( mensaje != null) {
+                CreateLogs.addLog(mensaje);
             }
         }
     }
 
     private void ejecutarFaseAtaques() {
         for (Personaje personaje : personajes) {
-            if (personaje.getTargetTile().getOcupado()
-                    && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
+            String mensaje = null;
+            if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
                 if (personaje.getEstado() == EstadoPersonaje.ATACANDO) {
                     personaje.atacar((Personaje) personaje.getTargetTile().getObjectoOcupado());
+                    mensaje = personaje.getNombre() + " ha atacado a " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
+
                 }
+            } else if (personaje.getEstado() == EstadoPersonaje.ATACANDO) {
+                mensaje = personaje.getNombre() + " ha atacado a una casilla en la que no había nadie 【・_・?】";
+            }
+
+            if ( mensaje != null) {
+                CreateLogs.addLog(mensaje);
             }
 
         }
@@ -70,17 +114,62 @@ public class Turno {
             // Lógica para mover personajes
             // Restricción: No pueden atacar o defender en esta fase
 
-            if (personaje.getUbicacionPersonaje().isTrap())
-            {
-                personaje.getVida(); // hay que cambiar la vida por la trampa
-                personaje.getUbicacionPersonaje().explodeTrap();
+            String mensaje = null;
+            String mensajeItem = null;
+
+            if (personaje.getEstado() == EstadoPersonaje.MOVIENDOSE) {
+
+                // TODO: si hay una trampa se ha de añadir a una lista (efectos) del personaje,
+                // aplicar el metodo usar del item
+                // if (personaje.getUbicacionPersonaje().isTrap()) {
+                // personaje.getVida(); // hay que cambiar la vida por la trampa
+                // personaje.getUbicacionPersonaje().explodeTrap();
+                // }
+
+                if (personaje.getTargetTile().getObjectoOcupado() instanceof Item) {
+                    if (personaje.getTargetTile().getObjectoOcupado() instanceof Trampa) {
+                        // Añadimos a la lista de trampas afectando al personaje
+                        personaje.getEfectos().add((Item) personaje.getTargetTile().getObjectoOcupado());
+                    } else {
+                        // Comprobramos que no tiene mas de 5 items
+                        if (personaje.getItems().size() < 5) {
+                            personaje.getItems().add((Item) personaje.getTargetTile().getObjectoOcupado());
+                            // Eliminamos el item de la casilla
+                            personaje.getTargetTile().removeTileObject();
+                            mensajeItem = personaje.getNombre() + " ha recogido el item de la casilla "
+                                    + personaje.getTargetTile().getTileId();
+                        } else {
+                            mensajeItem = personaje.getNombre() + " no ha podido recoger el item de la casilla "
+                                    + personaje.getTargetTile().getTileId() + " porque su inventario está lleno";
+                            JOptionPane.showMessageDialog(null, "No puedes recoger más de 5 items", "Inventario lleno",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                }
+
+                    // Comprobar que nadie se ha movido a la casilla ya
+                    if (!(personaje.getTargetTile().getObjectoOcupado() instanceof Personaje)) {
+                        personaje.getUbicacionPersonaje().removeTileObject();
+                        personaje.setUbicacionPersonaje(personaje.getTargetTile());
+                        personaje.getTargetTile().setTileObject(personaje);
+                        mensaje = personaje.getNombre() + " se ha movido a la casilla "
+                                + personaje.getTargetTile().getTileId();
+                    } else {
+                        mensaje = personaje.getNombre() + " no se ha podido mover a la casilla "
+                                + personaje.getTargetTile().getTileId() + " porque "
+                                + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre()
+                                + " ha llegado antes : ' (";
+                    }
+                }
+            
+
+            if (mensaje != null) {
+                CreateLogs.addLog(mensaje);
             }
 
-            personaje.getUbicacionPersonaje().removeTileObject();
-            personaje.setUbicacionPersonaje(personaje.getTargetTile());
-            personaje.getTargetTile().setTileObject(personaje);
-
-
+            if (mensajeItem != null) {
+                CreateLogs.addLog(mensajeItem);
+            }
         }
     }
 
@@ -90,14 +179,14 @@ public class Turno {
             personaje.setTargetTile(null);
         }
 
-        for (int i = 1; i < personajes.size(); i++) { // Empezar desde 1 para no contar al primero que es el jugador
-            Personaje personaje = personajes.get(i);
-            if (personaje.estaVivo()) {
-            enemigosVivos.add(personaje);
-            } else {
-            personaje.getUbicacionPersonaje().removeTileObject();
+        for (Personaje personaje : personajes) {
+            if (personaje.estaVivo() && personaje.getIsAI()) {
+                enemigosVivos.add(personaje);
+            } else if (!personaje.estaVivo()) {
+                personaje.getUbicacionPersonaje().removeTileObject();
             }
         }
+
         // Reiniciar modificadores y limpiar inventario de cada personaje
         for (Personaje personaje : personajes) {
             personaje.reiniciarModificadores(); // Reiniciar modificadores e items usados

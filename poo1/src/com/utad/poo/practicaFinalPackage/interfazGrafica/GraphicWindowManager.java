@@ -137,7 +137,7 @@ public class GraphicWindowManager {
 
         /// *** PANEL DE ESTADISTICAS *** ///
         statsPersonaje = new JPanel(new GridLayout(3, 1));
-        
+
         JPanel playerStats = new JPanel(new GridLayout(1, 4));
         stats.add(new JButton("Vida: " + jugador.getVida() + " puntos"));
         stats.add(new JButton("Ataque: " + jugador.getAtaque() + "%"));
@@ -148,20 +148,18 @@ public class GraphicWindowManager {
             playerStats.add(stat);
         }
 
-        
         // Stats que no cambian
         JPanel statsArma = new JPanel(new GridLayout(1, 3));
         statsArma.add(new JButton("Arma: " + jugador.getArma().getNombre()));
         statsArma.add(new JButton("Daño-Precision: " + jugador.getArma().getDanio() + "-"
-        + jugador.getArma().getPrecision()));
+                + jugador.getArma().getPrecision()));
         statsArma.add(new JButton("Modificador a la habilidad especial: " + jugador.getArma().getSpecialEffect()));
-        
+
         JPanel statsEscudo = new JPanel(new GridLayout(1, 2));
         statsEscudo.add(new JButton("Escudo: " + jugador.getEscudo().getNombre()));
         statsEscudo.add(new JButton("Defensa-Modificador Retirada: " + jugador.getEscudo().getDefensa() + "-"
-        + jugador.getEscudo().getProbabilidadEscape()));
-        
-        
+                + jugador.getEscudo().getProbabilidadEscape()));
+
         statsPersonaje.add(playerStats);
         statsPersonaje.add(statsArma);
         statsPersonaje.add(statsEscudo);
@@ -207,7 +205,7 @@ public class GraphicWindowManager {
     }
 
     private void initializeFrame(JFrame frame) {
-        frame.setSize(1080, 900);
+        frame.setSize(1080, 750);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -270,7 +268,8 @@ public class GraphicWindowManager {
         public void actionPerformed(ActionEvent e) {
 
             if (jugador.getEstado() != EstadoPersonaje.NADA && jugador.getTargetTile() != null) {
-                if (jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile())) {
+                if (jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile())
+                        || (jugador.getEstado() != EstadoPersonaje.MOVIENDOSE && jugador.getUbicacionPersonaje().isLegalAction(GraphicWindowManager.this.mapController.getSelectedTile()))) {
                     try {
                         empezarTurnoEventListener.onExecuteTurn();
                     } catch (Exception ex) {
@@ -286,10 +285,8 @@ public class GraphicWindowManager {
                 JOptionPane.showMessageDialog(null, "Selecciona un objetivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            
         }
 
-        
     }
 
     class MenuListener implements ActionListener {

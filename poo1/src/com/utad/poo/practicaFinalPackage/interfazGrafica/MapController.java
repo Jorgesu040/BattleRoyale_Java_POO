@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 import com.utad.poo.practicaFinalPackage.partida.TileClickListener;
 
