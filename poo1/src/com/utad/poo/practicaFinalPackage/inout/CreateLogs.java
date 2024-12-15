@@ -21,16 +21,20 @@ public class CreateLogs
     public static List<String> lineas = new ArrayList<String>();
     public static Integer lineasCount = 0;
 
-    public static void addLog(String newLog)
+    public static void addLog(String newLog) 
     {
-        if (CreateLogs.lineasCount < CreateLogs.MAX_LINEAS)
+        if (CreateLogs.lineasCount >= CreateLogs.MAX_LINEAS) 
         {
-            CreateLogs.lineas.add(newLog);
-            CreateLogs.lineasCount++;
+            
+            CreateLogs.lineas.remove(0);
+            CreateLogs.lineasCount--;
         }
-      
+    
+        CreateLogs.lineas.add(newLog);
+        CreateLogs.lineasCount++;
     }
 
+    
     public static void printLogs()
     {
         try {
