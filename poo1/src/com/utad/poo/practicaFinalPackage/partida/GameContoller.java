@@ -75,6 +75,8 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
 
         while (gameController.jugador.estaVivo() && !gameController.gameArranger.getEnemigos().isEmpty()) {
         }
+
+        System.out.println("Juego terminado");
     }
 
 

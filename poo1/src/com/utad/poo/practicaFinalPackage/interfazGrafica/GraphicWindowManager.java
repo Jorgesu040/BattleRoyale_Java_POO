@@ -138,15 +138,15 @@ public class GraphicWindowManager {
         /// *** PANEL DE ESTADISTICAS *** ///
         statsPersonaje = new JPanel(new GridLayout(2, 5));
 
-        stats.add(new JButton("Vida: " + jugador.getVida() + "puntos"));
+        stats.add(new JButton("Vida: " + jugador.getVida() + " puntos"));
         stats.add(new JButton("Ataque: " + jugador.getAtaque() + "%"));
         stats.add(new JButton("Defensa: " + jugador.getDefensa() + "%"));
         stats.add(new JButton("Habilidad Especial: " + jugador.getSpecialAbility()));
 
         // Stats que no cambian
         stats.add(new JButton("Arma: " + jugador.getArma().getNombre()));
-        stats.add(new JButton("Daño-Precision" + jugador.getArma().getDanio() + "-"
-                + jugador.getArma().getPrecision() + "-"));
+        stats.add(new JButton("Daño-Precision: " + jugador.getArma().getDanio() + "-"
+                + jugador.getArma().getPrecision()));
         stats.add(new JButton("Modificador a la habilidad especial: " + jugador.getArma().getSpecialEffect()));
 
         stats.add(new JButton("Escudo: " + jugador.getEscudo().getNombre()));
