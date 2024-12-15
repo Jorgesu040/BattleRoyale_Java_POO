@@ -303,16 +303,25 @@ public abstract class Personaje {
 
     // Método que reinicia los modificadores de los items del personaje
     public void reiniciarModificadores() {
-        for (Item item : this.efectos) {
-            item.revertir(this);
-            efectos.remove(item);
+        if (!this.efectos.isEmpty()) {
+            List<Item> itemsToRemove = new ArrayList<>();
+            for (Item item : this.efectos) {
+                item.revertir(this);
+                itemsToRemove.add(item);
+            }
+            this.efectos.removeAll(itemsToRemove);
         }
 
-        for (Item item : this.items) {
-            item.revertir(this);
-            items.remove(item);
+        if (!this.items.isEmpty()) {
+            List<Item> itemsToRemove = new ArrayList<>();
+            for (Item item : this.items) {
+                if (item.isHaSidoUsada()){
+                    item.revertir(this);
+                    itemsToRemove.add(item);
+                }
+            }
+            this.items.removeAll(itemsToRemove);
         }
-        
     }
 
     /* Métodos de inventario */
@@ -323,6 +332,11 @@ public abstract class Personaje {
         } else {
             System.out.println("No se pueden añadir más items al inventario de " + this.nombre);
         }
+    }
+
+    public void addEfecto(Item item) {
+        this.efectos.add(item);
+        System.out.println(this.nombre + " ha sido afectado por " + item.getNombre());
     }
     
     // Metodo que reinicie el estado del personaje al final de un turno
@@ -397,18 +411,45 @@ public abstract class Personaje {
         return items;
     }
 
+    public List<Item> getEfectos() {
+        return efectos;
+    }
+
+    public void setEfectos(List<Item> efectos) {
+        this.efectos = efectos;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Integer getNumeroItems() {
+        return numeroItems;
+    }
+    
+    public Arma getArma() {
+        return this.armaPersonaje;
+    }
+
+    public Escudo getEscudo() {
+        return this.escudoPersonaje;
+    }
+
     public abstract String getSpecialAbility();
 
-
-    
-    /* Misceláneos */
     @Override
     public String toString() {
         return "Personaje [id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", ataque=" + ataque + ", defensa="
-                + defensa + ", probabilidadRetirada=" + probabilidadRetirada + ", estado=" + estado + ", armaPersonaje="
-                + armaPersonaje + ", escudoPersonaje=" + escudoPersonaje + ", items=" + items + ", efectos=" + efectos
-                + ", numeroItems=" + numeroItems + "]";
+                + defensa + ", probabilidadRetirada=" + probabilidadRetirada + ", estado=" + estado
+                + ", retiradaConExito=" + retiradaConExito + ", armaPersonaje=" + armaPersonaje + ", escudoPersonaje="
+                + escudoPersonaje + ", items=" + items + ", efectos=" + efectos + ", numeroItems=" + numeroItems
+                + ", imagen=" + imagen + ",\ntargetTile=" + (targetTile != null ? targetTile : "ninguno")
+                + "]";
     }
+
+    
+    /* Misceláneos */
+    
     
     
 

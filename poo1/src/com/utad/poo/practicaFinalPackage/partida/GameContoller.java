@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
-import com.utad.poo.practicaFinalPackage.personajes.EstadoPersonaje;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 
-public class GameContoller {
+public class GameContoller implements EmpezarTurnoEventListener, TileClickListener {
 
     private Turno turno;
     private Personaje jugador;
@@ -36,6 +35,9 @@ public class GameContoller {
         graphicWindowManager.updateInventoryPanel(jugador); // Actualizar la ventana gráfica
 
         gameArranger.setEnemigos(mapa.getBandidos());
+
+        graphicWindowManager.setGameEventListener(this);
+        graphicWindowManager.getMapController().setTileClickListener(this);
     }
 
     public void ejecutarTurno() {
@@ -55,14 +57,23 @@ public class GameContoller {
         graphicWindowManager.updateMapPanel(); // Actualizar el mapa
     }
 
+    @Override
+    public void onExecuteTurn() {
+        ejecutarTurno();
+    }
+
+    @Override
+    public void onTileClicked(Tile tile) {
+        // Asignar el tile seleccionado al personaje
+        jugador.setTargetTile(tile);
+        // Realizar acciones adicionales si es necesario
+    }
+
     public static void main(String[] args) {
         GameContoller gameController = new GameContoller(new MapGenerator(7, 1, 1, 3, 4, new Utility()));
         gameController.startGame();
 
         while (gameController.jugador.estaVivo() && !gameController.gameArranger.getEnemigos().isEmpty()) {
-            if (gameController.jugador.getEstado() != EstadoPersonaje.NADA && gameController.jugador.getTargetTile() != null) {
-                gameController.ejecutarTurno();
-            }
         }
     }
 

@@ -48,6 +48,11 @@ public abstract class ArmaGuerrero implements Arma {
 	}
 
 	@Override
+    public Double getSpecialEffect() {
+        return this.iraEspartanaContraataque;
+    }
+
+	@Override
 	public String toString() {
 		return "ArmaGuerrero [iraEspartanaContraataque=" + iraEspartanaContraataque + ", nombre=" + nombre + ", danio="
 				+ danio + ", precision=" + precision + "]";

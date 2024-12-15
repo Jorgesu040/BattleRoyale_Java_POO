@@ -48,6 +48,11 @@ public abstract class ArmaMago implements Arma {
 	}
 
 	@Override
+	public Double getSpecialEffect() {
+		return this.probabilidadCritico;
+	}
+
+	@Override
 	public String toString() {
 		return "ArmaMago [probabilidadCritico=" + probabilidadCritico + ", nombre=" + nombre + ", danio=" + danio
 				+ ", precision=" + precision + "]";

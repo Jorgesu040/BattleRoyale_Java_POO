@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.utad.poo.practicaFinalPackage.items.Item;
+import com.utad.poo.practicaFinalPackage.partida.EmpezarTurnoEventListener;
 import com.utad.poo.practicaFinalPackage.personajes.EstadoPersonaje;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 
@@ -32,13 +33,17 @@ public class GraphicWindowManager {
     private JPanel panelItemsPersonaje;
     private JPanel statsPersonaje;
     private JPanel centerPanel;
+    private JPanel bottomJPanel;
 
     private JButton attackButton;
     private JButton defendButton;
     private JButton retreatButton;
     private JButton moveButton;
+    private JButton startTurnoButton;
 
     private List<JButton> stats;
+
+    private EmpezarTurnoEventListener empezarTurnoEventListener;
 
     // Testing
     public static void main(String[] args) {
@@ -97,7 +102,7 @@ public class GraphicWindowManager {
         panelItemsPersonaje.removeAll();
         // Añade los items del jugador al panel westPanel
         if (items.isEmpty()) {
-            panelItemsPersonaje.add(new JButton("Tu personaje no tiene items para usar"));
+            panelItemsPersonaje.add(new JButton("Tu personaje no tiene items"));
         } else {
             for (Item item : items) {
                 panelItemsPersonaje.add((new ItemsButton(item, jugador, panelItemsPersonaje, this)));
@@ -130,12 +135,23 @@ public class GraphicWindowManager {
     private void setupLayout(JFrame frame, MapGenerator panel, int panelSize, Personaje jugador) {
         frame.setLayout(new BorderLayout());
 
-        statsPersonaje = new JPanel(new GridLayout(1, 5));
+        /// *** PANEL DE ESTADISTICAS *** ///
+        statsPersonaje = new JPanel(new GridLayout(2, 5));
 
-        stats.add(new JButton("Vida: " + jugador.getVida()));
-        stats.add(new JButton("Ataque: " + jugador.getAtaque()));
-        stats.add(new JButton("Defensa: " + jugador.getDefensa()));
+        stats.add(new JButton("Vida: " + jugador.getVida() + "puntos"));
+        stats.add(new JButton("Ataque: " + jugador.getAtaque() + "%"));
+        stats.add(new JButton("Defensa: " + jugador.getDefensa() + "%"));
         stats.add(new JButton("Habilidad Especial: " + jugador.getSpecialAbility()));
+
+        // Stats que no cambian
+        stats.add(new JButton("Arma: " + jugador.getArma().getNombre()));
+        stats.add(new JButton("Daño-Precision" + jugador.getArma().getDanio() + "-"
+                + jugador.getArma().getPrecision() + "-"));
+        stats.add(new JButton("Modificador a la habilidad especial: " + jugador.getArma().getSpecialEffect()));
+
+        stats.add(new JButton("Escudo: " + jugador.getEscudo().getNombre()));
+        stats.add(new JButton("Defensa-Modificador Retirada: " + jugador.getEscudo().getDefensa() + "-"
+                + jugador.getEscudo().getProbabilidadEscape()));
 
         for (JButton stat : stats) {
             statsPersonaje.add(stat);
@@ -143,6 +159,7 @@ public class GraphicWindowManager {
 
         frame.add(BorderLayout.NORTH, statsPersonaje);
 
+        /// *** PANEL DE ACCIONES *** ///
         accionesPersonaje = new JPanel(new GridLayout(4, 1));
         attackButton = new AttackButton(jugador);
         defendButton = new DefendButton(jugador);
@@ -158,9 +175,18 @@ public class GraphicWindowManager {
 
         frame.add(BorderLayout.EAST, accionesPersonaje);
 
+        /// *** PANEL DE ITEMS *** ///
         panelItemsPersonaje = new JPanel(new GridLayout(5, 1));
         frame.add(BorderLayout.WEST, panelItemsPersonaje);
 
+        /// *** PANEL DE INICIAR TURNO *** ///
+        bottomJPanel = new JPanel();
+        startTurnoButton = new StartTurnoButton();
+        startTurnoButton.addActionListener(new StartTurnoButtonListener(jugador));
+        bottomJPanel.add(startTurnoButton);
+        frame.add(BorderLayout.SOUTH, bottomJPanel);
+
+        /// *** PANEL DE MAPA *** ///
         centerPanel = new JPanel(new GridBagLayout());
         int width = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X);
         int height = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y);
@@ -177,11 +203,15 @@ public class GraphicWindowManager {
         frame.setVisible(true);
     }
 
+    public void setGameEventListener(EmpezarTurnoEventListener empezarTurnoEventListener) {
+        this.empezarTurnoEventListener = empezarTurnoEventListener;
+    }
+
     private void addCharacterOptionsListeners(Personaje jugador) {
         attackButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.ATACANDO, jugador));
         defendButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.DEFENDIENDO, jugador));
         retreatButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.RETIRANDOSE, jugador));
-        moveButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.NADA, jugador));
+        moveButton.addActionListener(new onClickDisableButtons(EstadoPersonaje.MOVIENDOSE, jugador));
     }
 
     class onClickDisableButtons implements ActionListener {
@@ -203,24 +233,54 @@ public class GraphicWindowManager {
 
             jugador.setEstado(estado);
 
+            // TODO: añadir un boton para iniciar las acciones
+            // TODO: opcional añadir una seccion de log (ventana emergente scrollable) para
+            // mostrar las acciones realizadas
 
-            
-            // TODO: añadir un boton para iniciar las acciones 
-            // TODO: opcional añadir una seccion de log (ventana emergente scrollable) para mostrar las acciones realizadas
-           
-            // TODO: isLegalMove debería ser llamado cuando se selecciona un tile, no un botón
-            if ( jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile()))
-            {
-                jugador.setTargetTile(GraphicWindowManager.this.mapController.getSelectedTile());
-            }
+            // TODO: isLegalMove debería ser llamado cuando se selecciona un tile, no un
+            // botón, si no crashea
 
             // jugador.getUbicacionPersonaje().removeTileObject();
-            //     jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());
-            //     GraphicWindowManager.this.mapController.getSelectedTile().setTileObject(jugador);
+            // jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());
+            // GraphicWindowManager.this.mapController.getSelectedTile().setTileObject(jugador);
 
             GraphicWindowManager.this.updateActionsPanel();
         }
 
+    }
+
+    class StartTurnoButtonListener implements ActionListener {
+
+        private Personaje jugador;
+
+        public StartTurnoButtonListener(Personaje jugador) {
+            this.jugador = jugador;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (jugador.getEstado() != EstadoPersonaje.NADA && jugador.getTargetTile() != null) {
+                if (jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile())) {
+                    try {
+                        empezarTurnoEventListener.onExecuteTurn();
+                    } catch (Exception ex) {
+                        System.err.println("Error al ejecutar el turno, no se ha podido ejecutar el turno");
+                        ex.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Movimiento no permitido", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (jugador.getEstado() == EstadoPersonaje.NADA) {
+                JOptionPane.showMessageDialog(null, "Selecciona una acción", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (jugador.getTargetTile() == null) {
+                JOptionPane.showMessageDialog(null, "Selecciona un objetivo", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            
+        }
+
+        
     }
 
     class MenuListener implements ActionListener {
@@ -252,7 +312,11 @@ public class GraphicWindowManager {
     }
 
     public void updateMapPanel() {
-        // TODO Auto-generated method stub 
+        this.panel.repaint();
         return;
+    }
+
+    public MapController getMapController() {
+        return mapController;
     }
 }

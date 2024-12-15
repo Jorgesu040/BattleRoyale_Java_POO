@@ -48,6 +48,11 @@ public abstract class ArmaArquero implements Arma {
 	}
 
 	@Override
+	public Double getSpecialEffect() {
+		return this.punteria;
+	}
+
+	@Override
 	public String toString() {
 		return "ArmaArquero [punteria=" + punteria + ", nombre=" + nombre + ", danio=" + danio + ", precision="
 				+ precision + "]";

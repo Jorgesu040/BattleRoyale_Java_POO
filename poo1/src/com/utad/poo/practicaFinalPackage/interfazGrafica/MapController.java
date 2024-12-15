@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+import com.utad.poo.practicaFinalPackage.partida.TileClickListener;
+
 public class MapController {
     private MapGenerator mapGenerator;
     private List<TileEventListener> tileEventListeners;
     private Tile selectedTile; // Variable to store the selected Tile
+    private TileClickListener tileClickListener;
 
     public MapController(MapGenerator mapGenerator) {
         this.mapGenerator = mapGenerator;
@@ -21,6 +24,10 @@ public class MapController {
         this.tileEventListeners.add(listener);
     }
     
+    public void setTileClickListener(TileClickListener listener) {
+        this.tileClickListener = listener;
+    }
+    
     private void initializeListeners() {
         mapGenerator.addMouseListener(new MouseAdapter() {
             @Override
@@ -28,7 +35,10 @@ public class MapController {
                 Tile tile = handleTileClick(e); // Capture the returned Tile
                 if (tile != null) {
                     selectedTile = tile; // Update the variable with the returned Tile
-                    // You can add additional logic here if needed
+                    // Notificar al listener que se ha hecho clic en un Tile
+                    if (tileClickListener != null) {
+                        tileClickListener.onTileClicked(tile);
+                    }
                 }
             }
         });

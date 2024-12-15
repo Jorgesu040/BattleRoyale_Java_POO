@@ -90,12 +90,12 @@ public class Turno {
             personaje.setTargetTile(null);
         }
 
-        for (Personaje personaje : personajes) {
+        for (int i = 1; i < personajes.size(); i++) { // Empezar desde 1 para no contar al primero que es el jugador
+            Personaje personaje = personajes.get(i);
             if (personaje.estaVivo()) {
-                enemigosVivos.add(personaje);
-
+            enemigosVivos.add(personaje);
             } else {
-                personaje.getUbicacionPersonaje().removeTileObject();
+            personaje.getUbicacionPersonaje().removeTileObject();
             }
         }
         // Reiniciar modificadores y limpiar inventario de cada personaje
