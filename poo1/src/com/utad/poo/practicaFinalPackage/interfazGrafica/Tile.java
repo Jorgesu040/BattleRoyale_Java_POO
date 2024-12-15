@@ -72,6 +72,17 @@ public class Tile
 		this.objectoOcupado = null;
 		this.ocupado = false;
 	}
+
+	public boolean isTrap()
+	{
+		return this.tileType.equals(TileType.TILE_TRAP_SET);
+	}
+
+	public void explodeTrap()
+	{
+		this.tileType = TileType.TILE_TRAP_EXPLODED;
+		removeTileObject();
+	}
 	
 	public void createHexagon()
 	{
@@ -163,42 +174,41 @@ public class Tile
 			case TILE_SPAWN:
 			{
 				// Interior
-				graficos.setColor(Color.BLACK);
+				graficos.setColor(new Color(26, 118, 35));
 				graficos.fillPolygon(hexagono);	
-
-				
+	
 			} break;
 		
-			case TILE_SPAWN_AI:
-			{
-				// Interior
-				graficos.setColor(Color.ORANGE);
-				graficos.fillPolygon(hexagono);
+			// case TILE_SPAWN_AI:
+			// {
+			// 	// Interior
+			// 	graficos.setColor(Color.ORANGE);
+			// 	graficos.fillPolygon(hexagono);
 
 				
-			} break;
+			// } break;
 			
-			case TILE_TRAP_SET:
-			{
-				// Interior
-				graficos.setColor(Color.RED);
-				graficos.fillPolygon(hexagono);
+			// case TILE_TRAP_SET:
+			// {
+			// 	// Interior
+			// 	graficos.setColor(Color.RED);
+			// 	graficos.fillPolygon(hexagono);
 
 				
-			} break;
+			// } break;
 			
-			case TILE_TRAP_IDLE:
-			{
-				// Interior
-				graficos.setColor(Color.GRAY);
-				graficos.fillPolygon(hexagono);
+			// case TILE_TRAP_IDLE:
+			// {
+			// 	// Interior
+			// 	graficos.setColor(Color.GRAY);
+			// 	graficos.fillPolygon(hexagono);
 
-			} break;
+			// } break;
 				
 			case TILE_TRAP_EXPLODED:
 			{
 				// Interior
-				graficos.setColor(Color.DARK_GRAY);
+				graficos.setColor(new Color(172, 103, 33));
 				graficos.fillPolygon(hexagono);
 
 			} break;

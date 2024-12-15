@@ -69,9 +69,18 @@ public class Turno {
         for (Personaje personaje : personajes) {
             // Lógica para mover personajes
             // Restricción: No pueden atacar o defender en esta fase
+
+            if (personaje.getUbicacionPersonaje().isTrap())
+            {
+                personaje.getVida(); // hay que cambiar la vida por la trampa
+                personaje.getUbicacionPersonaje().explodeTrap();
+            }
+
             personaje.getUbicacionPersonaje().removeTileObject();
             personaje.setUbicacionPersonaje(personaje.getTargetTile());
             personaje.getTargetTile().setTileObject(personaje);
+
+
         }
     }
 
