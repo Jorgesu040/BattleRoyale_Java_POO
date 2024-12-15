@@ -56,7 +56,7 @@ public class MapController {
         for (Tile tile : this.mapGenerator.getTiles()) {
             if (tile.contains(click.getPoint())) {
                 if (!tile.getTileType().equals(TileType.TILE_OBSTACLE)) {
-                    JOptionPane.showMessageDialog(mapGenerator, tile.toString());
+                    //JOptionPane.showMessageDialog(mapGenerator, tile.toString());
                 }
                 for (TileEventListener listener : this.tileEventListeners) {
                     listener.onTileClicked(tile);

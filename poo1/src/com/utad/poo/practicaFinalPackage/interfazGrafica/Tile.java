@@ -58,7 +58,10 @@ public class Tile
 	
 	public boolean isLegalMove(Tile tile)
 	{
-		return this.getTileDistance(tile) <= Tile.MAX_DISTANCE_LEGAL_MOVE && !tile.getTileType().equals(TileType.TILE_OBSTACLE) && !tile.getOcupado();
+		Boolean obstacle = tile.getTileType().equals(TileType.TILE_OBSTACLE);
+		Boolean ocupado = tile.getObjectoOcupado() instanceof Personaje;
+
+		return this.getTileDistance(tile) <= Tile.MAX_DISTANCE_LEGAL_MOVE && !obstacle && !ocupado;
 	}
 	
 	public void setTileObject(Object object)
@@ -139,8 +142,6 @@ public class Tile
 	
 	private void setTileColor(Graphics2D graficos, Polygon hexagono)
 	{
-
-		
 		switch(this.tileType)
 		{
 			case TILE_FREE_SPACE: 
@@ -161,15 +162,6 @@ public class Tile
 
 			} break;
 		
-			
-			case TILE_LOOT:
-			{
-				// Interior
-				graficos.setColor(Color.PINK);
-				graficos.fillPolygon(hexagono);
-
-				
-			} break;
 		
 			case TILE_SPAWN:
 			{
@@ -178,38 +170,17 @@ public class Tile
 				graficos.fillPolygon(hexagono);	
 	
 			} break;
-		
-			// case TILE_SPAWN_AI:
-			// {
-			// 	// Interior
-			// 	graficos.setColor(Color.ORANGE);
-			// 	graficos.fillPolygon(hexagono);
 
-				
-			// } break;
-			
-			case TILE_TRAP_SET:
-			{
-				// Interior
-				graficos.setColor(Color.RED);
-				graficos.fillPolygon(hexagono);
-
-				
-			} break;
-			
-			// case TILE_TRAP_IDLE:
-			// {
-			// 	// Interior
-			// 	graficos.setColor(Color.GRAY);
-			// 	graficos.fillPolygon(hexagono);
-
-			// } break;
-				
 			case TILE_TRAP_EXPLODED:
 			{
 				// Interior
-				graficos.setColor(new Color(172, 103, 33));
+				graficos.setColor(new Color(44, 131, 58));
 				graficos.fillPolygon(hexagono);
+
+				graficos.setStroke(new BasicStroke(3)); 
+				graficos.setColor(new Color(155, 53, 50));        
+				graficos.drawPolygon(hexagono);    
+				graficos.setStroke(new BasicStroke(3));
 
 			} break;
 			
@@ -221,6 +192,26 @@ public class Tile
 
 			}
 		
+		}
+
+		if (this.objectoOcupado instanceof Personaje)
+		{
+			Personaje player = (Personaje) this.objectoOcupado;
+
+			if (player.getIsAI())
+			{
+				graficos.setStroke(new BasicStroke(3)); 
+				graficos.setColor(new Color(172, 103, 33));        
+				graficos.drawPolygon(hexagono);    
+				graficos.setStroke(new BasicStroke(3));
+			}
+			else
+			{
+				graficos.setStroke(new BasicStroke(3)); 
+				graficos.setColor(new Color(155,50,120));          
+				graficos.drawPolygon(hexagono);    
+				graficos.setStroke(new BasicStroke(3)); 
+			}
 		}
 	}
 
