@@ -183,6 +183,7 @@ public class Turno {
             if (personaje.estaVivo() && personaje.getIsAI()) {
                 enemigosVivos.add(personaje);
             } else if (!personaje.estaVivo()) {
+                personaje.getUbicacionPersonaje().setSpecialImage(personaje.seleccionarImagen());
                 personaje.getUbicacionPersonaje().removeTileObject();
             }
         }

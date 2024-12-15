@@ -81,7 +81,7 @@ public class Mago extends Personaje {
     }
 
     @Override
-    protected BufferedImage seleccionarImagen() {
+    public BufferedImage seleccionarImagen() {
         BufferedImage imagen = null;
         String basePath = "";
 

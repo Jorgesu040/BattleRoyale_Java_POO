@@ -126,7 +126,7 @@ public abstract class Personaje {
         this.isAI = false;
     }
 
-    protected abstract BufferedImage seleccionarImagen();
+    public abstract BufferedImage seleccionarImagen();
 
     /* Métodos Opciones de combate */
 
