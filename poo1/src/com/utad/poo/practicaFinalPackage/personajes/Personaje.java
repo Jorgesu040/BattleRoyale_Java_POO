@@ -97,6 +97,7 @@ public abstract class Personaje {
 
     protected BufferedImage imagen;
     protected Tile ubicacion_personaje;
+    protected Tile targetTile;
 
 
     /* Constructor (Solo uno, los hijos se encargan de los Defaults) */
@@ -118,6 +119,7 @@ public abstract class Personaje {
 
         // TODO: Añadir su tile aqui o luego tras la instanciación?
         this.ubicacion_personaje = null;
+        this.targetTile = null;
     }
 
     protected abstract BufferedImage seleccionarImagen();
@@ -375,6 +377,14 @@ public abstract class Personaje {
 
     public void setUbicacionPersonaje(Tile ubicacion_personaje) {
         this.ubicacion_personaje = ubicacion_personaje;
+    }
+
+    public Tile getTargetTile() {
+        return targetTile;
+    }
+
+    public void setTargetTile(Tile targetTile) {
+        this.targetTile = targetTile;
     }
     
     public List<Item> getItems() {

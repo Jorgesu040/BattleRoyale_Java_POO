@@ -300,6 +300,7 @@ public class MapGenerator extends JPanel
 
 			this.tiles.get(random).setTileType(TileType.TILE_SPAWN_AI);
 			this.tiles.get(random).setTileObject(bandit);
+			bandit.setUbicacionPersonaje(this.tiles.get(random));
 			this.bandidosGenerados.add(bandit);
 		}
     }

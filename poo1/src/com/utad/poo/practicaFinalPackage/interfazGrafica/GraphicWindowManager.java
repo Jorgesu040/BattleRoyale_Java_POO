@@ -109,6 +109,10 @@ public class GraphicWindowManager {
     }
 
     public void updateActionsPanel() {
+        attackButton.setEnabled(true);
+        defendButton.setEnabled(true);
+        retreatButton.setEnabled(true);
+        moveButton.setEnabled(true);
         accionesPersonaje.revalidate();
         accionesPersonaje.updateUI();
     }
@@ -199,18 +203,17 @@ public class GraphicWindowManager {
 
             jugador.setEstado(estado);
 
-            // performAction(estado, tile)
 
-            
 
-           
-
+            // TODO: isLegalMove debería ser llamado cuando se selecciona un tile, no un botón
             if ( jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile()))
             {
-                jugador.getUbicacionPersonaje().removeTileObject();
-                jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());
-                GraphicWindowManager.this.mapController.getSelectedTile().setTileObject(jugador);;
+                jugador.setTargetTile(GraphicWindowManager.this.mapController.getSelectedTile());
             }
+
+            // jugador.getUbicacionPersonaje().removeTileObject();
+            //     jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());
+            //     GraphicWindowManager.this.mapController.getSelectedTile().setTileObject(jugador);
 
             GraphicWindowManager.this.updateActionsPanel();
         }
@@ -243,5 +246,10 @@ public class GraphicWindowManager {
 
         }
 
+    }
+
+    public void updateMapPanel() {
+        // TODO Auto-generated method stub 
+        return;
     }
 }

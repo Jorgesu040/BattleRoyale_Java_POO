@@ -1,6 +1,10 @@
 package com.utad.poo.practicaFinalPackage.partida;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
+import com.utad.poo.practicaFinalPackage.personajes.EstadoPersonaje;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 
 public class GameContoller {
@@ -36,19 +40,30 @@ public class GameContoller {
 
     public void ejecutarTurno() {
         // Iniciar turno
-        turno = new Turno(gameArranger.getPersonajes());
+        List<Personaje> allCharacters = new ArrayList<>(gameArranger.getPersonajes());
+        allCharacters.addAll(gameArranger.getEnemigos());
+        new AI(gameArranger.getEnemigos(), mapa).decideActions();
+        turno = new Turno(allCharacters);
         turno.iniciarTurno();
-        // Ejecutar acciones
-        turno.ejecutarAcciones();
-        // Mover personajes
-        turno.moverPersonajes();
 
-        graphicWindowManager.updateInventoryPanel(jugador); // Actualizar la ventana gráfica
+        // Actualizar los enemigos vivos
+        gameArranger.setEnemigos(turno.getEnemigosVivos());
+        // Actualizar la ventana gráfica
+        graphicWindowManager.updateInventoryPanel(jugador); // Actualizar la ventana inventario
+        graphicWindowManager.updateStatsPanel(this.jugador); // Actualizar la ventana de estadísticas
+        graphicWindowManager.updateActionsPanel(); // Actualizar la ventana de acciones
+        graphicWindowManager.updateMapPanel(); // Actualizar el mapa
     }
 
     public static void main(String[] args) {
         GameContoller gameController = new GameContoller(new MapGenerator(7, 1, 1, 3, 4, new Utility()));
         gameController.startGame();
+
+        while (gameController.jugador.estaVivo() && !gameController.gameArranger.getEnemigos().isEmpty()) {
+            if (gameController.jugador.getEstado() != EstadoPersonaje.NADA && gameController.jugador.getTargetTile() != null) {
+                gameController.ejecutarTurno();
+            }
+        }
     }
 
 
