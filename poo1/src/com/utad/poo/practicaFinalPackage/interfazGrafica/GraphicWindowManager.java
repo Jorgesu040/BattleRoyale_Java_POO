@@ -204,7 +204,7 @@ public class GraphicWindowManager {
             
 
            
-
+            // mover player
             if ( jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile()))
             {
                 jugador.getUbicacionPersonaje().removeTileObject();
