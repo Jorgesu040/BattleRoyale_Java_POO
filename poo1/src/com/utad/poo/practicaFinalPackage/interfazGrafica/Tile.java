@@ -27,8 +27,8 @@ public class Tile
 	private Object objectoOcupado; // el objeto que esta ocupando el tile
 	private Polygon hexagono;
 	private boolean isHovered;
-	private boolean containsDeath;
-	private BufferedImage deathImage;
+	private boolean containsSpecialImage;
+	private BufferedImage specialImage;
 
 
 	
@@ -41,8 +41,8 @@ public class Tile
 		this.objectoOcupado = objectoOcupado;
 		this.tileId = id;
 		this.isHovered = false;
-		this.containsDeath = false;
-		this.deathImage = null;
+		this.containsSpecialImage = false;
+		this.specialImage = null;
 	}
 	
 
@@ -141,9 +141,9 @@ public class Tile
 			drawImage(player.getImagen(), graficos);
 		}
 
-		if (this.containsDeath)
+		if (this.containsSpecialImage)
 		{
-			drawImage(this.deathImage, graficos);
+			drawImage(this.specialImage, graficos);
 		}
 	}
 
@@ -160,10 +160,10 @@ public class Tile
 	   }
 	}
 
-	public void setDeathImage(BufferedImage image)
+	public void setSpecialImage(BufferedImage image)
 	{
-		this.containsDeath = true;
-		this.deathImage = image;
+		this.containsSpecialImage = true;
+		this.specialImage = image;
 	}
 	
 	private void setTileColor(Graphics2D graficos, Polygon hexagono)
