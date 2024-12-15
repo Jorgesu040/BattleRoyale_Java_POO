@@ -205,7 +205,8 @@ public class GraphicWindowManager {
 
 
             
-
+            // TODO: añadir un boton para iniciar las acciones 
+            // TODO: opcional añadir una seccion de log (ventana emergente scrollable) para mostrar las acciones realizadas
            
             // TODO: isLegalMove debería ser llamado cuando se selecciona un tile, no un botón
             if ( jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile()))
