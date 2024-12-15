@@ -174,11 +174,11 @@ public class Tile
 			case TILE_TRAP_EXPLODED:
 			{
 				// Interior
-				graficos.setColor(new Color(44, 131, 58));
+				graficos.setColor(new Color(114, 68, 23));
 				graficos.fillPolygon(hexagono);
 
 				graficos.setStroke(new BasicStroke(3)); 
-				graficos.setColor(new Color(155, 53, 50));        
+				graficos.setColor(new Color(114, 40, 40));        
 				graficos.drawPolygon(hexagono);    
 				graficos.setStroke(new BasicStroke(3));
 
