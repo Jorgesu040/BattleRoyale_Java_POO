@@ -204,8 +204,10 @@ public class GraphicWindowManager {
             jugador.setEstado(estado);
 
 
+            
 
-            // TODO: isLegalMove debería ser llamado cuando se selecciona un tile, no un botón
+           
+
             if ( jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile()))
             {
                 jugador.setTargetTile(GraphicWindowManager.this.mapController.getSelectedTile());
