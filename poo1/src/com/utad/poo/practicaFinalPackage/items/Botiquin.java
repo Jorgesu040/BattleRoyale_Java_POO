@@ -7,7 +7,7 @@ public class Botiquin extends Item {
     public static final String NOMBRE = "Botiquín";
     protected Integer valorEfecto = 50;
 
-    public Botiquin(Double valorEfecto) {
+    public Botiquin() {
         super(Botiquin.NOMBRE);
     }
     
