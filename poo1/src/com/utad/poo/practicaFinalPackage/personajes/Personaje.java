@@ -91,8 +91,8 @@ public abstract class Personaje {
     protected Arma armaPersonaje;
     protected Escudo escudoPersonaje;
 
-    protected List<Item> items;
-    protected List<Item> efectos;
+    protected List<Item> items; // Pociones, vendas, botiquines, etc.
+    protected List<Item> efectos; // Efectos negativos de las trampas, etc.
     protected Integer numeroItems;
 
     protected BufferedImage imagen;
@@ -307,6 +307,12 @@ public abstract class Personaje {
             item.revertir(this);
             efectos.remove(item);
         }
+
+        for (Item item : this.items) {
+            item.revertir(this);
+            items.remove(item);
+        }
+        
     }
 
     /* Métodos de inventario */
