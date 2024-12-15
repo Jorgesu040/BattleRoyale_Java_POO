@@ -24,7 +24,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.utad.poo.practicaFinalPackage.herramientas.*;
+import com.utad.poo.practicaFinalPackage.herramientas.Arma;
+import com.utad.poo.practicaFinalPackage.herramientas.Escudo;
 
 public class Arquero extends Personaje {
 

@@ -72,11 +72,15 @@ public class Turno {
         for (Personaje personaje : personajes) {
             String mensaje = null;
             if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
-                if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO || personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {
+               
+                if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO) {
                     personaje.defensa((Personaje) personaje.getTargetTile().getObjectoOcupado());
                     mensaje = personaje.getNombre() + " se ha defendido de " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
-
+                } else if (personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {
+                    personaje.retirada((Personaje) personaje.getTargetTile().getObjectoOcupado());
+                    mensaje = personaje.getNombre() + " va a intentar evitar el ataque de " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
                 }
+            
             } else if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO) {
                 mensaje = personaje.getNombre() + " se ha defendido de una casilla en la que no había nadie 【・_・?】";
             } else if (personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {

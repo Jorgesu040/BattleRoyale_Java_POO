@@ -49,6 +49,9 @@ public class AI {
             if (!enemyTiles.isEmpty()) {
                 Tile targetTile = enemyTiles.get(random.nextInt(enemyTiles.size()));
                 int action = random.nextInt(3); // 0: atacar, 1: defender, 2: retirarse
+                
+                // TODO: eliminar esta linea después de probar
+                // action = 2; // Testing 
                 personaje.setTargetTile(targetTile);
                 switch (action) {
                     case 0:

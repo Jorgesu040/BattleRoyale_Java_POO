@@ -56,6 +56,7 @@ import java.util.List;
 
 import com.utad.poo.practicaFinalPackage.herramientas.Arma;
 import com.utad.poo.practicaFinalPackage.herramientas.Escudo;
+import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
 import com.utad.poo.practicaFinalPackage.interfazGrafica.Tile;
 import com.utad.poo.practicaFinalPackage.items.*;
 import java.awt.image.BufferedImage;
@@ -67,7 +68,7 @@ public abstract class Personaje {
     public static final Integer VIDA_DEFAULT = 100; // Puntos de vida
     public static final Double ATAQUE_DEFAULT = 0.0; // %
     public static final Double DEFENSA_DEFAULT = 0.0; // %
-    public static final Double PROBABILIDAD_RETIRADA_DEFAULT = 10.0; // %
+    public static final Double PROBABILIDAD_RETIRADA_DEFAULT = 20.0; // %
     public static final Double PROBABILIDAD_CONTRAATAQUE_DEFAULT = 10.0; // %
     public static final Double DANIO_CONTRAATAQUE_DEFAULT = 50.0; // %
 
@@ -216,25 +217,28 @@ public abstract class Personaje {
     public void recibirAtaque(Double ataque) {
         if (estado == EstadoPersonaje.DEFENDIENDO) {
             ataque = ataque * (1 - this.escudoPersonaje.getDefensa()/100.0); // Reducir el daño recibido
-            System.out.println("El personaje se ha defendido y ha reducido el daño recibido");
+            CreateLogs.addLog(this.nombre + " se ha defendido y ha reducido el daño recibido");
         }
 
         if (estado == EstadoPersonaje.RETIRANDOSE && this.retiradaConExito) {
             ataque = 0.0; // No recibe daño
-            System.out.println("El personaje se ha retirado y ha evitado el ataque");
-        }
+            CreateLogs.addLog(this.nombre + " ha evitado el ataque con éxito");}
 
         this.vida -= (int) (ataque - (ataque * this.defensa/100.0));
 
-        System.out.println(this.nombre + " ha recibido un ataque de " + ataque + " pero gracias a su defensa ha recibido " + (int) (ataque - (ataque * this.defensa/100.0)) + " de daño"); 
+        CreateLogs.addLog(this.nombre + " ha recibido un ataque de " + ataque.intValue() + " puntos pero gracias a su defensa ha recibido " + (int) (ataque - (ataque * this.defensa/100.0)) + " de daño"); 
 
         if (this.vida < 0) {
             this.vida = 0;
+            // TODO: Decir quien ha derrotado al personaje
+            CreateLogs.addLog(this.nombre + " ha sido derrotado en combate");
+            
         }
 
     }
 
     /* Métodos de lootear enemigo */
+    // TODO: yo sinceramente no lo implementaría
     // Permite al personaje obtener los objetos del enemigo derrotado
     public void lootearEnemigo(Personaje oponente) {
         // ** Código agregado por el asistente **
@@ -242,7 +246,7 @@ public abstract class Personaje {
             System.out.println(this.nombre + " ha derrotado a " + oponente.nombre + " y lootea sus objetos");
 
             // TODO: Menu con los items del enemigo
-
+            
             // TODO: Dar opcion de cambiar de escudo
         }
     }
