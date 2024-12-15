@@ -123,10 +123,10 @@ public class GraphicWindowManager {
     }
 
     public void updateStatsPanel(Personaje jugador) {
-        stats.get(0).setText("Vida: " + jugador.getVida());
-        stats.get(1).setText("Ataque: " + jugador.getAtaque());
-        stats.get(2).setText("Defensa: " + jugador.getDefensa());
-        stats.get(3).setText("Habilidad Especial: " + jugador.getSpecialAbility());
+        stats.get(0).setText("Vida: " + jugador.getVida() + " puntos");
+        stats.get(1).setText("Ataque: " + jugador.getAtaque() + "%");
+        stats.get(2).setText("Defensa: " + jugador.getDefensa() + "%");
+        stats.get(3).setText("Habilidad Especial: " + jugador.getSpecialAbility() + "%");
 
         statsPersonaje.revalidate();
         statsPersonaje.updateUI();
@@ -136,26 +136,35 @@ public class GraphicWindowManager {
         frame.setLayout(new BorderLayout());
 
         /// *** PANEL DE ESTADISTICAS *** ///
-        statsPersonaje = new JPanel(new GridLayout(2, 5));
-
+        statsPersonaje = new JPanel(new GridLayout(3, 1));
+        
+        JPanel playerStats = new JPanel(new GridLayout(1, 4));
         stats.add(new JButton("Vida: " + jugador.getVida() + " puntos"));
         stats.add(new JButton("Ataque: " + jugador.getAtaque() + "%"));
         stats.add(new JButton("Defensa: " + jugador.getDefensa() + "%"));
         stats.add(new JButton("Habilidad Especial: " + jugador.getSpecialAbility()));
 
-        // Stats que no cambian
-        stats.add(new JButton("Arma: " + jugador.getArma().getNombre()));
-        stats.add(new JButton("Daño-Precision: " + jugador.getArma().getDanio() + "-"
-                + jugador.getArma().getPrecision()));
-        stats.add(new JButton("Modificador a la habilidad especial: " + jugador.getArma().getSpecialEffect()));
-
-        stats.add(new JButton("Escudo: " + jugador.getEscudo().getNombre()));
-        stats.add(new JButton("Defensa-Modificador Retirada: " + jugador.getEscudo().getDefensa() + "-"
-                + jugador.getEscudo().getProbabilidadEscape()));
-
         for (JButton stat : stats) {
-            statsPersonaje.add(stat);
+            playerStats.add(stat);
         }
+
+        
+        // Stats que no cambian
+        JPanel statsArma = new JPanel(new GridLayout(1, 3));
+        statsArma.add(new JButton("Arma: " + jugador.getArma().getNombre()));
+        statsArma.add(new JButton("Daño-Precision: " + jugador.getArma().getDanio() + "-"
+        + jugador.getArma().getPrecision()));
+        statsArma.add(new JButton("Modificador a la habilidad especial: " + jugador.getArma().getSpecialEffect()));
+        
+        JPanel statsEscudo = new JPanel(new GridLayout(1, 2));
+        statsEscudo.add(new JButton("Escudo: " + jugador.getEscudo().getNombre()));
+        statsEscudo.add(new JButton("Defensa-Modificador Retirada: " + jugador.getEscudo().getDefensa() + "-"
+        + jugador.getEscudo().getProbabilidadEscape()));
+        
+        
+        statsPersonaje.add(playerStats);
+        statsPersonaje.add(statsArma);
+        statsPersonaje.add(statsEscudo);
 
         frame.add(BorderLayout.NORTH, statsPersonaje);
 
