@@ -58,7 +58,7 @@ public class Tile
 	
 	public boolean isLegalMove(Tile tile)
 	{
-		return this.getTileDistance(tile) <= Tile.MAX_DISTANCE_LEGAL_MOVE && !tile.getTileType().equals(TileType.TILE_OBSTACLE);
+		return this.getTileDistance(tile) <= Tile.MAX_DISTANCE_LEGAL_MOVE && !tile.getTileType().equals(TileType.TILE_OBSTACLE) && !tile.getOcupado();
 	}
 	
 	public void setTileObject(Object object)
