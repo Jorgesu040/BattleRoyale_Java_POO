@@ -30,6 +30,8 @@ public class GameContoller {
         mapa.setPlayers(gameArranger.getPersonajes());
         // Configurar la ventana gráfica
         graphicWindowManager.updateInventoryPanel(jugador); // Actualizar la ventana gráfica
+
+        gameArranger.setEnemigos(mapa.getBandidos());
     }
 
     public void ejecutarTurno() {

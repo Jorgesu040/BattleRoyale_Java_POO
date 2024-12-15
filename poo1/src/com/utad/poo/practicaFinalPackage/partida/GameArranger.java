@@ -40,5 +40,13 @@ public class GameArranger {
         this.personajes = personajes;
     }
 
+    public List<Personaje> getEnemigos() {
+        return this.enemigos;
+    }
+
+    public void setEnemigos(List<Personaje> enemigos) {
+        this.enemigos = enemigos;
+    }
+
     
 }
