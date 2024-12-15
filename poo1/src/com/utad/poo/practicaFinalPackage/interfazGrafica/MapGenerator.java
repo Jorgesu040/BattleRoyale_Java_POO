@@ -177,13 +177,7 @@ public class MapGenerator extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        // Solo permite la generacion del mapa una vez en toda la ejecucion
-        if (this.firstGeneration.equals(false))
-        {
-        	   generateMap(g2d);
-        	   generateSpecialTiles();
-        	   this.firstGeneration = true;
-        }
+        
      
         renderMap(g2d);
        
@@ -201,7 +195,7 @@ public class MapGenerator extends JPanel
     }
 
   
-    private void generateMap(Graphics2D g2d)
+    public void generateMap()
     {
     	Double ang30 = Math.toRadians(30);
         Double xOff = Math.cos(ang30) * (Tile.HEXAGON_RADIOUS + MapGenerator.DEFAULT_SPACING_X);
@@ -216,13 +210,18 @@ public class MapGenerator extends JPanel
             {
                 Integer x = (int) (this.centerX + xOff * (col * 2 + 1 - cols));
                 Integer y = (int) (this.centerY + yOff * (row - half) * 3);
-            	generateRandomTile(x, y, g2d); 
+            	generateRandomTile(x, y); 
             }
         }
+		generateSpecialTiles();
+		
+
+		this.firstGeneration = true;
+
     }
    
     
-    private void generateRandomTile(Integer posX, Integer posY, Graphics2D g2d) 
+    private void generateRandomTile(Integer posX, Integer posY ) 
     {
         Tile newTile = null;
 
@@ -237,7 +236,7 @@ public class MapGenerator extends JPanel
     }
     
    
-    public void setPlayers(List<Personaje> players)
+    public synchronized void setPlayers(List<Personaje> players)
     {
     	for (Integer i = 0; i < this.playerAmount; i++)
     	{

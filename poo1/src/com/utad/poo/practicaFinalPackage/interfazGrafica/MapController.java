@@ -39,7 +39,7 @@ public class MapController {
 
     }
     
-    private void handleTileClick(MouseEvent click) {
+    private Tile handleTileClick(MouseEvent click) {
         for (Tile tile : this.mapGenerator.getTiles()) {
             if (tile.contains(click.getPoint())) {
                 if (!tile.getTileType().equals(TileType.TILE_OBSTACLE)) {
@@ -48,9 +48,10 @@ public class MapController {
                 for (TileEventListener listener : this.tileEventListeners) {
                     listener.onTileClicked(tile);
                 }
-                break;
+                return tile; // Return the clicked Tile
             }
         }
+        return null; // No tile clicked
     }
     
     private void handleTileHover(MouseEvent e) {

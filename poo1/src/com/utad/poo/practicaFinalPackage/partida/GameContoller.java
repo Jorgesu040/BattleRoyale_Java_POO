@@ -18,13 +18,14 @@ public class GameContoller {
         this.jugador = null;
     }
 
-    public void startGame() {
+    public synchronized void startGame() {
         // Inicializar elementos del juego
         gameArranger.startGame();
         // Obtener personajes
         jugador = gameArranger.getPersonajes().get(0);
         graphicWindowManager.setupGame(jugador);
         
+        mapa.generateMap();
         // Poner al personaje en el mapa
         mapa.setPlayers(gameArranger.getPersonajes());
         // Configurar la ventana gráfica
