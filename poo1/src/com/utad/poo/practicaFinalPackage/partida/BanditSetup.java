@@ -28,6 +28,6 @@ public class BanditSetup extends CharacterSetup {
 
         String shield = shields[random.nextInt(shields.length)];
 
-        return createCharacter(characterType, weapon, shield);
+        return createCharacter(characterType, weapon, shield, true);
     }
 }

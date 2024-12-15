@@ -18,7 +18,7 @@ public class UserSetup extends CharacterSetup {
                     if (weapon != null) {
                         String shield = gui.selectShield();
                         if (shield != null) {
-                            personaje = createCharacter(characterType, weapon, shield);
+                            personaje = createCharacter(characterType, weapon, shield, false);
                             gui.showCharacterCreated(characterType, weapon, shield);
                         } else {
                             gui.showError("Error en la selección de escudo.");

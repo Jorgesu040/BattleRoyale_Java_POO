@@ -99,6 +99,8 @@ public abstract class Personaje {
     protected Tile ubicacion_personaje;
     protected Tile targetTile;
 
+    protected Boolean isAI;
+
 
     /* Constructor (Solo uno, los hijos se encargan de los Defaults) */
     public Personaje(String nombre, Double ataque, Double defensa, Integer numeroItems, Arma arma, Escudo escudo) {
@@ -120,6 +122,8 @@ public abstract class Personaje {
         // TODO: Añadir su tile aqui o luego tras la instanciación?
         this.ubicacion_personaje = null;
         this.targetTile = null;
+
+        this.isAI = false;
     }
 
     protected abstract BufferedImage seleccionarImagen();
@@ -435,6 +439,14 @@ public abstract class Personaje {
         return this.escudoPersonaje;
     }
 
+    public Boolean getIsAI() {
+        return isAI;
+    }
+
+    public void setIsAI(Boolean isAI) {
+        this.isAI = isAI;
+    }
+    
     public abstract String getSpecialAbility();
 
     @Override
@@ -447,9 +459,7 @@ public abstract class Personaje {
                 + "]";
     }
 
-    
-    /* Misceláneos */
-    
+
     
     
 

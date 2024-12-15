@@ -82,7 +82,7 @@ public abstract class CharacterSetup {
         return escudoPersonaje;
     }
 
-    protected Personaje createCharacter(String characterType, String weapon, String shield) {
+    protected Personaje createCharacter(String characterType, String weapon, String shield, Boolean isAI) {
         Arma armaPersonaje = stringToWeapon(characterType, weapon);
         Escudo escudoPersonaje = stringToShield(shield);
         Personaje personaje;
@@ -100,6 +100,11 @@ public abstract class CharacterSetup {
                 personaje = null;
                 break;
         }
+
+        if (isAI && personaje != null) {
+            personaje.setIsAI(isAI);
+        }
+
         return personaje;
     }
 }
