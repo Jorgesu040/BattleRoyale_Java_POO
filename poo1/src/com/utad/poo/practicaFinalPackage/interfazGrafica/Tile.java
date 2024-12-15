@@ -2,6 +2,8 @@ package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
 import com.utad.poo.practicaFinalPackage.personajes.*;
+import java.awt.image.BufferedImage;
+
 
 
 public class Tile 
@@ -25,6 +27,9 @@ public class Tile
 	private Object objectoOcupado; // el objeto que esta ocupando el tile
 	private Polygon hexagono;
 	private boolean isHovered;
+	private boolean containsDeath;
+	private BufferedImage deathImage;
+
 
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
@@ -36,7 +41,8 @@ public class Tile
 		this.objectoOcupado = objectoOcupado;
 		this.tileId = id;
 		this.isHovered = false;
-		
+		this.containsDeath = false;
+		this.deathImage = null;
 	}
 	
 
@@ -129,22 +135,35 @@ public class Tile
 	
 	private void setTileImage(Graphics2D graficos)
 	{
-		
 		if (this.ocupado && this.objectoOcupado instanceof Personaje)
 		{
 			Personaje player = (Personaje) this.objectoOcupado;
-			
-			 Integer imageX = this.posX - Tile.IMAGE_WIDTH / 2;
-		     Integer imageY = this.posY - Tile.IMAGE_HEIGHT / 2;
-			
-	        try {
-	        	graficos.drawImage(player.getImagen(), imageX, imageY, Tile.IMAGE_WIDTH, Tile.IMAGE_HEIGHT, null);
-			} catch (Exception e) {
-				System.out.println("Error with loading tile image");
-				e.printStackTrace();
-			}
-			
+			drawImage(player.getImagen(), graficos);
 		}
+
+		if (this.containsDeath)
+		{
+			drawImage(this.deathImage, graficos);
+		}
+	}
+
+	private void drawImage(BufferedImage image, Graphics2D graficos)
+	{
+		Integer imageX = this.posX - Tile.IMAGE_WIDTH / 2;
+		Integer imageY = this.posY - Tile.IMAGE_HEIGHT / 2;
+	   
+	   try {
+		   graficos.drawImage(image, imageX, imageY, Tile.IMAGE_WIDTH, Tile.IMAGE_HEIGHT, null);
+	   } catch (Exception e) {
+		   System.out.println("Error with loading tile image");
+		   e.printStackTrace();
+	   }
+	}
+
+	public void setDeathImage(BufferedImage image)
+	{
+		this.containsDeath = true;
+		this.deathImage = image;
 	}
 	
 	private void setTileColor(Graphics2D graficos, Polygon hexagono)
@@ -189,6 +208,19 @@ public class Tile
 				graficos.drawPolygon(hexagono);    
 				graficos.setStroke(new BasicStroke(3));
 
+			} break;
+
+			case TILE_TRAP_SET:
+			case TILE_LOOT:
+			{
+				// Interior
+				graficos.setColor(new Color(32, 108, 159));
+				graficos.fillPolygon(hexagono);
+
+				graficos.setStroke(new BasicStroke(3)); 
+				graficos.setColor(new Color(23, 77, 114));        
+				graficos.drawPolygon(hexagono);    
+				graficos.setStroke(new BasicStroke(3));
 			} break;
 			
 			default:  // Se trata como un TILE_FREE_SPACE
