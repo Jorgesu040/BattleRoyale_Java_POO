@@ -29,7 +29,7 @@ public class Tile
 	private boolean isHovered;
 	private boolean containsSpecialImage;
 	private BufferedImage specialImage;
-
+	private boolean targetTile;
 
 	
 	public Tile(TileType type, Integer posX, Integer posY, Boolean ocupado, Object objectoOcupado, Integer id)
@@ -43,6 +43,7 @@ public class Tile
 		this.isHovered = false;
 		this.containsSpecialImage = false;
 		this.specialImage = null;
+		this.targetTile = false;
 	}
 	
 
@@ -123,7 +124,7 @@ public class Tile
 		setTileColor(graficos, this.hexagono);	
 		setTileImage(graficos);
 		
-		
+		// Dibujos especiales
 		if (this.isHovered && !this.tileType.equals(TileType.TILE_OBSTACLE)) {
 	        // Agregar borde rojo más grueso para indicar hover
 	        graficos.setStroke(new BasicStroke(3)); 
@@ -131,6 +132,17 @@ public class Tile
 	        graficos.drawPolygon(this.hexagono);    
 	        graficos.setStroke(new BasicStroke(1)); 
 	    }
+
+		if (this.targetTile)
+		{
+			graficos.setColor(new Color(189, 145, 78));
+			graficos.fillPolygon(this.hexagono);
+
+			graficos.setStroke(new BasicStroke(3)); 
+	        graficos.setColor(new Color(108,70,49));          
+	        graficos.drawPolygon(this.hexagono);    
+	        graficos.setStroke(new BasicStroke(1)); 
+		}
 	}
 	
 	private void setTileImage(Graphics2D graficos)
@@ -139,9 +151,8 @@ public class Tile
 		{
 			Personaje player = (Personaje) this.objectoOcupado;
 			drawImage(player.getImagen(), graficos);
-		}
 
-		if (this.containsSpecialImage)
+		} else if (this.containsSpecialImage)
 		{
 			drawImage(this.specialImage, graficos);
 		}
@@ -252,6 +263,11 @@ public class Tile
 				graficos.setStroke(new BasicStroke(3)); 
 			}
 		}
+	}
+
+	public void setTargetTile(boolean isTarget)
+	{
+		this.targetTile = isTarget;
 	}
 
 	public void setHovered(boolean hovered) 
