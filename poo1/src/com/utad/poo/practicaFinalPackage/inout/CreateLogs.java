@@ -23,15 +23,20 @@ public class CreateLogs
 
     public static void addLog(String newLog) 
     {
-        if (CreateLogs.lineasCount >= CreateLogs.MAX_LINEAS) 
-        {
+        if (!newLog.equals(null)) {
+            if (CreateLogs.lineasCount >= CreateLogs.MAX_LINEAS) 
+            {
+                
+                CreateLogs.lineas.remove(0);
+                CreateLogs.lineasCount--;
+            }
             
-            CreateLogs.lineas.remove(0);
-            CreateLogs.lineasCount--;
+            System.out.println(newLog); // For debugging purposes
+            CreateLogs.lineas.add(newLog);
+            CreateLogs.lineasCount++;
+        } else {
+            System.out.println("Error: No se puede añadir un log nulo");
         }
-    
-        CreateLogs.lineas.add(newLog);
-        CreateLogs.lineasCount++;
     }
 
     
