@@ -146,9 +146,14 @@ public abstract class Personaje {
     // atributos de ataque y defensa
     protected Double calcularDanio() {
         // Obtenemos el daño base del arma
-        Double danioTotal = this.armaPersonaje.getDanio() * (1 + (this.ataque / 100));
-        if (this.armaPersonaje.getPrecision() < Math.random() * 100) {
-            danioTotal = 0.0; // No se ha acertado el golpe
+        Double danioTotal = 0.0;
+        try {
+            danioTotal = this.armaPersonaje.getDanio() * (1 + (this.ataque / 100));
+            if (this.armaPersonaje.getPrecision() < Math.random() * 100) {
+                danioTotal = 0.0; // No se ha acertado el golpe
+            }
+        } catch (Exception e) {
+            System.out.println("Error al calcular el daño: " + e.getMessage());
         }
         return danioTotal;
     }
