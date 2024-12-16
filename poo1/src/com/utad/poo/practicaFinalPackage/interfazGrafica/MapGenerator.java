@@ -95,14 +95,6 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-
-/*
- * Esta clase se tiene que hacer en condiciones
- * Solo se encargara de construir en una ventana todos los tiles
- * Sera la clase tile exclusivamente quien se encargara de dibujarse
- * Por el momento esta clase es puro testing
- */
-
 public class MapGenerator extends JPanel
 {
 
