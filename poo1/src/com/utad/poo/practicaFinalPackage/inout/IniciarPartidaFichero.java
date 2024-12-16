@@ -19,14 +19,16 @@ public class IniciarPartidaFichero {
     private Integer trapCount;
     private Integer banditCount;
 
-    public IniciarPartidaFichero() {
+    public IniciarPartidaFichero() 
+    {
         this.jugador = "Sin Nombre";
         this.lootCount = 0;
         this.trapCount = 0;
         this.banditCount = 0;
     }
 
-    public void cargarDatosDesdeXML() {
+    public void cargarDatosDesdeXML() 
+    {
         try {
             File myObj = new File(IniciarPartidaFichero.PATH_TO_BOOT_FILE);
             Scanner myReader = new Scanner(myObj);
@@ -78,8 +80,6 @@ public class IniciarPartidaFichero {
     }
 
 
-
-    
     public String getJugador() {
         return this.jugador;
     }

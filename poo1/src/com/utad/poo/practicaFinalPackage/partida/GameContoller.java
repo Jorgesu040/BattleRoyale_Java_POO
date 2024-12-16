@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
 import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
+import com.utad.poo.practicaFinalPackage.inout.*;
 
 public class GameContoller implements EmpezarTurnoEventListener, TileClickListener {
 
@@ -82,7 +82,7 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     }
 
     public static void main(String[] args) {
-        GameContoller gameController = new GameContoller(new MapGenerator(7, 3, 1, 5, 3, new Utility()));
+        GameContoller gameController = new GameContoller(new MapGenerator(7, 3, 1, 5, 3, new Utility(), new IniciarPartidaFichero(), true));
         gameController.startGame();
 
         // TODO: fix

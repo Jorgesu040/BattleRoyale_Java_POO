@@ -2,6 +2,6 @@
 <GameStart>
     <Player Name="Matesanz calvo"/>
     <Loot LootCount="4"/>
-    <Traps TrapCount="1"/> 
+    <Traps TrapCount="2"/> 
     <Bandits BanditCount="3"/> 
 </GameStart>
