@@ -135,9 +135,9 @@ public abstract class Personaje {
     public void atacar(Personaje opponent) {
         Double danioTotal = this.calcularDanio();
         if (danioTotal == 0.0) {
-            System.out.println("¡Oh no! El personaje ha fallado el ataque");
+            CreateLogs.addLog("¡Oh no, "+  this.nombre + " ha fallado el ataque!");
         } else {
-            System.out.println("¡El personaje ha atacado con un daño total de " + danioTotal + "!");
+            CreateLogs.addLog("¡" +this.nombre + " ha atacado con un daño total de " + danioTotal + "puntos de daño!");
             opponent.recibirAtaque(danioTotal);
         }
     }
@@ -166,7 +166,7 @@ public abstract class Personaje {
     // recibido)
     protected void contraataque(Personaje opponent, Double ataque) {
         opponent.recibirAtaque(ataque * Personaje.DANIO_CONTRAATAQUE_DEFAULT / 100);
-        System.out.println("¡Que suerte! El personaje ha contraatacado y ha devuelto un "
+        CreateLogs.addLog("¡Que suerte! El personaje ha contraatacado y ha devuelto un "
                 + Personaje.DANIO_CONTRAATAQUE_DEFAULT + "% del daño recibido!");
     }
 
@@ -189,15 +189,15 @@ public abstract class Personaje {
         // retirada
         if (opponent != null && opponent instanceof Arquero) {
             probabilidadRetirada = Math.max(probabilidadRetirada - ((Arquero) opponent).getPunteria(), 0);
-            System.out.println("El oponente es un arquero muy preciso y redujo tu probabilidad de retirada en "
+            CreateLogs.addLog("El oponente es un arquero muy preciso y redujo tu probabilidad de retirada en "
                     + ((Arquero) opponent).getPunteria() + "%");
         }
 
         // Comprobar si el personaje tiene un escudo y aumentar/disminuir la
         // probabilidad de retirada
-        System.out.println("Las características del escudo dan un modificador de "
-                + this.escudoPersonaje.getProbabilidadEscape() + "% a la probabilidad de retirada");
         probabilidadRetirada = Math.max(probabilidadRetirada + this.escudoPersonaje.getProbabilidadEscape(), 0);
+        CreateLogs.addLog("Las características del escudo dan un modificador de "
+                + this.escudoPersonaje.getProbabilidadEscape() + "% a la probabilidad de retirada, para un total de " + probabilidadRetirada + "%");
 
         // Calcular la probabilidad de retirada
         if (Math.random() * 100 <= probabilidadRetirada) {
@@ -243,7 +243,7 @@ public abstract class Personaje {
     public void lootearEnemigo(Personaje oponente) {
         // ** Código agregado por el asistente **
         if (!oponente.estaVivo()) {
-            System.out.println(this.nombre + " ha derrotado a " + oponente.nombre + " y lootea sus objetos");
+            CreateLogs.addLog(this.nombre + " ha derrotado a " + oponente.nombre + " y lootea sus objetos");
 
             // TODO: Menu con los items del enemigo
             
@@ -254,7 +254,7 @@ public abstract class Personaje {
     /* Métodos de incremento/decremento de atributos y estado */
     public void incrementarAtaque(Double valorEfecto) {
         this.ataque += valorEfecto;
-        System.out.println(this.nombre + " ha incrementado su ataque en " + valorEfecto);
+        CreateLogs.addLog(this.nombre + " ha incrementado su ataque en " + valorEfecto);
     }
 
     public void incrementarDefensa(Double valorEfecto) {
@@ -262,12 +262,12 @@ public abstract class Personaje {
         if (this.defensa > 100.0) {
             this.defensa = 100.0; // La defensa no puede superar el 100%
         }
-        System.out.println(this.nombre + " ha incrementado su defensa en " + valorEfecto);
+        CreateLogs.addLog(this.nombre + " ha incrementado su defensa en " + valorEfecto);
     }
 
     public void incrementarProbabilidadRetirada(Double valorEfecto) {
         this.probabilidadRetirada += valorEfecto;
-        System.out.println(this.nombre + " ha incrementado su probabilidad de retirada en " + valorEfecto);
+        CreateLogs.addLog(this.nombre + " ha incrementado su probabilidad de retirada en " + valorEfecto);
     }
 
     public void incrementarVida(Integer valorEfecto) {
@@ -276,7 +276,7 @@ public abstract class Personaje {
         } else {
             this.vida += valorEfecto;
         }
-        System.out.println(this.nombre + " ha recuperado " + valorEfecto + " puntos de vida");
+        CreateLogs.addLog(this.nombre + " ha recuperado " + valorEfecto + " puntos de vida");
     }
 
     public void decrementarAtaque(Double valor) {
@@ -340,15 +340,15 @@ public abstract class Personaje {
     public void addItem(Item item) {
         if (this.items.size() < this.numeroItems) {
             this.items.add(item);
-            System.out.println(this.nombre + " ha obtenido " + item.getNombre());
+            CreateLogs.addLog(this.nombre + " ha obtenido " + item.getNombre());
         } else {
-            System.out.println("No se pueden añadir más items al inventario de " + this.nombre);
+            CreateLogs.addLog("No se pueden añadir más items al inventario de " + this.nombre);
         }
     }
 
     public void addEfecto(Item item) {
         this.efectos.add(item);
-        System.out.println(this.nombre + " ha sido afectado por " + item.getNombre());
+        CreateLogs.addLog(this.nombre + " ha sido afectado por " + item.getNombre() + 
     }
     
     // Metodo que reinicie el estado del personaje al final de un turno

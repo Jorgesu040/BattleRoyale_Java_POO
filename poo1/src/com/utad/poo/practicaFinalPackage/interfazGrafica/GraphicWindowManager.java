@@ -282,7 +282,7 @@ public class GraphicWindowManager {
                     try {
                         empezarTurnoEventListener.onExecuteTurn();
                     } catch (Exception ex) {
-                        System.err.println("Error al ejecutar el turno, no se ha podido ejecutar el turno");
+                        CreateLogs.addLog("Error al ejecutar el turno, no se ha podido ejecutar el turno");
                         ex.printStackTrace();
                     }
                 } else {

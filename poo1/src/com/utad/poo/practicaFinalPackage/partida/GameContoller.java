@@ -3,6 +3,9 @@ package com.utad.poo.practicaFinalPackage.partida;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
 import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
 
@@ -83,9 +86,16 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         gameController.startGame();
 
         while (gameController.jugador.estaVivo() && !gameController.gameArranger.getEnemigos().isEmpty()) {
+            
         }
 
-        System.out.println("Juego terminado");
+        if (!gameController.jugador.estaVivo()) {
+            CreateLogs.addLog("Has perdido");
+            JOptionPane.showMessageDialog(null, "¡Oh no!, " + gameController.jugador.getNombre() + ", has sido derrotado y has perdido.", "Derrota", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            CreateLogs.addLog("Has ganado");
+            JOptionPane.showMessageDialog(null, "Felicidades, " + gameController.jugador.getNombre() + ", has ganado!", "Victoria", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
 
