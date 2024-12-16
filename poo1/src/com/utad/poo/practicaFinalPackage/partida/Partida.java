@@ -52,6 +52,28 @@ public class Partida {
             loot = scanner.nextInt();
         }
 
+
+        // Comprobar los valores introducidos
+        if (size < 4) {
+            size = 4;
+            System.out.println("El tamaño del mapa no puede ser menor a 4. Se usará el valor por defecto: 4");
+        }
+
+        if (traps < 1) {
+            traps = 1;
+            System.out.println("La cantidad de trampas no puede ser menor a 1. Se usará el valor por defecto: 1");
+        }
+
+        if (bandits < 1) {
+            bandits = 1;
+            System.out.println("La cantidad de bandidos no puede ser menor a 1. Se usará el valor por defecto: 1");
+        }
+
+        if (loot < 1) {
+            loot = 1;
+            System.out.println("La cantidad de botín no puede ser menor a 1. Se usará el valor por defecto: 1");
+        }
+
         scanner.close();
         Utility utility = new Utility();
 
