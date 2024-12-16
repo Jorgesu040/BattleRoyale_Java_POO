@@ -7,8 +7,8 @@ public class ItemGenerator {
 
     public Item generateRandomItem() {
         Random rand = new Random();
-        int randomNum = rand.nextInt(2); // 0 for trap, 1 for character item
-        if (randomNum == 0) {
+        Integer randomNum = rand.nextInt(2); // 0 para ºtrap, 1 para character item
+        if (randomNum.equals(0)) {
             return generateRandomTrap();
         } else {
             return generateRandomCharacterItem();
@@ -17,7 +17,7 @@ public class ItemGenerator {
 
     public Item generateRandomTrap() {
         Random rand = new Random();
-        int randomNum = rand.nextInt(3); // Number of trap types
+        Integer randomNum = rand.nextInt(3); // Numero de tipos de trampas
         switch(randomNum) {
             case 0:
                 return new TrampaReducirAtaque(TrampaReducirAtaque.VALOR_EFECTO);
@@ -32,7 +32,7 @@ public class ItemGenerator {
 
     public Item generateRandomCharacterItem() {
         Random rand = new Random();
-        int randomNum = rand.nextInt(5); // Number of character item types
+        Integer randomNum = rand.nextInt(5); // Numero de tipos de items de personaje
         switch(randomNum) {
             case 0:
                 return new Vendas();

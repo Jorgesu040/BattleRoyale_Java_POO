@@ -136,7 +136,7 @@ public class GraphicWindowManager {
         statsPersonaje.updateUI();
     }
 
-    private void setupLayout(JFrame frame, MapGenerator panel, int panelSize, Personaje jugador) {
+    private void setupLayout(JFrame frame, MapGenerator panel, Integer panelSize, Personaje jugador) {
         frame.setLayout(new BorderLayout());
 
         /// *** PANEL DE ESTADISTICAS *** ///
@@ -199,8 +199,8 @@ public class GraphicWindowManager {
 
         /// *** PANEL DE MAPA *** ///
         centerPanel = new JPanel(new GridBagLayout());
-        int width = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X);
-        int height = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y);
+        Integer width = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_X);
+        Integer height = panelSize * (MapGenerator.OCCUPIED_SIZE_DEFAULT + MapGenerator.DEFAULT_SPACING_Y);
         panel.setPreferredSize(new Dimension(width, height));
         panel.setMinimumSize(new Dimension(width, height));
         centerPanel.add(panel);
@@ -276,9 +276,9 @@ public class GraphicWindowManager {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (jugador.getEstado() != EstadoPersonaje.NADA && jugador.getTargetTile() != null) {
+            if (!jugador.getEstado().equals(EstadoPersonaje.NADA) && jugador.getTargetTile() != null) {
                 if (jugador.getUbicacionPersonaje().isLegalMove(GraphicWindowManager.this.mapController.getSelectedTile())
-                        || (jugador.getEstado() != EstadoPersonaje.MOVIENDOSE && jugador.getUbicacionPersonaje().isLegalAction(GraphicWindowManager.this.mapController.getSelectedTile()))) {
+                        || (!jugador.getEstado().equals(EstadoPersonaje.MOVIENDOSE) && jugador.getUbicacionPersonaje().isLegalAction(GraphicWindowManager.this.mapController.getSelectedTile()))) {
                     try {
                         empezarTurnoEventListener.onExecuteTurn();
                     } catch (Exception ex) {
@@ -288,7 +288,7 @@ public class GraphicWindowManager {
                 } else {
                     JOptionPane.showMessageDialog(null, "Movimiento no permitido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } else if (jugador.getEstado() == EstadoPersonaje.NADA) {
+            } else if (jugador.getEstado().equals(EstadoPersonaje.NADA)) {
                 JOptionPane.showMessageDialog(null, "Selecciona una acción", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (jugador.getTargetTile() == null) {
                 JOptionPane.showMessageDialog(null, "Selecciona un objetivo", "Error", JOptionPane.ERROR_MESSAGE);

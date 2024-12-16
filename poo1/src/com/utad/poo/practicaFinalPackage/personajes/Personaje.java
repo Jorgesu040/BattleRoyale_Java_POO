@@ -129,7 +129,7 @@ public abstract class Personaje {
     /// ************* Logica de ataque ************* ///
     public void atacar(Personaje opponent) {
         Double danioTotal = this.calcularDanio();
-        if (danioTotal == 0.0) {
+        if (danioTotal.equals(0.0)) {
             CreateLogs.addLog("¡Oh no, "+  this.nombre + " ha fallado el ataque!");
         } else {
             CreateLogs.addLog("¡" +this.nombre + " ha atacado con un daño total de " + danioTotal + "puntos de daño!");
@@ -152,7 +152,7 @@ public abstract class Personaje {
     // Defiende de un ataque a un personaje -> reduce el y pequeña posibilidad de
     // contraataque (devolver un porcentaje del daño recibido)
     public void defensa(Personaje opponent) {
-        if (contraAtaco() && opponent.getEstado() == EstadoPersonaje.ATACANDO) {
+        if (contraAtaco() && opponent.getEstado().equals(EstadoPersonaje.ATACANDO)) {
             this.contraataque(opponent, opponent.ataque);
         }
     }
@@ -210,12 +210,12 @@ public abstract class Personaje {
     // personaje (ya incluye posibles modificadores: críticos, bonus de ataque,
     // etc.)
     public void recibirAtaque(Double ataque) {
-        if (estado == EstadoPersonaje.DEFENDIENDO) {
+        if (estado.equals(EstadoPersonaje.DEFENDIENDO)) {
             ataque = ataque * (1 - this.escudoPersonaje.getDefensa()/100.0); // Reducir el daño recibido
             CreateLogs.addLog(this.nombre + " se ha defendido y ha reducido el daño recibido");
         }
 
-        if (estado == EstadoPersonaje.RETIRANDOSE && this.retiradaConExito) {
+        if (estado.equals(EstadoPersonaje.RETIRANDOSE) && this.retiradaConExito) {
             ataque = 0.0; // No recibe daño
             CreateLogs.addLog(this.nombre + " ha evitado el ataque con éxito");}
 

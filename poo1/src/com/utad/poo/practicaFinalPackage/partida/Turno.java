@@ -87,17 +87,17 @@ public class Turno {
             String mensaje = null;
                 if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
                
-                if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO) {
+                if (personaje.getEstado().equals(EstadoPersonaje.DEFENDIENDO)) {
                     personaje.defensa((Personaje) personaje.getTargetTile().getObjectoOcupado());
                     mensaje = personaje.getNombre() + " se ha defendido de " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
-                } else if (personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {
+                } else if (personaje.getEstado().equals(EstadoPersonaje.RETIRANDOSE)) {
                     personaje.retirada((Personaje) personaje.getTargetTile().getObjectoOcupado());
                     mensaje = personaje.getNombre() + " va a intentar evitar el ataque de " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
                 }
             
-            } else if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO) {
+            } else if (personaje.getEstado().equals(EstadoPersonaje.DEFENDIENDO)) {
                 mensaje = personaje.getNombre() + " se ha defendido de una casilla en la que no había nadie 【・_・?】";
-            } else if (personaje.getEstado() == EstadoPersonaje.RETIRANDOSE) {
+            } else if (personaje.getEstado().equals(EstadoPersonaje.RETIRANDOSE)) {
                 mensaje = personaje.getNombre() + " se ha evitado el ataque (retirada) de una casilla en la que no había nadie 【・_・?】";
             }
 
@@ -111,12 +111,12 @@ public class Turno {
         for (Personaje personaje : personajes) {
             String mensaje = null;
             if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
-                if (personaje.getEstado() == EstadoPersonaje.ATACANDO) {
+                if (personaje.getEstado().equals(EstadoPersonaje.ATACANDO)) {
                     personaje.atacar((Personaje) personaje.getTargetTile().getObjectoOcupado());
                     mensaje = personaje.getNombre() + " ha atacado a " + ((Personaje) personaje.getTargetTile().getObjectoOcupado()).getNombre();
 
                 }
-            } else if (personaje.getEstado() == EstadoPersonaje.ATACANDO) {
+            } else if (personaje.getEstado().equals(EstadoPersonaje.ATACANDO)) {
                 mensaje = personaje.getNombre() + " ha atacado a una casilla en la que no había nadie 【・_・?】";
             }
 
@@ -135,7 +135,7 @@ public class Turno {
             String mensaje = null;
             String mensajeItem = null;
 
-            if (personaje.getEstado() == EstadoPersonaje.MOVIENDOSE) {
+            if (personaje.getEstado().equals(EstadoPersonaje.MOVIENDOSE)) {
 
                 // TODO: si hay una trampa se ha de añadir a una lista (efectos) del personaje,
                 // aplicar el metodo usar del item
