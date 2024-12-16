@@ -13,7 +13,10 @@ public class TrampaReducirDefensa extends Trampa {
 
     @Override
     public void usar(Personaje personaje) {
-        personaje.decrementarDefensa(super.valorEfecto);
+        if (!haSidoUsada) {
+            personaje.decrementarDefensa(super.valorEfecto);
+            super.haSidoUsada = true;
+        }
     }
 
     @Override

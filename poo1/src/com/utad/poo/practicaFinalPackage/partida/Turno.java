@@ -67,7 +67,7 @@ public class Turno {
 
         turnoActual++;
 
-        CreateLogs.addLog("|----------------------------------|");
+        CreateLogs.addLog("|-----------------------------------|");
     }
 
     private void aplicarEfetosTrampas() {

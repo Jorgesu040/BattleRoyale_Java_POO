@@ -348,7 +348,7 @@ public abstract class Personaje {
 
     public void addEfecto(Item item) {
         this.efectos.add(item);
-        CreateLogs.addLog(this.nombre + " ha sido afectado por " + item.getNombre() + 
+        CreateLogs.addLog(this.nombre + " ha sido afectado por " + item.getNombre());
     }
     
     // Metodo que reinicie el estado del personaje al final de un turno

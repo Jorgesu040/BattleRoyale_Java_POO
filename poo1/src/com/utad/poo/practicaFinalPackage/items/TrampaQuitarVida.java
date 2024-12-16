@@ -14,7 +14,10 @@ public class TrampaQuitarVida extends Trampa {
 
     @Override
     public void usar(Personaje personaje) {
-        personaje.decrementarVida(valorEfecto.intValue());
+        if (!haSidoUsada) {
+            personaje.decrementarVida(valorEfecto.intValue());
+            super.haSidoUsada = true;
+        }
     }
 
     @Override
