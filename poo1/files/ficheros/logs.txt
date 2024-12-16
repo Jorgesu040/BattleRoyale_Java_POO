@@ -1,6 +1,90 @@
-HOLA ME LLAMO SERGIO
-MATESANZ PODEMITA
-PILLAN A LOLALOLITA FUMANDO EN UN BAR
-HOLA ME LLAMO SERGIO
-MATESANZ PODEMITA
-PILLAN A LOLALOLITA FUMANDO EN UN BAR
+|------------- TURNO 0 -------------|
+Arquero 3 se ha defendido de Mago 2
+Guerrero 0 ha recibido un ataque de 12 puntos pero gracias a su defensa ha recibido 9 de daño
+Guerrero 1 ha atacado a Guerrero 0
+Arquero 3 se ha defendido y ha reducido el daño recibido
+Arquero 3 ha recibido un ataque de 3 puntos pero gracias a su defensa ha recibido 2 de daño
+Mago 2 ha atacado a Arquero 3
+Guerrero 0 se ha movido a la casilla 6
+Guerrero 0 ha recogido el item de la casilla 6
+Arquero 4 se ha movido a la casilla 9
+Arquero 4 ha pisado una trampa en la casilla 9
+Guerrero 5 se ha movido a la casilla 29
+|----------------------------------|
+|------------- TURNO 1 -------------|
+Mago 2 se ha defendido de Arquero 3
+Arquero 3 va a intentar evitar el ataque de Guerrero 0
+Guerrero 0 ha atacado a Arquero 3
+Guerrero 1 se ha movido a la casilla 12
+Arquero 4 se ha movido a la casilla 15
+Guerrero 5 se ha movido a la casilla 24
+|----------------------------------|
+|------------- TURNO 2 -------------|
+Guerrero 1 va a intentar evitar el ataque de Guerrero 0
+Mago 2 va a intentar evitar el ataque de Arquero 3
+Arquero 3 se ha defendido de Guerrero 0
+Guerrero 0 se ha movido a la casilla 11
+Arquero 4 se ha movido a la casilla 14
+Arquero 4 ha recogido el item de la casilla 14
+Guerrero 5 se ha movido a la casilla 18
+|----------------------------------|
+|------------- TURNO 3 -------------|
+Guerrero 1 se ha defendido de Guerrero 0
+Mago 2 va a intentar evitar el ataque de Arquero 3
+Guerrero 5 se ha defendido de Guerrero 0
+Mago 2 ha recibido un ataque de 10 puntos pero gracias a su defensa ha recibido 9 de daño
+Arquero 3 ha atacado a Mago 2
+Guerrero 0 se ha movido a la casilla 17
+Arquero 4 se ha movido a la casilla 21
+|----------------------------------|
+|------------- TURNO 4 -------------|
+Mago 2 va a intentar evitar el ataque de Arquero 3
+Arquero 3 se ha defendido de Mago 2
+Guerrero 5 va a intentar evitar el ataque de Guerrero 1
+Guerrero 5 ha recibido un ataque de 12 puntos pero gracias a su defensa ha recibido 9 de daño
+Guerrero 1 ha atacado a Guerrero 5
+Guerrero 0 se ha movido a la casilla 24
+Arquero 4 se ha movido a la casilla 14
+|----------------------------------|
+|------------- TURNO 5 -------------|
+Arquero 3 se ha defendido de Mago 2
+Guerrero 5 ha recibido un ataque de 12 puntos pero gracias a su defensa ha recibido 9 de daño
+Guerrero 1 ha atacado a Guerrero 5
+Arquero 3 se ha defendido y ha reducido el daño recibido
+Arquero 3 ha recibido un ataque de 3 puntos pero gracias a su defensa ha recibido 2 de daño
+Mago 2 ha atacado a Arquero 3
+Guerrero 1 ha recibido un ataque de 18 puntos pero gracias a su defensa ha recibido 14 de daño
+Guerrero 5 ha atacado a Guerrero 1
+Guerrero 0 se ha movido a la casilla 30
+Arquero 4 se ha movido a la casilla 15
+|----------------------------------|
+|------------- TURNO 6 -------------|
+Guerrero 1 va a intentar evitar el ataque de Guerrero 5
+Mago 2 ha recibido un ataque de 2 puntos pero gracias a su defensa ha recibido 2 de daño
+Arquero 3 se ha defendido de Mago 2
+Arquero 3 se ha defendido y ha reducido el daño recibido
+Arquero 3 ha recibido un ataque de 3 puntos pero gracias a su defensa ha recibido 2 de daño
+Mago 2 ha atacado a Arquero 3
+Guerrero 1 ha evitado el ataque con éxito
+Guerrero 1 ha recibido un ataque de 0 puntos pero gracias a su defensa ha recibido 0 de daño
+Guerrero 5 ha atacado a Guerrero 1
+Guerrero 0 se ha movido a la casilla 35
+|----------------------------------|
+|------------- TURNO 7 -------------|
+Guerrero 1 va a intentar evitar el ataque de Guerrero 5
+Arquero 3 va a intentar evitar el ataque de Mago 2
+Arquero 3 ha recibido un ataque de 21 puntos pero gracias a su defensa ha recibido 18 de daño
+Mago 2 ha atacado a Arquero 3
+Guerrero 1 ha evitado el ataque con éxito
+Guerrero 1 ha recibido un ataque de 0 puntos pero gracias a su defensa ha recibido 0 de daño
+Guerrero 5 ha atacado a Guerrero 1
+Guerrero 0 se ha movido a la casilla 36
+Guerrero 0 ha recogido el item de la casilla 36
+|----------------------------------|
+|------------- TURNO 8 -------------|
+Guerrero 1 se ha defendido de Guerrero 5
+Mago 2 va a intentar evitar el ataque de Arquero 3
+Arquero 3 se ha defendido de Mago 2
+Guerrero 5 va a intentar evitar el ataque de Guerrero 1
+Guerrero 0 se ha movido a la casilla 32
+|----------------------------------|

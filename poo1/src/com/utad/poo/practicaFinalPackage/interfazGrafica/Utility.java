@@ -2,6 +2,12 @@ package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.util.List;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Utility 
@@ -14,6 +20,31 @@ public class Utility
 	{
 
 	}
+
+	public BufferedImage getImage(String name) {
+        BufferedImage imagen = null;
+        String basePath = "";
+
+        try {
+            File currentDir = new File(System.getProperty("user.dir"));
+            basePath = currentDir.getCanonicalPath() + "\\poo1\\files\\";
+        } catch (IOException e) {
+            System.err.println("Error al obtener el directorio de las imágenes.");
+            e.printStackTrace();
+        }
+
+        String nombreArchivo = basePath + name;
+
+        try {
+            File archivoImagen = new File(nombreArchivo);
+            imagen = ImageIO.read(archivoImagen);
+        } catch (IOException e) {
+            System.err.println("Error al cargar la imagen: " + nombreArchivo);
+            e.printStackTrace();
+        }
+
+        return imagen;
+    }
 	
 	public Integer generateRandom(Integer min, Integer max)
     {

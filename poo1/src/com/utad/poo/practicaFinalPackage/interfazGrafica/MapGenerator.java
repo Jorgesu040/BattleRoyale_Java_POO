@@ -313,6 +313,7 @@ public class MapGenerator extends JPanel
 
 			this.tiles.get(random).setTileType(TileType.TILE_LOOT);
 			this.tiles.get(random).setTileObject(item);
+			this.tiles.get(random).setSpecialImage(this.utilityFunctions.getImage("cubo.png"));
 		}
     }
     
@@ -326,6 +327,7 @@ public class MapGenerator extends JPanel
 
 			this.tiles.get(random).setTileType(TileType.TILE_TRAP_SET);
 			this.tiles.get(random).setTileObject(trap);
+			this.tiles.get(random).setSpecialImage(this.utilityFunctions.getImage("cubo.png"));
 		}
     }
     

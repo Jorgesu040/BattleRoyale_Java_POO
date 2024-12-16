@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
 import com.utad.poo.practicaFinalPackage.items.Item;
 import com.utad.poo.practicaFinalPackage.partida.EmpezarTurnoEventListener;
 import com.utad.poo.practicaFinalPackage.personajes.EstadoPersonaje;
@@ -317,8 +318,9 @@ public class GraphicWindowManager {
 
             if (item.getText().equals("Crear logs")) {
                 // Show unimplemented dialog
-                JOptionPane.showMessageDialog(null, "Funcionalidad no implementada", "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                Integer lineas = CreateLogs.printLogs();
+                JOptionPane.showMessageDialog(null, "Se ha realizado un dump de " + lineas + " lineas de logs", "Logs Created",
+                       JOptionPane.INFORMATION_MESSAGE);
             }
 
         }

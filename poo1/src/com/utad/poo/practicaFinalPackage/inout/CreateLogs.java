@@ -40,14 +40,17 @@ public class CreateLogs
     }
 
     
-    public static void printLogs()
+    public static Integer printLogs()
     {
+        Integer lineas = 0;
+
         try {
             FileWriter writer = new FileWriter(CreateLogs.PATH_TO_LOGS_FILE, true);
           
             for (String log : CreateLogs.lineas)
             {
                 writer.write(log + "\n");
+                lineas++;
             }
         
             writer.close();
@@ -55,6 +58,9 @@ public class CreateLogs
             System.out.println("Error al leer el archivo");
             e.printStackTrace();
         }
+
+        CreateLogs.lineas = new ArrayList<String>();
+        return lineas;
     }
 
     public static void main(String[] args) 

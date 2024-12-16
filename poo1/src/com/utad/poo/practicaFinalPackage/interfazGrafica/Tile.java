@@ -1,6 +1,8 @@
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
 import java.awt.*;
+
+import com.utad.poo.practicaFinalPackage.items.*;
 import com.utad.poo.practicaFinalPackage.personajes.*;
 import java.awt.image.BufferedImage;
 
@@ -86,6 +88,12 @@ public class Tile
 	
 	public void removeTileObject()
 	{
+		if (this.objectoOcupado instanceof Item)
+		{
+			this.specialImage = null;
+			this.containsSpecialImage = false;
+		}
+
 		this.objectoOcupado = null;
 		this.ocupado = false;
 	}
@@ -99,6 +107,8 @@ public class Tile
 	{
 		this.tileType = TileType.TILE_TRAP_EXPLODED;
 		removeTileObject();
+		this.specialImage = null;
+		this.containsSpecialImage = false;
 	}
 	
 	public void createHexagon()
@@ -122,7 +132,7 @@ public class Tile
 	{
 		createHexagon();
 		setTileColor(graficos, this.hexagono);	
-		setTileImage(graficos);
+		
 		
 		// Dibujos especiales
 		if (this.isHovered && !this.tileType.equals(TileType.TILE_OBSTACLE)) {
@@ -143,6 +153,8 @@ public class Tile
 	        graficos.drawPolygon(this.hexagono);    
 	        graficos.setStroke(new BasicStroke(1)); 
 		}
+
+		setTileImage(graficos);
 	}
 	
 	private void setTileImage(Graphics2D graficos)
