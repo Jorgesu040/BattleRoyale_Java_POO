@@ -54,6 +54,8 @@ public class CreateLogs
             }
             writer.write("\n\n\n------------------------------------------\n\nDUMP DE LOGS\n\n------------------------------------------\n\n\n");
             writer.close();
+            CreateLogs.lineasCount = 0;
+
         } catch (FileNotFoundException e)
         {
             System.out.println("No se ha encontrado el archivo");
@@ -71,11 +73,7 @@ public class CreateLogs
 
     public static void main(String[] args) 
     {
-        
-        CreateLogs.addLog("HOLA ME LLAMO SERGIO");
-        CreateLogs.addLog("MATESANZ PODEMITA");
-        CreateLogs.addLog("PILLAN A LOLALOLITA FUMANDO EN UN BAR");
-
+        CreateLogs.addLog("Hola");
         CreateLogs.printLogs();
 
     }

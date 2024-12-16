@@ -17,3 +17,55 @@ DUMP DE LOGS
 ------------------------------------------
 
 
+|------------- TURNO 0 -------------|
+Las características del escudo dan un modificador de -10.0% a la probabilidad de retirada, para un total de 10.0%
+Arquero 1 va a intentar evitar el ataque de Guerrero 0
+¡Guerrero 0 ha atacado con un daño total de 36.0puntos de daño!
+Arquero 1 ha recibido un ataque de 36 puntos pero gracias a su defensa ha recibido 32 de daño
+Guerrero 0 ha atacado a Arquero 1
+|-----------------------------------|
+|------------- TURNO 1 -------------|
+Las características del escudo dan un modificador de -10.0% a la probabilidad de retirada, para un total de 10.0%
+Arquero 1 va a intentar evitar el ataque de Guerrero 0
+¡Guerrero 0 ha atacado con un daño total de 36.0puntos de daño!
+Arquero 1 ha evitado el ataque con éxito
+Arquero 1 ha recibido un ataque de 0 puntos pero gracias a su defensa ha recibido 0 de daño
+Guerrero 0 ha atacado a Arquero 1
+|-----------------------------------|
+|------------- TURNO 2 -------------|
+Las características del escudo dan un modificador de -10.0% a la probabilidad de retirada, para un total de 10.0%
+Arquero 1 va a intentar evitar el ataque de Guerrero 0
+¡Guerrero 0 ha atacado con un daño total de 36.0puntos de daño!
+Arquero 1 ha recibido un ataque de 36 puntos pero gracias a su defensa ha recibido 32 de daño
+Guerrero 0 ha atacado a Arquero 1
+|-----------------------------------|
+|------------- TURNO 3 -------------|
+Las características del escudo dan un modificador de -10.0% a la probabilidad de retirada, para un total de 10.0%
+Arquero 1 va a intentar evitar el ataque de Guerrero 0
+¡Guerrero 0 ha atacado con un daño total de 36.0puntos de daño!
+Arquero 1 ha recibido un ataque de 36 puntos pero gracias a su defensa ha recibido 32 de daño
+Guerrero 0 ha atacado a Arquero 1
+|-----------------------------------|
+|------------- TURNO 4 -------------|
+Arquero 1 se ha defendido de Guerrero 0
+¡Oh no, Guerrero 0 ha fallado el ataque!
+Guerrero 0 ha atacado a Arquero 1
+|-----------------------------------|
+|------------- TURNO 5 -------------|
+Arquero 1 se ha defendido de Guerrero 0
+¡Guerrero 0 ha atacado con un daño total de 36.0puntos de daño!
+Arquero 1 se ha defendido y ha reducido el daño recibido
+Arquero 1 ha recibido un ataque de 5 puntos pero gracias a su defensa ha recibido 4 de daño
+Guerrero 0 ha atacado a Arquero 1
+|-----------------------------------|
+Has ganado
+
+
+
+------------------------------------------
+
+DUMP DE LOGS
+
+------------------------------------------
+
+

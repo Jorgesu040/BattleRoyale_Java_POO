@@ -19,15 +19,7 @@ public class GameArranger {
 
     public Boolean areAllDead() {
 
-        Boolean allDead = true;
-
-        for (Personaje personaje : personajes) {
-            if (personaje.getVida() > 0) {
-                allDead = false;
-            }
-        }
-
-        return allDead;
+        return enemigos.isEmpty();
 
     }
 

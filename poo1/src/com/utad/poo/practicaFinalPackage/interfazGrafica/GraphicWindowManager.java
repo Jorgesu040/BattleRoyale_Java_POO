@@ -252,14 +252,6 @@ public class GraphicWindowManager {
 
             jugador.setEstado(estado);
 
-            // TODO: opcional añadir una seccion de log (ventana emergente scrollable) para
-            // mostrar las acciones realizadas
-
-
-            // jugador.getUbicacionPersonaje().removeTileObject();
-            // jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());
-            // GraphicWindowManager.this.mapController.getSelectedTile().setTileObject(jugador);
-
             GraphicWindowManager.this.updateActionsPanel();
         }
 

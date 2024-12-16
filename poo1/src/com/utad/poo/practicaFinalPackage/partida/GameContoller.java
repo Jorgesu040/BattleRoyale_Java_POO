@@ -64,13 +64,23 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         graphicWindowManager.updateActionsPanel(); // Actualizar la ventana de acciones
         graphicWindowManager.updateMapPanel(); // Actualizar el mapa
         graphicWindowManager.resetActionsPanel(); // Reactivar los botones de acciones
-
-        allDead = gameArranger.areAllDead();
     }
 
     @Override
     public void onExecuteTurn() {
-        ejecutarTurno();
+        ejecutarTurno();      
+              
+        if (!this.jugador.estaVivo()) {
+            CreateLogs.addLog("Has perdido");
+            JOptionPane.showMessageDialog(null, "¡Oh no!, " + this.jugador.getNombre() + ", has sido derrotado y has perdido.", "Derrota", JOptionPane.INFORMATION_MESSAGE);
+            CreateLogs.printLogs();
+            System.exit(0);
+        } else if (gameArranger.areAllDead()) {
+            CreateLogs.addLog("Has ganado");
+            JOptionPane.showMessageDialog(null, "Felicidades, valiente aventurero, has ganado!", "Victoria", JOptionPane.INFORMATION_MESSAGE);
+            CreateLogs.printLogs();
+            System.exit(0);
+        }
     }
 
     @Override
@@ -85,21 +95,12 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     }
 
     public static void main(String[] args) {
-        GameContoller gameController = new GameContoller(new MapGenerator(7, 3, 1, 5, 3, new Utility(), new IniciarPartidaFichero(), true));
+        GameContoller gameController = new GameContoller(new MapGenerator(7, 3, 1, 1, 3, new Utility(), new IniciarPartidaFichero(), false));
         gameController.startGame();
 
-        // TODO: fix
-        while (gameController.jugador.estaVivo() && !gameController.allDead) {
+        while (true) {            
         }
 
-        // TODO: mover a un metodo de finalización de juego
-        if (!gameController.jugador.estaVivo()) {
-            CreateLogs.addLog("Has perdido");
-            JOptionPane.showMessageDialog(null, "¡Oh no!, " + gameController.jugador.getNombre() + ", has sido derrotado y has perdido.", "Derrota", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            CreateLogs.addLog("Has ganado");
-            JOptionPane.showMessageDialog(null, "Felicidades, " + gameController.jugador.getNombre() + ", has ganado!", "Victoria", JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 
 

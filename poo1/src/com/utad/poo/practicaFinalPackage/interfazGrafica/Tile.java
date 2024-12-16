@@ -54,7 +54,6 @@ public class Tile
 		return this.hexagono.contains(p);
 	}
 
-	// ni grafos ni pollas, a la cuenta de la vieja
 	private Double getTileDistance(Tile tile)
 	{
 		Point tileCenter = new Point(tile.posX, tile.posY);
