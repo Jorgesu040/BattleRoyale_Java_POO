@@ -1,18 +1,3 @@
-package com.utad.poo.practicaFinalPackage.partida;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JOptionPane;
-
-import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
-import com.utad.poo.practicaFinalPackage.inout.IniciarPartidaFichero;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.GraphicWindowManager;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.MapGenerator;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.Tile;
-import com.utad.poo.practicaFinalPackage.interfazGrafica.Utility;
-import com.utad.poo.practicaFinalPackage.personajes.Personaje;
-
 /**
  * **Explicación de la Clase `GameController` en Profundidad**
  * 
@@ -234,6 +219,21 @@ import com.utad.poo.practicaFinalPackage.personajes.Personaje;
  * 
  * Su relación con otras clases es simbiótica, ya que depende de ellas para funcionar y, a su vez, proporciona dirección y control al flujo del juego.
  */
+package com.utad.poo.practicaFinalPackage.partida;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
+import com.utad.poo.practicaFinalPackage.inout.IniciarPartidaFichero;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.GraphicWindowManager;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.MapGenerator;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.Tile;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.Utility;
+import com.utad.poo.practicaFinalPackage.personajes.Personaje;
+
 public class GameContoller implements EmpezarTurnoEventListener, TileClickListener {
 
     private Turno turno;
