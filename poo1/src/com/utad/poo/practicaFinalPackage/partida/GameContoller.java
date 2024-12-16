@@ -17,15 +17,12 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     private GraphicWindowManager graphicWindowManager;
     private MapGenerator mapa;
     
-    private Boolean allDead;
-
     public GameContoller(MapGenerator mapa) {
         this.graphicWindowManager = new GraphicWindowManager(mapa);
         this.gameArranger = new GameArranger();
         this.mapa = mapa;
         this.jugador = null;
         this.turno = null;
-        this.allDead = false;
     }
 
     public synchronized void startGame() {
@@ -69,7 +66,7 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     @Override
     public void onExecuteTurn() {
         ejecutarTurno();      
-              
+
         if (!this.jugador.estaVivo()) {
             CreateLogs.addLog("Has perdido");
             JOptionPane.showMessageDialog(null, "¡Oh no!, " + this.jugador.getNombre() + ", has sido derrotado y has perdido.", "Derrota", JOptionPane.INFORMATION_MESSAGE);
