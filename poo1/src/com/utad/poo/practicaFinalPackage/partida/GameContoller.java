@@ -5,9 +5,13 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.utad.poo.practicaFinalPackage.interfazGrafica.*;
+import com.utad.poo.practicaFinalPackage.inout.CreateLogs;
+import com.utad.poo.practicaFinalPackage.inout.IniciarPartidaFichero;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.GraphicWindowManager;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.MapGenerator;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.Tile;
+import com.utad.poo.practicaFinalPackage.interfazGrafica.Utility;
 import com.utad.poo.practicaFinalPackage.personajes.Personaje;
-import com.utad.poo.practicaFinalPackage.inout.*;
 
 public class GameContoller implements EmpezarTurnoEventListener, TileClickListener {
 
