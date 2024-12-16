@@ -134,6 +134,10 @@ public class Turno {
                     if (personaje.getTargetTile().getObjectoOcupado() instanceof Trampa) {
                         // Añadimos a la lista de trampas afectando al personaje
                         personaje.getEfectos().add((Item) personaje.getTargetTile().getObjectoOcupado());
+                        // LLamamos al metodo de explotar la trampa (eliminarla y cambio visual)
+                        personaje.getTargetTile().explodeTrap();
+                        mensajeItem = personaje.getNombre() + " ha pisado una trampa en la casilla "
+                                    + personaje.getTargetTile().getTileId();
                     } else {
                         // Comprobramos que no tiene mas de 5 items
                         if (personaje.getItems().size() < 5) {
@@ -195,6 +199,17 @@ public class Turno {
         // Reiniciar modificadores y limpiar inventario de cada personaje
         for (Personaje personaje : personajes) {
             personaje.reiniciarModificadores(); // Reiniciar modificadores e items usados
+        }
+
+        // Aplicar los efectos de las trampas para la siguiente ronda
+        for (Personaje personaje : personajes) {
+            for (Item item : personaje.getEfectos()) {
+                item.usar(personaje);
+                if (personaje.getIsAI().equals(false)){
+                    JOptionPane.showMessageDialog(null, "Has pisado una trampa:" + item.getNombre(), "Trampa", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            personaje.getEfectos().clear();
         }
     }
 

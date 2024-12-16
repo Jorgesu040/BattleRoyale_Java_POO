@@ -21,7 +21,7 @@ public abstract class CharacterSetup {
                         break;
                     default:
                         armaPersonaje = null;
-                        break;
+                        throw new IllegalArgumentException("Invalid weapon for character type");
                 }
                 break;
             case "Arquero":
@@ -37,7 +37,7 @@ public abstract class CharacterSetup {
                         break;
                     default:
                         armaPersonaje = null;
-                        break;
+                        throw new IllegalArgumentException("Invalid weapon for character type");
                 }
                 break;
             case "Mago":
@@ -53,12 +53,12 @@ public abstract class CharacterSetup {
                         break;
                     default:
                         armaPersonaje = null;
-                        break;
+                        throw new IllegalArgumentException("Invalid weapon for character type");
                 }
                 break;
             default:
                 armaPersonaje = null;
-                break;
+                throw new IllegalArgumentException("Invalid character type");
         }
         return armaPersonaje;
     }
@@ -77,7 +77,7 @@ public abstract class CharacterSetup {
                 break;
             default:
                 escudoPersonaje = null;
-                break;
+                throw new IllegalArgumentException("Invalid shield type");
         }
         return escudoPersonaje;
     }
@@ -98,7 +98,7 @@ public abstract class CharacterSetup {
                 break;
             default:
                 personaje = null;
-                break;
+                throw new IllegalArgumentException("Invalid character type");
         }
 
         if (isAI && personaje != null) {
