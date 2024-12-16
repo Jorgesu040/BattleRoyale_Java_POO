@@ -58,14 +58,28 @@ public class Turno {
 
         CreateLogs.addLog("|------------- TURNO " + turnoActual + " -------------|");
 
+        
         ejecutarFaseAcciones();
         ejecutarFaseAtaques();
         ejecutarFaseMovimientos();
         finalizarTurno();
+        aplicarEfetosTrampas();
 
         turnoActual++;
 
         CreateLogs.addLog("|----------------------------------|");
+    }
+
+    private void aplicarEfetosTrampas() {
+        // Aplicar los efectos de las trampas para la siguiente ronda
+        for (Personaje personaje : personajes) {
+            for (Item item : personaje.getEfectos()) {
+                item.usar(personaje);
+                if (personaje.getIsAI().equals(false)){
+                    JOptionPane.showMessageDialog(null, "Has pisado una " + item.getNombre() + "\nen el siguiente turno tendrás dicho efecto negativo", "Trampa", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }
 
     private void ejecutarFaseAcciones() {
@@ -199,17 +213,6 @@ public class Turno {
         // Reiniciar modificadores y limpiar inventario de cada personaje
         for (Personaje personaje : personajes) {
             personaje.reiniciarModificadores(); // Reiniciar modificadores e items usados
-        }
-
-        // Aplicar los efectos de las trampas para la siguiente ronda
-        for (Personaje personaje : personajes) {
-            for (Item item : personaje.getEfectos()) {
-                item.usar(personaje);
-                if (personaje.getIsAI().equals(false)){
-                    JOptionPane.showMessageDialog(null, "Has pisado una trampa:" + item.getNombre(), "Trampa", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-            personaje.getEfectos().clear();
         }
     }
 

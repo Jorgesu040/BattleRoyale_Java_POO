@@ -316,8 +316,10 @@ public abstract class Personaje {
         if (!this.efectos.isEmpty()) {
             List<Item> itemsToRemove = new ArrayList<>();
             for (Item item : this.efectos) {
-                item.revertir(this);
-                itemsToRemove.add(item);
+                if (item.isHaSidoUsada()){
+                    item.revertir(this);
+                    itemsToRemove.add(item);
+                }
             }
             this.efectos.removeAll(itemsToRemove);
         }
