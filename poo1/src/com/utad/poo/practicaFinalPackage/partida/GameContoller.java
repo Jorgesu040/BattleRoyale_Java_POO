@@ -16,12 +16,16 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     private GameArranger gameArranger;
     private GraphicWindowManager graphicWindowManager;
     private MapGenerator mapa;
+    
+    private Boolean allDead;
 
     public GameContoller(MapGenerator mapa) {
         this.graphicWindowManager = new GraphicWindowManager(mapa);
         this.gameArranger = new GameArranger();
         this.mapa = mapa;
         this.jugador = null;
+        this.turno = null;
+        this.allDead = false;
     }
 
     public synchronized void startGame() {
@@ -49,7 +53,6 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         allCharacters.addAll(gameArranger.getEnemigos());
         new AI(gameArranger.getEnemigos(), mapa).decideActions();
         turno = new Turno(allCharacters);
-        // Descmarcar el tile seleccionado // TODO
         jugador.getTargetTile().setTargetTile(false);
         turno.iniciarTurno();
 
@@ -62,7 +65,7 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         graphicWindowManager.updateMapPanel(); // Actualizar el mapa
         graphicWindowManager.resetActionsPanel(); // Reactivar los botones de acciones
 
-
+        allDead = gameArranger.areAllDead();
     }
 
     @Override
@@ -86,8 +89,7 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         gameController.startGame();
 
         // TODO: fix
-        while (gameController.jugador.estaVivo() && !gameController.gameArranger.getEnemigos().isEmpty()) {
-            
+        while (gameController.jugador.estaVivo() && !gameController.allDead) {
         }
 
         // TODO: mover a un metodo de finalización de juego

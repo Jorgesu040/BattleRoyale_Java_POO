@@ -17,20 +17,22 @@ public class GameArranger {
         personajes.add((new UserSetup()).askUserSettings());
     }
 
-    public void endGame() {
-        // // Perform end game logic
-        // gameLogicHandler.endGame();
-        // // Close the graphic window
-        // graphicWindowManager.closeGameWindow();
-        return;
+    public Boolean areAllDead() {
+
+        Boolean allDead = true;
+
+        for (Personaje personaje : personajes) {
+            if (personaje.getVida() > 0) {
+                allDead = false;
+            }
+        }
+
+        return allDead;
+
     }
 
-    public void restartGame() {
-        // Restart the game
-        endGame();
-        startGame();
-    }
 
+        
     
     public List<Personaje> getPersonajes() {
         return this.personajes;
