@@ -52,12 +52,18 @@ public class CreateLogs
                 writer.write(log + "\n");
                 lineas++;
             }
-        
+            writer.write("\n\n\n------------------------------------------\n\nDUMP DE LOGS\n\n------------------------------------------\n\n\n");
             writer.close();
-        } catch (IOException e) {
+        } catch (FileNotFoundException e)
+        {
+            System.out.println("No se ha encontrado el archivo");
+            e.printStackTrace();
+            
+        } catch (IOException e) 
+        {
             System.out.println("Error al leer el archivo");
             e.printStackTrace();
-        }
+        } 
 
         CreateLogs.lineas = new ArrayList<String>();
         return lineas;
