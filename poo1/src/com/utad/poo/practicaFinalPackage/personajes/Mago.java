@@ -20,8 +20,8 @@ package com.utad.poo.practicaFinalPackage.personajes;
 import com.utad.poo.practicaFinalPackage.items.*;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -83,26 +83,21 @@ public class Mago extends Personaje {
     @Override
     public BufferedImage seleccionarImagen() {
         BufferedImage imagen = null;
-        String basePath = "";
-
-        try {
-            File currentDir = new File(System.getProperty("user.dir"));
-            basePath = currentDir.getCanonicalPath() + "\\poo1\\files\\";
-        } catch (IOException e) {
-            System.err.println("Error al obtener el directorio de las imágenes.");
-            e.printStackTrace();
-        }
 
         String filePrefix = estaVivo() ? "mago" : "derrotado";
         String fileExtension = ".png";
-        String nombreArchivo = basePath + filePrefix + fileExtension;
 
         try {
-            File archivoImagen = new File(nombreArchivo);
-            imagen = ImageIO.read(archivoImagen);
-        } catch (IOException e) {
-            System.err.println("Error al cargar la imagen: " + nombreArchivo);
-            e.printStackTrace();
+            // Intentar cargar la imagen desde el .jar usando InputStream
+            InputStream inputStream = getClass().getResourceAsStream("/" + filePrefix + fileExtension);
+            if (inputStream != null) {
+                imagen = ImageIO.read(inputStream);
+            } else {
+                System.err.println("Archivo no encontrado en el .jar: " + filePrefix + fileExtension);
+            }
+        } catch (IOException ex) {
+            System.err.println("Error al cargar la imagen desde el .jar: " + filePrefix + fileExtension);
+            ex.printStackTrace();
         }
 
         return imagen;

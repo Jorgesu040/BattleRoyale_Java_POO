@@ -19,8 +19,8 @@
 package com.utad.poo.practicaFinalPackage.personajes;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -34,48 +34,40 @@ public class Arquero extends Personaje {
     public static final Double PUNTERIA_MAX = 20.0;
     public static final Double MOD_DEF_INICIAL = 10.0;
 
-
     private Double punteria;
 
     public Arquero(Arma arco, Escudo escudo) {
         this("Arquero " + contadorPersonajes, arco, escudo);
-        
+
     }
 
     public Arquero(String nombre, Arma arco, Escudo escudo) {
         super(nombre, Personaje.ATAQUE_DEFAULT, Arquero.MOD_DEF_INICIAL, Personaje.NUMERO_ITEMS_DEFAULT, arco, escudo);
-        this.punteria = Arquero.PUNTERIA_INICIAL;    
+        this.punteria = Arquero.PUNTERIA_INICIAL;
     }
-    
-    
+
     @Override
     public BufferedImage seleccionarImagen() {
         BufferedImage imagen = null;
-        String basePath = "";
-    
-        try {
-            File currentDir = new File(System.getProperty("user.dir"));
-            basePath = currentDir.getCanonicalPath() + "\\poo1\\files\\";
-        } catch (IOException e) {
-            System.err.println("Error al obtener el directorio de las imágenes.");
-            e.printStackTrace();
-        }
-    
+
         String filePrefix = estaVivo() ? "arquero" : "derrotado";
         String fileExtension = ".png";
-        String nombreArchivo = basePath + filePrefix + fileExtension;
-    
+
         try {
-            File archivoImagen = new File(nombreArchivo);
-            imagen = ImageIO.read(archivoImagen);
-        } catch (IOException e) {
-            System.err.println("Error al cargar la imagen: " + nombreArchivo);
-            e.printStackTrace();
+            // Intentar cargar la imagen desde el .jar usando InputStream
+            InputStream inputStream = getClass().getResourceAsStream("/" + filePrefix + fileExtension);
+            if (inputStream != null) {
+                imagen = ImageIO.read(inputStream);
+            } else {
+                System.err.println("Archivo no encontrado en el .jar: " + filePrefix + fileExtension);
+            }
+        } catch (IOException ex) {
+            System.err.println("Error al cargar la imagen desde el .jar: " + filePrefix + fileExtension);
+            ex.printStackTrace();
         }
-    
+
         return imagen;
     }
-
 
     public Double getPunteria() {
         return punteria;
@@ -89,7 +81,5 @@ public class Arquero extends Personaje {
     public String getSpecialAbility() {
         return "Puntería: " + punteria;
     }
-
-    
 
 }

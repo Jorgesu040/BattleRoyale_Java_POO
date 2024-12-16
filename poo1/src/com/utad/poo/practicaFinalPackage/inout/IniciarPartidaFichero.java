@@ -1,9 +1,8 @@
 package com.utad.poo.practicaFinalPackage.inout;
 
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.InputStream;
 
 public class IniciarPartidaFichero {
 
@@ -31,67 +30,106 @@ public class IniciarPartidaFichero {
     {   
         Boolean cargado = true;
         try {
-             // Primero, intentamos cargar el archivo desde el directorio actual
+            // Intentar cargar el archivo desde el directorio actual
             File myObj = new File(FILE_NAME);
 
             if (!myObj.exists()) {
-                
-                System.out.println("Error al leer el archivo en el directorio actual");
+                System.out.println("Error al leer el archivo en el directorio actual.");
                 System.out.println("Asegúrate de que el archivo " + FILE_NAME + " existe en el directorio actual.");
-                System.out.println("Intentando cargar el archivo incluido en el proyecto...");
-                myObj = new File(IniciarPartidaFichero.PATH_TO_BOOT_FILE);
-            }
-           
-            Scanner myReader = new Scanner(myObj);
+                System.out.println("Intentando cargar el archivo incluido en el jar...");
 
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine().trim(); 
+                // Intentar cargar el archivo desde el jar usando InputStream
+                InputStream inputStream = getClass().getResourceAsStream("/ficheros/" + FILE_NAME);
+                if (inputStream != null) {
+                    Scanner myReader = new Scanner(inputStream);
+                    while (myReader.hasNextLine()) {
+                        String data = myReader.nextLine().trim(); 
 
+                        if (data.startsWith("<Player")) {
+                            String[] parts = data.split("Name=\"");
+                            if (parts.length > 1) 
+                            {
+                                String name = parts[1].split("\"")[0]; 
+                                this.jugador = name;
+                            }
 
-                if (data.startsWith("<Player")) 
-                {
-                    String[] parts = data.split("Name=\"");
-                    if (parts.length > 1) 
-                    {
-                        String name = parts[1].split("\"")[0]; 
-                        this.jugador = name;
+                        } else if (data.startsWith("<Loot")) 
+                        {
+                            String[] parts = data.split("LootCount=\"");
+                            if (parts.length > 1) 
+                            {
+                                this.lootCount = Integer.parseInt(parts[1].split("\"")[0]);
+                            }
+
+                        } else if (data.startsWith("<Traps")) 
+                        {
+                            String[] parts = data.split("TrapCount=\"");
+                            if (parts.length > 1) 
+                            {
+                                this.trapCount = Integer.parseInt(parts[1].split("\"")[0]);
+                            }
+
+                        } else if (data.startsWith("<Bandits")) 
+                        {
+                            String[] parts = data.split("BanditCount=\"");
+                            if (parts.length > 1) 
+                            {
+                                this.banditCount = Integer.parseInt(parts[1].split("\"")[0]); 
+                            }
+                        }
                     }
+                    myReader.close();
+                } else {
+                    System.out.println("Archivo no encontrado en el jar: " + FILE_NAME);
+                    cargado = false;
+                }
+            } else {
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine().trim(); 
 
-                } else if (data.startsWith("<Loot")) 
-                {
-                    String[] parts = data.split("LootCount=\"");
-                    if (parts.length > 1) 
-                    {
-                        this.lootCount = Integer.parseInt(parts[1].split("\"")[0]);
-                    }
+                    if (data.startsWith("<Player")) {
+                        String[] parts = data.split("Name=\"");
+                        if (parts.length > 1) 
+                        {
+                            String name = parts[1].split("\"")[0]; 
+                            this.jugador = name;
+                        }
 
-                } else if (data.startsWith("<Traps")) 
-                {
-                    String[] parts = data.split("TrapCount=\"");
-                    if (parts.length > 1) 
+                    } else if (data.startsWith("<Loot")) 
                     {
-                        this.trapCount = Integer.parseInt(parts[1].split("\"")[0]);
-                    }
+                        String[] parts = data.split("LootCount=\"");
+                        if (parts.length > 1) 
+                        {
+                            this.lootCount = Integer.parseInt(parts[1].split("\"")[0]);
+                        }
 
-                } else if (data.startsWith("<Bandits")) 
-                {
-                    String[] parts = data.split("BanditCount=\"");
-                    if (parts.length > 1) 
+                    } else if (data.startsWith("<Traps")) 
                     {
-                        this.banditCount = Integer.parseInt(parts[1].split("\"")[0]); 
+                        String[] parts = data.split("TrapCount=\"");
+                        if (parts.length > 1) 
+                        {
+                            this.trapCount = Integer.parseInt(parts[1].split("\"")[0]);
+                        }
+
+                    } else if (data.startsWith("<Bandits")) 
+                    {
+                        String[] parts = data.split("BanditCount=\"");
+                        if (parts.length > 1) 
+                        {
+                            this.banditCount = Integer.parseInt(parts[1].split("\"")[0]); 
+                        }
                     }
                 }
+                myReader.close();
             }
 
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error al leer el archivo");
+            this.verifyValues();
+
+        } catch (Exception e) {
             e.printStackTrace();
             cargado = false;
         }
-
-        this.verifyValues();
-
         return cargado;
     }
 

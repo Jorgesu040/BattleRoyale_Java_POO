@@ -1,12 +1,10 @@
 package com.utad.poo.practicaFinalPackage.partida;
-// filepath: /c:/Users/jorge/wsjorge/gitclone/BattleRoyale_Java_POO/poo1/src/com/utad/poo/practicaFinalPackage/Main.java
 
 import com.utad.poo.practicaFinalPackage.inout.IniciarPartidaFichero;
 import com.utad.poo.practicaFinalPackage.interfazGrafica.MapGenerator;
 import com.utad.poo.practicaFinalPackage.interfazGrafica.Utility;
 
 import java.util.Scanner;
-import java.io.File;
 
 public class Partida {
     public static void main(String[] args) {
