@@ -47,10 +47,10 @@ public class GraphicWindowManager {
     private EmpezarTurnoEventListener empezarTurnoEventListener;
 
     // Testing
-    public static void main(String[] args) {
-        MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4, new Utility());
-        new GraphicWindowManager(panel);
-    }
+    // public static void main(String[] args) {
+    //     MapGenerator panel = new MapGenerator(7, 1, 1, 2, 4, new Utility());
+    //     new GraphicWindowManager(panel);
+    // }
 
     public GraphicWindowManager(MapGenerator panel) {
         this.frame = setupFrame();

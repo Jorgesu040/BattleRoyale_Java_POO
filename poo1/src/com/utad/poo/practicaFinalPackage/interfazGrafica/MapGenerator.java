@@ -86,6 +86,7 @@
 
 package com.utad.poo.practicaFinalPackage.interfazGrafica;
 
+import com.utad.poo.practicaFinalPackage.inout.*;
 import com.utad.poo.practicaFinalPackage.partida.BanditSetup;
 import com.utad.poo.practicaFinalPackage.personajes.*;
 import com.utad.poo.practicaFinalPackage.items.*;
@@ -114,6 +115,7 @@ public class MapGenerator extends JPanel
     public static final Integer DEFAULT_TRAPS = 2;
     public static final Integer DEFAULT_BANDITS = 3;
     public static final Integer DEFAULT_LOOT = 3;
+	public static final Integer DEFAULT_PLAYERS = 1;
     
     public static final Integer DEFAULT_SIZE = 7;
 
@@ -128,6 +130,8 @@ public class MapGenerator extends JPanel
     private Integer lootAmount;
     
     private Utility utilityFunctions;
+	private IniciarPartidaFichero cargadorFichero;
+	private Boolean cargarDesdeFichero;
     
     // Variables empleadas para la generacion procedural
     private static Integer tileCounter = 0;
@@ -139,18 +143,25 @@ public class MapGenerator extends JPanel
 	// pal turno
 	private List<Personaje> bandidosGenerados;
 
+	public MapGenerator(IniciarPartidaFichero cargador, Utility func, Boolean fichero)
+	{
+		this(MapGenerator.DEFAULT_PLAYERS, func, cargador, fichero);
+	}
 
-    public MapGenerator(Integer playersNumber, Utility func)
+    public MapGenerator(Integer playersNumber, Utility func, IniciarPartidaFichero cargador, Boolean fichero)
     {
     	this(MapGenerator.DEFAULT_SIZE,
     			MapGenerator.DEFAULT_TRAPS,
     			playersNumber,
     			MapGenerator.DEFAULT_BANDITS,
     			MapGenerator.DEFAULT_LOOT,
-    			func);
+    			func,
+				cargador, 
+				fichero);
+
     }
     
-    public MapGenerator(Integer size, Integer traps, Integer players, Integer bandits, Integer loot, Utility func)
+    public MapGenerator(Integer size, Integer traps, Integer players, Integer bandits, Integer loot, Utility func, IniciarPartidaFichero cargador, Boolean fromFichero)
     {
     	super();
     	this.size = size;
@@ -162,18 +173,31 @@ public class MapGenerator extends JPanel
     	this.lootAmount = loot;
     	
     	this.utilityFunctions = func;
+		this.cargadorFichero = cargador;
+		this.cargarDesdeFichero = fromFichero;
     	
     	// Variables dedicadas al empleo de la generacion procedural
     	// No tocar por usuario bajo ningun concepto
 
-    	
-    	
     	this.tiles = new ArrayList<Tile>();
 		this.bandidosGenerados = new ArrayList<Personaje>();
+
+		getValuesFichero();
     	
     }
     
-   
+	private void getValuesFichero()
+	{
+		if (this.cargarDesdeFichero)
+		{
+			this.cargadorFichero.cargarDatosDesdeXML();
+
+			this.setBanditAmount(this.cargadorFichero.getBanditCount());
+			this.setTrapsAmount(this.cargadorFichero.getTrapCount());
+			this.setLootAmount(this.cargadorFichero.getLootCount());
+		}
+	}
+  
     @Override
     public void paintComponent(Graphics g) 
     {
@@ -256,24 +280,35 @@ public class MapGenerator extends JPanel
     	
     	while(!loading)
     	{
-    		// generate players
-    		generatePlayersTiles();
     		
-    		// generate bandits
-    		generateBanditTiles();
-    		
-    		// generate loot
-    		generateLootTiles();
-    		
-    		// generate trap
-    		generateTrapsTiles();
-    		
-    		loading = true;
+			try {
+				// generate players
+				generatePlayersTiles();
+				// generate bandits
+				generateBanditTiles();
+				// generate loot
+				generateLootTiles();
+				// generate trap
+				generateTrapsTiles();
+				
+				loading = true;
+			} catch (Exception e) {
+				System.out.println("Error en la generacion de tiles especiales");
+				//e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "No se ha implementado el jugador todavia", "Error" , JOptionPane.ERROR_MESSAGE);
+			}
+			
     	}
     }
     
-    private void generatePlayersTiles()
+    private void generatePlayersTiles() throws Exception
     {
+		if (this.playerAmount > 1)
+		{
+			throw new Exception("No se ha implementado el multijugador");
+		}
+
+
     	for(Integer i = 0; i < this.playerAmount; i++)
 		{
 			Integer random = this.utilityFunctions.generateRandom(1, MapGenerator.tileCounter);
