@@ -130,7 +130,7 @@ public class GraphicWindowManager {
         stats.get(0).setText("Vida: " + jugador.getVida() + " puntos");
         stats.get(1).setText("Ataque: " + jugador.getAtaque() + "%");
         stats.get(2).setText("Defensa: " + jugador.getDefensa() + "%");
-        stats.get(3).setText("Habilidad Especial: " + jugador.getSpecialAbility() + "%");
+        stats.get(3).setText("Habilidad Especial: " + jugador.getSpecialAbility());
 
         statsPersonaje.revalidate();
         statsPersonaje.updateUI();
