@@ -1,6 +1,5 @@
 package com.utad.poo.practicaFinalPackage.inout;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;  
 import java.io.IOException; 
@@ -11,11 +10,7 @@ public class CreateLogs
 {
     public static final Integer MAX_LINEAS = 1000;
     public static final String FILE_NAME = "logs.txt";
-    public static final String PATH_TO_LOGS_FILE = System.getProperty("user.dir") + File.separator + 
-                                                    "poo1" + File.separator + 
-                                                    "files" + File.separator + 
-                                                    "ficheros" + File.separator + 
-                                                    CreateLogs.FILE_NAME;
+    public static final String PATH_TO_LOGS_FILE = CreateLogs.FILE_NAME;
 
 
     public static List<String> lineas = new ArrayList<String>();
