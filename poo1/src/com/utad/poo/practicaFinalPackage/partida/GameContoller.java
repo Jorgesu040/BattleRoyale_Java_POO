@@ -46,6 +46,8 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         allCharacters.addAll(gameArranger.getEnemigos());
         new AI(gameArranger.getEnemigos(), mapa).decideActions();
         turno = new Turno(allCharacters);
+        // Descmarcar el tile seleccionado // TODO
+        jugador.getTargetTile().setTargetTile(false);
         turno.iniciarTurno();
 
         // Actualizar los enemigos vivos
@@ -55,6 +57,9 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
         graphicWindowManager.updateStatsPanel(this.jugador); // Actualizar la ventana de estadísticas
         graphicWindowManager.updateActionsPanel(); // Actualizar la ventana de acciones
         graphicWindowManager.updateMapPanel(); // Actualizar el mapa
+        graphicWindowManager.resetActionsPanel(); // Reactivar los botones de acciones
+
+
     }
 
     @Override
@@ -65,8 +70,12 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     @Override
     public void onTileClicked(Tile tile) {
         // Asignar el tile seleccionado al personaje
+        if ( jugador.getTargetTile() !=null ) {
+            jugador.getTargetTile().setTargetTile(false);
+        } 
         jugador.setTargetTile(tile);
-        // Realizar acciones adicionales si es necesario
+        // Marcar el tile seleccionado
+        jugador.getTargetTile().setTargetTile(true);
     }
 
     public static void main(String[] args) {

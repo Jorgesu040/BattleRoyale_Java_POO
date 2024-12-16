@@ -114,12 +114,15 @@ public class GraphicWindowManager {
     }
 
     public void updateActionsPanel() {
+        accionesPersonaje.revalidate();
+        accionesPersonaje.updateUI();
+    }
+
+    public void resetActionsPanel() {
         attackButton.setEnabled(true);
         defendButton.setEnabled(true);
         retreatButton.setEnabled(true);
         moveButton.setEnabled(true);
-        accionesPersonaje.revalidate();
-        accionesPersonaje.updateUI();
     }
 
     public void updateStatsPanel(Personaje jugador) {
@@ -233,19 +236,24 @@ public class GraphicWindowManager {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            attackButton.setEnabled(false);
-            defendButton.setEnabled(false);
-            retreatButton.setEnabled(false);
-            moveButton.setEnabled(false);
+            List<JButton> buttons = new ArrayList<JButton>();
+
+            buttons.add(attackButton);
+            buttons.add(defendButton);
+            buttons.add(retreatButton);
+            buttons.add(moveButton);
+
+            for (JButton button : buttons) {
+                button.setEnabled(true);
+            }
+
+            ((JButton) e.getSource()).setEnabled(false);
 
             jugador.setEstado(estado);
 
-            // TODO: añadir un boton para iniciar las acciones
             // TODO: opcional añadir una seccion de log (ventana emergente scrollable) para
             // mostrar las acciones realizadas
 
-            // TODO: isLegalMove debería ser llamado cuando se selecciona un tile, no un
-            // botón, si no crashea
 
             // jugador.getUbicacionPersonaje().removeTileObject();
             // jugador.setUbicacionPersonaje(GraphicWindowManager.this.mapController.getSelectedTile());

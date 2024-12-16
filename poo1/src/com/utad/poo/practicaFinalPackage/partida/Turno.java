@@ -71,7 +71,7 @@ public class Turno {
     private void ejecutarFaseAcciones() {
         for (Personaje personaje : personajes) {
             String mensaje = null;
-            if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
+                if (personaje.getTargetTile().getOcupado() && personaje.getTargetTile().getObjectoOcupado() instanceof Personaje) {
                
                 if (personaje.getEstado() == EstadoPersonaje.DEFENDIENDO) {
                     personaje.defensa((Personaje) personaje.getTargetTile().getObjectoOcupado());
