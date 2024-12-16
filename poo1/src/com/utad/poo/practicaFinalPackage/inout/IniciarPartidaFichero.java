@@ -90,7 +90,27 @@ public class IniciarPartidaFichero {
             cargado = false;
         }
 
+        this.verifyValues();
+
         return cargado;
+    }
+
+    private void verifyValues() {
+        if (this.lootCount < 1) {
+            this.lootCount = 1;
+        }
+
+        if (this.trapCount < 1) {
+            this.trapCount = 1;
+        }
+
+        if (this.banditCount < 1) {
+            this.banditCount = 1;
+        }
+
+        if (this.jugador == null || this.jugador.isEmpty()) {
+            this.jugador = "Sin Nombre";
+        }
     }
 
 
