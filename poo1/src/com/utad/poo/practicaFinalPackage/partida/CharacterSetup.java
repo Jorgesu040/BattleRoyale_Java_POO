@@ -21,7 +21,7 @@ public abstract class CharacterSetup {
                         break;
                     default:
                         armaPersonaje = null;
-                        throw new IllegalArgumentException("Invalid weapon for character type");
+                        throw new IllegalArgumentException("Invalid weapon for character type, tried to create invalid weapon: " + weapon + " for " + characterType);
                 }
                 break;
             case "Arquero":
@@ -37,7 +37,7 @@ public abstract class CharacterSetup {
                         break;
                     default:
                         armaPersonaje = null;
-                        throw new IllegalArgumentException("Invalid weapon for character type");
+                        throw new IllegalArgumentException("Invalid weapon for character type, tried to create invalid weapon: " + weapon + " for " + characterType);
                 }
                 break;
             case "Mago":
@@ -53,12 +53,12 @@ public abstract class CharacterSetup {
                         break;
                     default:
                         armaPersonaje = null;
-                        throw new IllegalArgumentException("Invalid weapon for character type");
+                        throw new IllegalArgumentException("Invalid weapon for character type, tried to create invalid weapon: " + weapon + " for " + characterType);
                 }
                 break;
             default:
                 armaPersonaje = null;
-                throw new IllegalArgumentException("Invalid character type");
+                throw new IllegalArgumentException("Invalid character type, character type: " + characterType + " is not a valid character type");
         }
         return armaPersonaje;
     }
@@ -77,7 +77,7 @@ public abstract class CharacterSetup {
                 break;
             default:
                 escudoPersonaje = null;
-                throw new IllegalArgumentException("Invalid shield type");
+                throw new IllegalArgumentException("Invalid shield type, tried to create invalid shield: " + shield);
         }
         return escudoPersonaje;
     }
@@ -98,7 +98,7 @@ public abstract class CharacterSetup {
                 break;
             default:
                 personaje = null;
-                throw new IllegalArgumentException("Invalid character type");
+                throw new IllegalArgumentException("Invalid character type, character type: " + characterType + " is not a valid character type");
         }
 
         if (isAI && personaje != null) {

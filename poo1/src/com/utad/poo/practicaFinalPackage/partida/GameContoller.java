@@ -79,7 +79,7 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
     }
 
     public static void main(String[] args) {
-        GameContoller gameController = new GameContoller(new MapGenerator(7, 5, 1, 3, 0, new Utility()));
+        GameContoller gameController = new GameContoller(new MapGenerator(7, 3, 1, 5, 3, new Utility()));
         gameController.startGame();
 
         while (gameController.jugador.estaVivo() && !gameController.gameArranger.getEnemigos().isEmpty()) {

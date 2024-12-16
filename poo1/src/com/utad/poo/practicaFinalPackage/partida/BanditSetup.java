@@ -9,7 +9,7 @@ public class BanditSetup extends CharacterSetup {
 
     public Personaje createRandomBandit() {
         String[] characterTypes = { "Guerrero", "Arquero", "Mago" };
-        String[] weaponsGuerrero = { "Espada Bastarda", "Lanza Puntaiguda", "Hacha Doble Filo" };
+        String[] weaponsGuerrero = { "Espada Bastarda", "Lanza Puntiaguda", "Hacha Doble Filo" };
         String[] weaponsArquero = { "Arco de Guerrilla", "Arco de Precisión", "Ballesta" };
         String[] weaponsMago = { "Varita de Cristal", "Bastón de Sabiduría", "Orbe Ancestral" }; 
 
