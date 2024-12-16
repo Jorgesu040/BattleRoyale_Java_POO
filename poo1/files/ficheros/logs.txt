@@ -1,0 +1,19 @@
+|------------- TURNO 0 -------------|
+Arquero 3 se ha defendido de Guerrero 1
+¡Guerrero 1 ha atacado con un daño total de 12.0puntos de daño!
+Arquero 3 se ha defendido y ha reducido el daño recibido
+Arquero 3 ha recibido un ataque de 1 puntos pero gracias a su defensa ha recibido 1 de daño
+Guerrero 1 ha atacado a Arquero 3
+Guerrero 0 se ha movido a la casilla 31
+Guerrero 2 se ha movido a la casilla 28
+|-----------------------------------|
+
+
+
+------------------------------------------
+
+DUMP DE LOGS
+
+------------------------------------------
+
+

@@ -143,7 +143,7 @@ public class Tile
 	        graficos.setStroke(new BasicStroke(1)); 
 	    }
 
-		if (this.targetTile)
+		if (this.targetTile && !this.tileType.equals(TileType.TILE_OBSTACLE))
 		{
 			graficos.setColor(new Color(189, 145, 78));
 			graficos.fillPolygon(this.hexagono);
