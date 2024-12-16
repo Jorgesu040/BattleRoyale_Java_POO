@@ -5,7 +5,7 @@ import javax.swing.JButton;
 public class StartTurnoButton extends JButton {
 
     public StartTurnoButton() {
-        super("Start Turno");
+        super("Empezar Turno");
     }
                 
 

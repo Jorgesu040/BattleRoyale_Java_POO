@@ -111,8 +111,9 @@ public abstract class GraphicHelp {
                     + "4- Casilla de objeto: Permite recoger un item\n"
                     + "5- Casilla de trampa: Casilla que hace aplica un efecto negativo al personaje que pase por ella\n"
                         + "- Las trampas pueden reducir la vida, ataque o defensa del personaje\n"
-                        + "- IMPORTANTE: Menos la trampa de vida, el resto se revierten al final del turno.\n");
-
+                        + "- IMPORTANTE: Menos la trampa de vida, el resto se revierten al final del turno.\n"
+                    + "IMPORTANTE: Las casillas de trampas y botín no se pueden distinguir así que tendrás que arriesgarte.\n");
+                        
         JOptionPane.showMessageDialog(null, "¿Como se gana el juego?\n"
                 + "El juego se gana cuando el jugador sea el ultimo en pie.\n"
                 + "El juego se pierde cuando un personaje llega a 0 puntos de vida.\n"

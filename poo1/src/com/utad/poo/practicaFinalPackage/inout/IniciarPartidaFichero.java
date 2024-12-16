@@ -27,10 +27,21 @@ public class IniciarPartidaFichero {
         this.banditCount = 0;
     }
 
-    public void cargarDatosDesdeXML() 
-    {
+    public Boolean cargarDatosDesdeXML() 
+    {   
+        Boolean cargado = true;
         try {
-            File myObj = new File(IniciarPartidaFichero.PATH_TO_BOOT_FILE);
+             // Primero, intentamos cargar el archivo desde el directorio actual
+            File myObj = new File(FILE_NAME);
+
+            if (!myObj.exists()) {
+                
+                System.out.println("Error al leer el archivo en el directorio actual");
+                System.out.println("Asegúrate de que el archivo " + FILE_NAME + " existe en el directorio actual.");
+                System.out.println("Intentando cargar el archivo incluido en el proyecto...");
+                myObj = new File(IniciarPartidaFichero.PATH_TO_BOOT_FILE);
+            }
+           
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
@@ -76,7 +87,10 @@ public class IniciarPartidaFichero {
         } catch (FileNotFoundException e) {
             System.out.println("Error al leer el archivo");
             e.printStackTrace();
+            cargado = false;
         }
+
+        return cargado;
     }
 
 

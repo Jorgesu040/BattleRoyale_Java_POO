@@ -205,7 +205,7 @@ public class GraphicWindowManager {
         panel.setMinimumSize(new Dimension(width, height));
         centerPanel.add(panel);
         frame.add(BorderLayout.CENTER, centerPanel);
-        centerPanel.setBackground(new java.awt.Color(76, 143, 200));
+        centerPanel.setBackground(new java.awt.Color(76, 143, 220));
     }
 
     private void initializeFrame(JFrame frame) {
