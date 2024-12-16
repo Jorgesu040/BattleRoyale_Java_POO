@@ -89,6 +89,7 @@ public class GameContoller implements EmpezarTurnoEventListener, TileClickListen
             
         }
 
+        // TODO: mover a un metodo de finalización de juego
         if (!gameController.jugador.estaVivo()) {
             CreateLogs.addLog("Has perdido");
             JOptionPane.showMessageDialog(null, "¡Oh no!, " + gameController.jugador.getNombre() + ", has sido derrotado y has perdido.", "Derrota", JOptionPane.INFORMATION_MESSAGE);
