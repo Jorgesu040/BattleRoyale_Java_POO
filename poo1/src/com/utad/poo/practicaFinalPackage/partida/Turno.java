@@ -137,13 +137,6 @@ public class Turno {
 
             if (personaje.getEstado().equals(EstadoPersonaje.MOVIENDOSE)) {
 
-                // TODO: si hay una trampa se ha de añadir a una lista (efectos) del personaje,
-                // aplicar el metodo usar del item
-                // if (personaje.getUbicacionPersonaje().isTrap()) {
-                // personaje.getVida(); // hay que cambiar la vida por la trampa
-                // personaje.getUbicacionPersonaje().explodeTrap();
-                // }
-
                 if (personaje.getTargetTile().getObjectoOcupado() instanceof Item) {
                     if (personaje.getTargetTile().getObjectoOcupado() instanceof Trampa) {
                         // Añadimos a la lista de trampas afectando al personaje
