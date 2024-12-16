@@ -44,10 +44,7 @@
  * - RecibirAtaque: método que reduce la vida del personaje tras recibir un ataque.
  * - EstaVivo: método que devuelve si el personaje está vivo o no.
  * - ReiniciarModificadores: método que reinicia los modificadores de los items del personaje.
- *
- * Métodos de lootear enemigo:
- * - lootearEnemigo: método que permite al personaje quedarse con los Items del enemigo tras derrotarlo.
- * - CambiarEscudo: método que permite al personaje cambiar su escudo por el del enemigo.
+ * 
  */
 package com.utad.poo.practicaFinalPackage.personajes;
 
@@ -119,8 +116,6 @@ public abstract class Personaje {
         this.efectos = new ArrayList<Item>();
         this.id = ++contadorPersonajes;
         this.imagen = seleccionarImagen();
-
-        // TODO: Añadir su tile aqui o luego tras la instanciación?
         this.ubicacion_personaje = null;
         this.targetTile = null;
 
@@ -230,25 +225,10 @@ public abstract class Personaje {
 
         if (this.vida < 0) {
             this.vida = 0;
-            // TODO: Decir quien ha derrotado al personaje
             CreateLogs.addLog(this.nombre + " ha sido derrotado en combate");
             
         }
 
-    }
-
-    /* Métodos de lootear enemigo */
-    // TODO: yo sinceramente no lo implementaría
-    // Permite al personaje obtener los objetos del enemigo derrotado
-    public void lootearEnemigo(Personaje oponente) {
-        // ** Código agregado por el asistente **
-        if (!oponente.estaVivo()) {
-            CreateLogs.addLog(this.nombre + " ha derrotado a " + oponente.nombre + " y lootea sus objetos");
-
-            // TODO: Menu con los items del enemigo
-            
-            // TODO: Dar opcion de cambiar de escudo
-        }
     }
 
     /* Métodos de incremento/decremento de atributos y estado */
