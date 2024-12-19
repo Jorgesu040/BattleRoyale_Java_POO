@@ -67,34 +67,6 @@ El juego utiliza un sistema de combate por turnos donde cada personaje puede rea
 - **Items**: Los personajes pueden encontrar items que otorgan beneficios como aumento de ataque, defensa o recuperación de vida.
 - **Trampas**: Al finalizar un turno, existe la posibilidad de que un personaje caiga en una trampa que aplica efectos negativos permanentes.
 
-## Ideas y Planificación
-
-El proyecto se ha planificado para incluir diversas características que enriquecen la experiencia de juego:
-
-- **Niveles de Dificultad**: Ajustan los atributos de los enemigos para ofrecer un mayor desafío.
-- **Sistema de Turnos**: Puede ser rotativo o aleatorio, determinando el orden de las acciones de los personajes.
-- **Modos de Juego Adicionales**:
-  - **Por Equipos**: Los jugadores pueden formar alianzas.
-  - **Mapas Dinámicos**: Implementación de obstáculos y zonas restringidas que cambian cada turno.
-- **Inteligencia Artificial Básica**: Los personajes controlados por la máquina siguen estrategias simples, como atacar al oponente más débil.
-- **Simulación Avanzada**: Opción para visualizar los combates de forma automática sin intervención del jugador.
-
-Para más detalles sobre la planificación y las ideas del proyecto, consulta el documento PLANIFICACION.md.
-
-## Implementación
-
-El proyecto se desarrollará en varias fases:
-
-1. **Estructura Básica**:
-   - Implementación de las clases principales y sus interacciones.
-   - Creación de un menú de texto para la interacción básica con el juego.
-2. **Funcionalidades Avanzadas**:
-   - Añadir logs y la posibilidad de guardar y cargar partidas.
-   - Implementar los modos de juego y mecánicas adicionales.
-3. **Mejoras Visuales y Usabilidad**:
-   - Desarrollo de una interfaz gráfica utilizando bibliotecas como JavaFX.
-   - Optimización del código y mejora de la experiencia del usuario.
-
 ## Cómo Jugar
 
 1. **Configuración Inicial**:
@@ -119,11 +91,3 @@ El proyecto se desarrollará en varias fases:
 1. Clona el repositorio del proyecto en tu máquina local.
 2. Importa el proyecto en tu IDE preferido.
 3. Compila y ejecuta la clase principal del juego.
-
-## Contribución
-
-Si deseas contribuir al proyecto:
-
-- Realiza un fork del repositorio.
-- Crea una rama con la nueva funcionalidad o mejora.
-- Envía un pull request para revisión.

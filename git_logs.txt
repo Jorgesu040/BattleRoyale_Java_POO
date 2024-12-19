@@ -1,0 +1,164 @@
+* 847ccde - Jorgesu040, 3 days ago - Tue Dec 17 00:30:09 2024 +0100 : V1
+* c9e938b - Jorgesu040, 3 days ago - Tue Dec 17 00:19:05 2024 +0100 : v1
+* 400103c - Jorgesu040, 3 days ago - Mon Dec 16 23:46:32 2024 +0100 : Simplify log file path definition in CreateLogs class
+* e7c755b - Jorgesu040, 3 days ago - Mon Dec 16 23:24:46 2024 +0100 : Refactor image loading to use InputStream for resource access; update VSCode settings for non-Java resources visibility
+* 6b7fced - Jorgesu040, 3 days ago - Mon Dec 16 21:35:38 2024 +0100 : Add default value messages for loot, traps, bandits, and player name in IniciarPartidaFichero
+* 4feae89 - Jorgesu040, 3 days ago - Mon Dec 16 21:34:33 2024 +0100 : Add value verification for loot, traps, bandits, and player name in IniciarPartidaFichero
+* 324bb89 - Jorgesu040, 3 days ago - Mon Dec 16 21:32:42 2024 +0100 : Add input validation for map size, traps, bandits, and loot in Partida class
+* b42a3e7 - Jorgesu040, 3 days ago - Mon Dec 16 21:27:05 2024 +0100 : Update game initialization and UI elements; add partida class for game execution
+* 5c706b6 - Jorgesu040, 3 days ago - Mon Dec 16 19:51:10 2024 +0100 : Reorganize imports in GameController for improved clarity and structure
+* 42d533a - Jorgesu040, 3 days ago - Mon Dec 16 19:12:23 2024 +0100 : Remove commented-out code and update damage value for Lanza Puntiaguda
+* 7d71a2f - Jorgesu040, 3 days ago - Mon Dec 16 18:35:09 2024 +0100 : Refactor imports in GameController for improved organization and clarity
+* 85a1662 - Jorgesu040, 3 days ago - Mon Dec 16 18:32:37 2024 +0100 : Remove unused variable and clean up game controller logic
+* 1978f1f - Jorgesu040, 3 days ago - Mon Dec 16 18:30:13 2024 +0100 : Adjust initial game settings and enhance game over logic with victory/defeat messages
+* 66ab637 - Jorgesu040, 3 days ago - Mon Dec 16 18:14:02 2024 +0100 : Increase damage values for various weapons
+* 184b629 - Jorgesu040, 3 days ago - Mon Dec 16 15:20:37 2024 +0100 : Implement game over logic and check for all characters' status. Posible game end fix
+*   a737553 - Jorgesu040, 3 days ago - Mon Dec 16 15:09:06 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| *   e6ba6b3 - Sergio, 3 days ago - Mon Dec 16 15:08:28 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+| |\  
+| * | 833fc44 - Sergio, 3 days ago - Mon Dec 16 15:08:15 2024 +0100 : fix target obstacles
+* | | ee2f8ee - Jorgesu040, 3 days ago - Mon Dec 16 15:08:52 2024 +0100 : Remove PersonajeTest Update MapGenerator documentation
+| |/  
+|/|   
+* | ae6afef - Jorgesu040, 3 days ago - Mon Dec 16 14:59:04 2024 +0100 : Remove outdated comments from MapGenerator class to improve code clarity
+* | 29eeee7 - Jorgesu040, 3 days ago - Mon Dec 16 14:58:14 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\| 
+| *   4cd9666 - Sergio, 3 days ago - Mon Dec 16 14:57:43 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+| |\  
+| * | 8102662 - Sergio, 3 days ago - Mon Dec 16 14:57:29 2024 +0100 : funcionalidad cargar desde el xml
+* | | ce8f76b - Jorgesu040, 3 days ago - Mon Dec 16 14:58:05 2024 +0100 : Refactor comparisons to use equals method for state checks and update variable types to Integer instead of int
+| |/  
+|/|   
+* | 02e2f3d - Jorgesu040, 3 days ago - Mon Dec 16 14:32:49 2024 +0100 : Refactor Personaje class by removing unused loot methods and cleaning up comments
+|/  
+* 0233b70 - Jorgesu040, 3 days ago - Mon Dec 16 12:26:44 2024 +0100 : Add TODO comment to GameController for future fixes
+* 1f3522a - Jorgesu040, 3 days ago - Mon Dec 16 12:25:03 2024 +0100 : Fix special ability formatting in GraphicWindowManager
+* cbbf224 - Jorgesu040, 3 days ago - Mon Dec 16 12:19:58 2024 +0100 : Implement single-use logic for traps and adjust log formatting
+* 0a3af1e - Jorgesu040, 3 days ago - Mon Dec 16 12:12:10 2024 +0100 : Add TO-DO
+* 8ab9c2d - Jorgesu040, 3 days ago - Mon Dec 16 12:11:20 2024 +0100 : Replace console output with logging in various classes for better error tracking and game state reporting
+* a249d73 - Sergio, 4 days ago - Mon Dec 16 03:11:18 2024 +0100 : añadido mas claridad en el dump de logs
+* 634acb3 - Sergio, 4 days ago - Mon Dec 16 02:53:47 2024 +0100 : No me acuerdo
+* ebadfb4 - Jorgesu040, 4 days ago - Mon Dec 16 02:36:52 2024 +0100 : Refactor trap effects handling and improve defense decrement logic in TrampaReducirDefensa and Turno classes
+*   222a34c - Jorgesu040, 4 days ago - Mon Dec 16 02:13:51 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| * d50eb0b - Sergio, 4 days ago - Mon Dec 16 02:10:34 2024 +0100 : cubo del mario
+* | 7e96e68 - Jorgesu040, 4 days ago - Mon Dec 16 02:13:42 2024 +0100 : Revert change in calcularDanio()
+* | dcc33ab - Jorgesu040, 4 days ago - Mon Dec 16 02:12:35 2024 +0100 : Fix weapon and character type error messages for better clarity and correct spelling in BanditSetup and CharacterSetup classes
+|/  
+* af5e51c - Jorgesu040, 4 days ago - Mon Dec 16 01:59:23 2024 +0100 : Improve damage calculation error handling in Personaje class
+* 336bc39 - Jorgesu040, 4 days ago - Mon Dec 16 01:57:15 2024 +0100 : Enhance error handling in character setup and improve trap effects processing
+* 3c999e9 - Jorgesu040, 4 days ago - Mon Dec 16 01:13:41 2024 +0100 : Refactor action panel updates and enhance tile targeting logic
+* 00cdc99 - Sergio, 4 days ago - Mon Dec 16 00:51:13 2024 +0100 : setTileTarget
+* 3c5865b - Jorgesu040, 4 days ago - Mon Dec 16 00:43:03 2024 +0100 : Refactor AI action handling and enhance logging in combat mechanics
+* 64f3041 - Sergio, 4 days ago - Sun Dec 15 23:06:44 2024 +0100 : imagen del amogus muelto (version del chino)
+* e5e0742 - Sergio, 4 days ago - Sun Dec 15 22:55:04 2024 +0100 : fix del nombre de la variable
+* 35a4595 - Sergio, 4 days ago - Sun Dec 15 22:51:09 2024 +0100 : change color tile_loot y tile_trap_set. Añadido setDeathImage
+* d1dce09 - Jorgesu040, 4 days ago - Sun Dec 15 21:54:31 2024 +0100 : Improve log handling in CreateLogs and fix/enhance AI action decision-making
+* 063ff64 - Jorgesu040, 4 days ago - Sun Dec 15 20:39:59 2024 +0100 : Fix damage calculation in recibirAtaque method to correctly apply defense percentage
+* ddcc582 - Jorgesu040, 4 days ago - Sun Dec 15 20:24:57 2024 +0100 : Refactor game turn logic to include logging for actions and item collection; adjust frame size and clean up unused imports.
+* 37ee03d - Sergio, 4 days ago - Sun Dec 15 20:16:39 2024 +0100 : isLegalAction
+* 5316111 - Sergio, 4 days ago - Sun Dec 15 18:21:56 2024 +0100 : cambio de color del trampa explotada
+* 42aaef8 - Sergio, 4 days ago - Sun Dec 15 18:18:23 2024 +0100 : cola logs
+* 97c9084 - Sergio, 4 days ago - Sun Dec 15 18:15:42 2024 +0100 : cambios en legalmove y coloreado de tiles
+* f697b8f - Jorgesu040, 4 days ago - Sun Dec 15 17:58:31 2024 +0100 : Añade atributo AI (true -> lo es) y actualiza los metods de creacion correspondientes
+* beafe04 - Jorgesu040, 4 days ago - Sun Dec 15 17:42:51 2024 +0100 : Enhance player stats display with improved formatting and layout adjustments
+* 0ab9091 - Jorgesu040, 4 days ago - Sun Dec 15 17:27:10 2024 +0100 : Fix UI display for player stats and add game over message
+*   ed135bf - Jorgesu040, 4 days ago - Sun Dec 15 17:03:49 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| * 33ee158 - Sergio, 4 days ago - Sun Dec 15 14:25:41 2024 +0100 : write logs
+| *   1c7f916 - Sergio, 4 days ago - Sun Dec 15 13:50:08 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+| |\  
+| * | 29b266e - Sergio, 4 days ago - Sun Dec 15 13:49:26 2024 +0100 : generacion de Loot y Trampas. Inout del xml
+* | | f11a474 - Jorgesu040, 4 days ago - Sun Dec 15 17:03:38 2024 +0100 : Implement event listeners for turn execution and tile clicks; add special effect methods to weapon interfaces
+| |/  
+|/|   
+* | 4d95fbb - Jorgesu040, 4 days ago - Sun Dec 15 13:48:19 2024 +0100 : Add MOVIENDOSE state to EstadoPersonaje enum
+|/  
+* 4487297 - Jorgesu040, 4 days ago - Sun Dec 15 12:53:16 2024 +0100 : Add ItemGenerator class for random item generation including traps and character items
+* 8e4df7a - Jorgesu040, 4 days ago - Sun Dec 15 12:53:12 2024 +0100 : Refactor Botiquin constructor to use default effect value
+* 5eb85cd - Jorgesu040, 4 days ago - Sun Dec 15 12:50:53 2024 +0100 : Actualiza el metodo reiniciarModificadores para incluir trampas e items
+* c996ad3 - Sergio, 4 days ago - Sun Dec 15 12:19:45 2024 +0100 : traps feature
+* b0c6942 - Jorgesu040, 5 days ago - Sun Dec 15 03:37:07 2024 +0100 : Add TODOs for action button and log section in GraphicWindowManager
+* 625bf18 - Jorgesu040, 5 days ago - Sun Dec 15 03:15:08 2024 +0100 : TODO: Refactor legal move check to trigger on tile selection instead of button press
+*   7ca4fe3 - Jorgesu040, 5 days ago - Sun Dec 15 03:13:55 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| * e5207c3 - Sergio, 5 days ago - Sun Dec 15 02:37:33 2024 +0100 : in fichero xml
+* | 854c57a - Jorgesu040, 5 days ago - Sun Dec 15 03:12:27 2024 +0100 : Implement AI decision-making for character actions and enhance turn execution flow
+|/  
+* 9e7a52a - Jorgesu040, 5 days ago - Sun Dec 15 01:39:11 2024 +0100 : Add getters and setters for enemigos in GameArranger and update GameController to set enemigos from mapa
+* e3dc1d6 - Sergio, 5 days ago - Sun Dec 15 01:37:02 2024 +0100 : lista de bandidos generados
+* 2070a49 - Sergio, 5 days ago - Sun Dec 15 01:31:57 2024 +0100 : fix del legalmove
+* 2c05b77 - Sergio, 5 days ago - Sun Dec 15 01:30:07 2024 +0100 : hay que cambiar las instrucciones my g
+* 9a1462e - Jorgesu040, 5 days ago - Sun Dec 15 01:14:52 2024 +0100 : Add selectedTile variable to MapController for improved tile selection handling
+* defcdff - Jorgesu040, 5 days ago - Sun Dec 15 01:05:03 2024 +0100 : Refactor MapController and MapGenerator for improved tile handling and map generation; synchronize game start method in GameController
+* 47262be - Jorgesu040, 5 days ago - Sun Dec 15 00:31:29 2024 +0100 : update JFrame title in GraphicWindowManager; refactor GameController to streamline game initialization
+* ed1764d - Jorgesu040, 5 days ago - Sat Dec 14 23:04:48 2024 +0100 : Integrate MapGenerator into GameController for player management and initialization
+* 86c28e7 - Jorgesu040, 5 days ago - Sat Dec 14 21:12:45 2024 +0100 : Refactor ItemsButton and GraphicWindowManager to improve inventory and stats updates
+* 2fa3a3a - Jorgesu040, 5 days ago - Sat Dec 14 18:19:55 2024 +0100 : Add action buttons for character interactions and update GUI setup
+* e620973 - Jorgesu040, 5 days ago - Sat Dec 14 14:24:23 2024 +0100 : Revert "Remove onTileHovered method from TileEventListener interface (ya se maneja por otra clase)"
+* 714ad7a - Jorgesu040, 5 days ago - Sat Dec 14 14:21:26 2024 +0100 : Remove onTileHovered method from TileEventListener interface (ya se maneja por otra clase)
+* 428e687 - Jorgesu040, 5 days ago - Sat Dec 14 13:37:49 2024 +0100 : Add location handling to Personaje class with Tile integration
+* ba9c6d6 - Jorgesu040, 6 days ago - Fri Dec 13 18:56:16 2024 +0100 : Remove GameLogicHandler and related classpath files to simplify game logic integration
+* d166bbe - Jorgesu040, 6 days ago - Fri Dec 13 18:44:09 2024 +0100 : Remove unused imports and refactor image selection in Personaje class
+* 01897ba - Sergio, 6 days ago - Fri Dec 13 13:35:37 2024 +0100 : bichos centrados en los tiles
+* e90eb26 - Sergio, 6 days ago - Fri Dec 13 13:09:07 2024 +0100 : imagenes aleatorias para personajes y bandidos
+* ea3a27c - Jorgesu040, 6 days ago - Fri Dec 13 12:25:28 2024 +0100 : Add image handling to Personaje class Añade un TODO con un detalle de la implementacion de como hacerlo
+* cf8f491 - Sergio, 7 days ago - Fri Dec 13 02:11:10 2024 +0100 : imagenes? (esta comentado)
+* 75a5ff8 - Sergio, 7 days ago - Fri Dec 13 01:21:42 2024 +0100 : encapsulado de funciones en generateSpecialTiles
+* 5f87b41 - Sergio, 7 days ago - Fri Dec 13 01:16:44 2024 +0100 : banditGenerator en la generacion de mapa
+* 6c4318c - Jorgesu040, 7 days ago - Fri Dec 13 01:12:03 2024 +0100 : Update .gitignore to exclude all class files
+*   f96b137 - Jorgesu040, 7 days ago - Fri Dec 13 01:10:42 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| * 2e055c8 - Sergio, 7 days ago - Fri Dec 13 01:00:09 2024 +0100 : utility class
+| *   5c25f72 - Sergio, 7 days ago - Fri Dec 13 00:39:35 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+| |\  
+| * | 295b4d0 - Sergio, 7 days ago - Fri Dec 13 00:39:19 2024 +0100 : Los obstaculos no son cliclables
+* | | 53b7a5f - Jorgesu040, 7 days ago - Fri Dec 13 01:10:32 2024 +0100 : Ahora tanto el creador de bandidos como el jugador, descienden de `CharacterSetup`, la ambas clases crean un personaje pero Bandit lo hace de manera aleatoria.
+| |/  
+|/|   
+* | 103dd38 - Jorgesu040, 7 days ago - Fri Dec 13 00:38:47 2024 +0100 : Update con TODO.md, he añadido las cosas que veo que faltan por hacer
+|/  
+*   4de2e58 - Jorgesu040, 7 days ago - Fri Dec 13 00:24:36 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| * 0797ebf - Sergio, 7 days ago - Fri Dec 13 00:24:21 2024 +0100 : max bandit amount enforced
+| * ff604e9 - Sergio, 7 days ago - Fri Dec 13 00:16:40 2024 +0100 : jugadores en tiles. Hau que crear los bandidos
+* | 5669c58 - Jorgesu040, 7 days ago - Fri Dec 13 00:24:21 2024 +0100 : Update PLANIFICACION.md con las novedades, lo que esta hecho, lo que falta por hacer, y lo que seria opcional
+|/  
+* 6cf0848 - Vlaskovich, 7 days ago - Thu Dec 12 19:38:42 2024 +0100 : getters y settes de map generator
+* 612f92d - Vlaskovich, 7 days ago - Thu Dec 12 19:27:10 2024 +0100 : reducir probabilidad de obstaculos
+* e191a43 - Jorgesu040, 7 days ago - Thu Dec 12 17:37:14 2024 +0100 : Rename ArcoDeGuerrila to ArcoDeGuerrilla, update BONUS_DE_RETIRADA value, and add GameArranger and UserSetup classes for game management
+* a7dd292 - Jorgesu040, 7 days ago - Thu Dec 12 12:37:39 2024 +0100 : Refactor MapGenerator constructor and add GraphicWindowManager class for improved window management
+* 088817a - Sergio, 7 days ago - Thu Dec 12 11:11:04 2024 +0100 : Añadido tile_trap_exploded
+* 07b6e71 - Sergio, 7 days ago - Thu Dec 12 11:04:46 2024 +0100 : Fix tile.legalmove
+* 9837da9 - Sergio, 7 days ago - Thu Dec 12 10:52:19 2024 +0100 : Fix generacion procedural
+* 250c6a3 - Sergio, 8 days ago - Thu Dec 12 02:40:21 2024 +0100 : movimientos legales
+* 60e9b9c - Sergio, 8 days ago - Thu Dec 12 02:38:10 2024 +0100 : getTileDistance
+* 06bff0c - Sergio, 8 days ago - Thu Dec 12 01:42:04 2024 +0100 : fix
+* cda4ce2 - Sergio, 8 days ago - Thu Dec 12 01:31:09 2024 +0100 : Generacion Procedural Tonta
+* d4c0519 - Sergio, 8 days ago - Wed Dec 11 22:14:53 2024 +0100 : fix hover a obstaculos para que no salga
+* c16ade2 - Vlaskovich, 8 days ago - Wed Dec 11 18:45:37 2024 +0100 : hover y colores fixed
+* 7ccf4c7 - Vlaskovich, 8 days ago - Wed Dec 11 18:36:14 2024 +0100 : hover?
+* 21baa34 - Jorgesu040, 8 days ago - Wed Dec 11 15:11:28 2024 +0100 : Renombra controlador de mapa a mapController para mayor claridad y consistencia en ventanaTesting
+* 65a748d - Jorgesu040, 8 days ago - Wed Dec 11 14:40:53 2024 +0100 : Implementa el manejo de eventos de tiles con la interfaz TileEventListener y el controlador MapController Todo explicado en EventListenerFlow.md
+* 373f01a - Jorgesu040, 8 days ago - Wed Dec 11 14:26:30 2024 +0100 : Añade archivo TODO para la interfaz gráfica con tareas pendientes y mejoras sugeridas
+* 7dfbb87 - Jorgesu040, 8 days ago - Wed Dec 11 13:41:51 2024 +0100 : Añade documentación sobre JUnit y ejemplos de pruebas en el archivo explicacion tests.md
+* 4b01b25 - Sergio, 8 days ago - Wed Dec 11 12:13:16 2024 +0100 : Debug testing error con colores
+* 4d3c9f0 - Sergio, 8 days ago - Wed Dec 11 11:47:15 2024 +0100 : Generacion Procedural de Mapa
+* e23ae74 - Sergio, 9 days ago - Wed Dec 11 01:28:46 2024 +0100 : nuevo codigo para el mapa
+* f348469 - Sergio, 9 days ago - Wed Dec 11 01:11:59 2024 +0100 : MapGenerator Updates y Tile Updates
+* 463e155 - Jorgesu040, 9 days ago - Tue Dec 10 16:10:08 2024 +0100 : Mejoras de la documentacion (ahora usa formato javadoc), añade clase PersonajeTests que testea los distintos personajes
+*   27fef44 - Jorgesu040, 9 days ago - Tue Dec 10 15:48:17 2024 +0100 : Merge branch 'main' of https://github.com/Jorgesu040/BattleRoyale_Java_POO
+|\  
+| * e207320 - Sergio, 9 days ago - Tue Dec 10 14:16:54 2024 +0100 : me olvide de una libreria en Tile
+| * 9fdfaba - Sergio, 9 days ago - Tue Dec 10 14:15:59 2024 +0100 : Cambios a clase Tile
+| * 550ebd7 - Sergio, 10 days ago - Tue Dec 10 00:51:13 2024 +0100 : OcupaidState y cambios a clase Tile
+| * 6d87e2e - Sergio, 10 days ago - Tue Dec 10 00:36:02 2024 +0100 : MapGenerator y Tiles project
+* | ba281d3 - Jorgesu040, 9 days ago - Tue Dec 10 15:48:01 2024 +0100 : Agrega método para resetear estado de caracteres al final de un turno en la clase personaje
+|/  
+* 8b36547 - Sergio, 11 days ago - Mon Dec 9 01:56:30 2024 +0100 : el final
+* 6103d9d - Sergio, 11 days ago - Mon Dec 9 01:47:38 2024 +0100 : Cambios a Interfaces y toString
+* c8a4634 - Jorgesu040, 11 days ago - Sun Dec 8 14:44:23 2024 +0100 : Cambio de como funcionan los escudos: ahora reducen porcentaje de daño
+* 53c6cd6 - Jorgesu040, 12 days ago - Sat Dec 7 19:25:02 2024 +0100 : Refactor item and weapon classes: move to new package structure and remove unused classes
+* 99184fe - Jorgesu040, 12 days ago - Sat Dec 7 13:27:14 2024 +0100 : Add README.md with project overview and game mechanics
+* d100f05 - Jorgesu040, 13 days ago - Fri Dec 6 21:05:23 2024 +0100 : Initial commit
